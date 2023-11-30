@@ -168,6 +168,11 @@ nav {
 }
 
 footer {
+    color: black;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: auto;
     margin-top: 5px;
     padding: 10px;
     border: 2px solid;
