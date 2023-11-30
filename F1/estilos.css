@@ -16,6 +16,11 @@
     list-style: none;
 }
 
+#f1letras {
+    padding: 5px;
+    border-radius: 5px;
+}
+
 #log {
     border: 2px solid black;
     float: right;
@@ -35,7 +40,7 @@
 }
 
 .btnlogin:hover {
-    background-color: #393939;
+    background-color: #454545;
     border: 2px solid black;
 }
 
@@ -67,6 +72,7 @@ body {
     margin: 0;
     min-width: 10%;
     max-width: 100%;
+    background-color: #e60000;
 }
 
 .dropdown {
@@ -117,7 +123,7 @@ li {
 }
 
 li a {
-    color: gray;
+    color: grey;
     text-decoration: none;
 }
 
