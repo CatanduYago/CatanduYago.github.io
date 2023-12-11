@@ -147,7 +147,7 @@ div {
     border: 2px solid black;
     border-radius: 20px;
     margin: 5px;
-    min-height: 1000px;
+    min-height: 100vh;
     background-color: #FF1801;
     padding: 10px;
 }
@@ -165,7 +165,6 @@ div {
 }
 
 .dentro-noticias {
-
     border: 2px solid black;
     justify-content: center;
     background-color: white;
@@ -177,12 +176,13 @@ div {
     width:20%;
     float: right;
     align-content: normal;
-
 }
+
 .centro2{
     display: flex;
     flex-direction: row;
 }
+
 .nav-centro {
     border: 2px solid black;
     background-color: white;
@@ -190,45 +190,47 @@ div {
     text-align: center;
     padding: 10px;
     margin: 5px;
-  }
-  
-  .nav-centro ul {
+}
+
+.nav-centro ul {
     display: flex;
     justify-content: center;
     padding: 0;
     margin: 0;
-  }
-  
-  .nav-centro li {
+}
+
+.nav-centro li {
     margin: 0 auto; 
     list-style: none;
     display: inline-block;
     position: relative;
     border-radius: 15px;
-  }
-  
-  .nav-centro a {
+}
+
+.nav-centro a {
     text-decoration: none;
     color: grey;
-  }
-  
-  .nav-centro li:hover {
+}
+
+.nav-centro li:hover {
     color: black;
-  }
-  
-  #introduccion:hover, #equipos:hover {
+}
+
+#introduccion:hover, #equipos:hover {
     color: #000000;
-  }
-  
-  #introduccion, #equipos {
+}
+
+#introduccion, #equipos {
     color: white;
     background-color: #FF1801;
-  }
+}
+
 nav {
     list-style: none;
     margin-bottom: 10px;
     padding: 0;
     border: 2px black solid;
+    font-weight: bold;
 }
 
 footer {
@@ -241,19 +243,22 @@ footer {
     padding: 10px;
     border: 2px solid;
     clear: both;
-    border-radius: 10px;
+    border-radius: 15px;
 }
+
 .dentro-centro img{
     width: 500px;
     justify-content: space-around;
-
 }
+
 #imgequipo:hover{
     transform: scale(1.1);
 }
+
 #imagenequipo{
     width: 350px;
 }
+
 #descripcion{
     float: right;
     display: flex;
@@ -263,17 +268,18 @@ footer {
     padding: 5px;
     padding-left:30px;
     max-width: 75%;
-    
 }
+
 #pilotos{
     display: flex;
     flex-direction: row;
 }
+
 .wikipedias{
     font-weight: bold;
 }
+
 #pilotos p{
     max-width: 500px;
-    margin-right: 50px;
-    margin-left:10px;
+    margin-right: 50px
 }
