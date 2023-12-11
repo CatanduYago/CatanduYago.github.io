@@ -32,11 +32,6 @@
     border-radius: 15px;
 }
 
-#f1letras {
-    padding: 5px;
-    border-radius: 5px;
-}
-
 #log {
     float: right;
     flex-direction: column;
@@ -63,7 +58,7 @@
 .btnregister {
     font-family: "MiFuente";
     border-radius: 5px;
-    background-color: #cc0000;
+    background-color: #FF1801;
     color: #ffffff;
     font-size: 15px;
     padding: 5px;
@@ -71,7 +66,7 @@
 }
 
 .btnregister:hover {
-    border: 2px solid #cc0000;
+    border: 2px solid #FF1801;
     background-color: white;
     color: black;
     cursor: pointer;
@@ -90,23 +85,15 @@ body {
     min-width: 10%;
     max-width: 100%;
     font-size: 14px;
+    line-height: 18px;
 }
 
-#f1 {
-    background-color: #FF1801;
-}
-
-#f2 {
-    background-color: lightskyblue;
-    box-shadow: 0 8px 16px lightblue;
-}
-
-#f1 a {
+.F1 {
     color: white;
-}
-
-#f2 a {
-    color: black;
+    background-color: #FF1801;
+    border: 2px solid #FF1801;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 li {
@@ -205,7 +192,9 @@ div {
 
 #introduccion:hover,
 #equipos:hover {
-    color: #000000;
+    border: 2px solid #FF1801;
+    background-color: white;
+    color: black;
     cursor: pointer;
 }
 
@@ -213,6 +202,9 @@ div {
 #equipos {
     color: white;
     background-color: #FF1801;
+    border: 2px solid #FF1801;
+    padding: 6px;
+    border-radius: 10px;
 }
 
 #equipos a {
@@ -225,19 +217,6 @@ nav {
     padding: 0;
     border: 2px black solid;
     font-weight: bold;
-}
-
-footer {
-    color: black;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: auto;
-    margin-top: 5px;
-    padding: 10px;
-    border: 2px solid;
-    clear: both;
-    border-radius: 15px;
 }
 
 .dentro-centro img {
@@ -261,6 +240,14 @@ footer {
 
 #imagenpiloto {
     height: 300px;
+}
+
+#imagenmercedes {
+    width: 210px;
+}
+
+#imagenmercedes:hover {
+    transform: scale(1.1);
 }
 
 #descripcion {
@@ -305,4 +292,22 @@ table {
 
 h1 {
     font-size: 18px;
+}
+
+footer {
+    color: black;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: auto;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid;
+    clear: both;
+    border-radius: 15px;
+}
+
+#imgfija {
+    float: right;
+    position: fixed;
 }
