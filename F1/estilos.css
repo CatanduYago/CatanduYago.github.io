@@ -160,8 +160,7 @@ div {
     padding: 10px;
     min-height: 800px;
     background-color: white;
-    max-width: 75%;
-    width: 80%;
+    max-width: 85%;
 }
 
 .dentro-noticias {
@@ -172,8 +171,7 @@ div {
     margin: 5px;
     margin-top: 10px;
     padding: 10px;
-    max-width: 30%;
-    width:20%;
+    width:15%;
     float: right;
     align-content: normal;
 }
@@ -267,12 +265,14 @@ footer {
     margin-top:25px ;
     padding: 5px;
     padding-left:30px;
-    max-width: 75%;
+    max-width: 70%;
+
 }
 
-#pilotos{
+#pilotos div{
     display: flex;
     flex-direction: row;
+    margin-top: 10px;
 }
 
 .wikipedias{
@@ -282,4 +282,13 @@ footer {
 #pilotos p{
     max-width: 500px;
     margin-right: 50px
+}
+td {
+    border: 1px solid white;
+    padding: 10px;
+    text-transform: uppercase;
+}
+table{
+    color: white;
+    width: 500px;
 }
