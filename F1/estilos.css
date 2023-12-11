@@ -245,8 +245,9 @@ footer {
 }
 
 .dentro-centro img{
-    width: 500px;
-    justify-content: space-around;
+    width: 350px;
+    justify-content: space-between;
+    margin: 25px;
 }
 
 #imgequipo:hover{
@@ -256,6 +257,9 @@ footer {
 #imagenequipo{
     width: 350px;
 }
+ #imagenpiloto{
+    height: 350px;
+ }
 
 #descripcion{
     float: right;
