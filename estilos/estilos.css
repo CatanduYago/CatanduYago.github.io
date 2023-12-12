@@ -133,7 +133,7 @@ body {
     background-color: #1c78fb;
     border: 2px solid #1c78fb;
     border-radius: 10px;
-    padding: 5px;
+    padding: 10px;
 }
 #introduccionf2:hover{
     color: black;
@@ -286,7 +286,6 @@ div {
     border: 2px solid #FF1801;
     padding: 10px;
     border-radius: 10px;
-    margin-bottom:4px;
 }
 
 #equipos a {
