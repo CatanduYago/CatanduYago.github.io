@@ -13,7 +13,6 @@
     list-style: none;
     margin: 5px;
     width: 100%;
-    
 }
 
 #menu ul {
@@ -29,16 +28,17 @@
     display: inline-block;
     position: relative;
     border-radius: 15px;
-    
 }
-#inicio{
-    color: white;
+
+#inicio {
+    color: #ffffee;
     background-color: #FF1801;
     border: 2px solid #FF1801;
     border-radius: 10px;
     padding: 5px;
 }
-#inicio:hover{
+
+#inicio:hover {
     color: black;
     background-color: white;
     border: 2px solid #FF1801;
@@ -100,7 +100,6 @@ body {
     font-size: 14px;
     line-height: 19px;
     background-color: #ffffee;
-
 }
 
 #F1 {
@@ -110,37 +109,42 @@ body {
     border-radius: 10px;
     padding: 5px;
 }
+
 #F1:hover {
     background-color: #ffffee;
     color: black;
     border: 2px solid #FF1801;
-
 }
-#F2{
+
+#F2 {
     color: white;
     background-color: #1c78fb;
     border: 2px solid #1c78fb;
     border-radius: 10px;
     padding: 5px;
 }
-#F2:hover{
+
+#F2:hover {
     color: black;
     background-color: white;
     border: 2px solid #1c78fb;
 }
-#introduccionf2{
+
+#introduccionf2 {
     color: white;
     background-color: #1c78fb;
     border: 2px solid #1c78fb;
     border-radius: 10px;
     padding: 10px;
 }
-#introduccionf2:hover{
+
+#introduccionf2:hover {
     color: black;
     background-color: white;
     border: 2px solid #1c78fb;
     cursor: pointer;
 }
+
 li {
     display: inline-block;
     position: relative;
@@ -175,7 +179,6 @@ div {
 }
 
 .dentro-centro {
-    border: 2px solid black;
     border-radius: 10px;
     margin: 5px;
     margin-top: 10px;
@@ -228,13 +231,13 @@ div {
 
 .nav-centro a {
     text-decoration: none;
-
 }
 
 .nav-centro li:hover {
     color: black;
 }
-.centrof2{
+
+.centrof2 {
     max-width: 100%;
     border: 2px solid black;
     border-radius: 20px;
@@ -243,7 +246,8 @@ div {
     background-color: #7cb1fc;
     padding: 10px;
 }
-.nav-centrof2{
+
+.nav-centrof2 {
     background-color: #ffffee;
     border-radius: 10px;
     border: 2px solid black;
@@ -251,6 +255,7 @@ div {
     padding: 10px;
     margin: 5px;
 }
+
 .nav-centrof2 ul {
     display: flex;
     justify-content: center;
@@ -269,7 +274,6 @@ div {
 .nav-centrof2 a {
     text-decoration: none;
 }
-
 
 #introduccion:hover,
 #equipos:hover {
@@ -290,8 +294,7 @@ div {
 
 #equipos a {
     color: white;
-    margin-bottom:10px;
-
+    margin-bottom: 10px;
 }
 
 nav {
@@ -392,8 +395,35 @@ footer {
 #imgfija {
     float: right;
     position: fixed;
-    bottom: 5px ;
+    bottom: 5px;
     right: 5px;
     background-color: #000000;
     padding: 10px;
+}
+
+#pagina {
+    text-decoration: none;
+    color: black;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+#imglayout {
+    width: 250px;
+    margin: 10px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    padding: 5px;
+}
+
+#imglayout:hover {
+    transform: scale(1.1);
+    box-shadow: 1px 1px 9px 1px black;
+}
+
+#fechasimg {
+    position: absolute;
+    text-align: center;
 }
