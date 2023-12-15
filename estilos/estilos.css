@@ -306,7 +306,6 @@ nav {
 }
 
 .dentro-centro img {
-
     width: 350px;
     justify-content: space-between;
     margin: 25px;
@@ -379,6 +378,7 @@ table {
 
 h1 {
     font-size: 18px;
+    padding: 5px;
 }
 
 footer {
@@ -413,26 +413,13 @@ iframe {
 }
 
 #imglayout {
-    width: 250px;
+    max-width: 250px;
+    width: 200px;
     margin: 10px;
     border-top: 2px solid;
     border-right: 2px solid;
     border-top-right-radius: 15px;
     padding: 5px;
-
-}
-
-
-#td-circuitos {
-    margin: 15px;
-    max-width: 300px;
-
-}
-
-#td-circuitos:hover {}
-
-#fila-tabla {
-    margin: 10px;
 }
 
 .layout {
@@ -440,16 +427,16 @@ iframe {
     grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
+    margin: 3px;
     padding: 10px;
-    
-
-
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-top-left-radius: 10px;
 }
 
 .lugar {
     margin: 7px;
     padding: 5px;
-
 }
 
 .lugar:hover {
@@ -460,5 +447,5 @@ iframe {
 
 .nombre {
     padding: 0px;
-    margin: 0px;
+    margin: 10px;
 }
