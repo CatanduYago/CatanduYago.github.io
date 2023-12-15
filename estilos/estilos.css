@@ -435,16 +435,11 @@ h1 {
 }
 
 footer {
+    background-color: #ffffee;
     color: black;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
     width: auto;
-    margin: 5px;
+    margin: 0;
     padding: 10px;
-    border: 2px solid;
-    clear: both;
-    border-radius: 15px;
 }
 
 #imgfija {
