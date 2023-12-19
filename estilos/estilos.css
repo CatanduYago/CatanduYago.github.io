@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'MiFuente';
-    src: url('fonts/Formula1-Regular_web.ttf') format('truetype');
+    src: url('/fonts/Formula1-Regular_web.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -449,4 +449,7 @@ footer {
     right: 5px;
     background-color: #000000;
     padding: 10px;
+}
+button{
+    font-family: 'MiFuente';
 }
