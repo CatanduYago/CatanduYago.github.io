@@ -89,7 +89,7 @@ body {
     font-family: 'MiFuente';
     border-radius: 5px;
     background-color: #FF1801;
-    color: #ffffff;
+    color: #ffffee;
     font-size: 15px;
     padding: 5px;
     height: 40px;
@@ -196,6 +196,7 @@ div {
 
 iframe {
     max-width: 100%;
+    border: none;
 }
 
 #imglayout {
@@ -450,6 +451,19 @@ footer {
     background-color: #000000;
     padding: 10px;
 }
-button{
+
+button {
     font-family: 'MiFuente';
+}
+
+#calendario-container {
+    width: 150px;
+    max-width: 10%;
+    border: 2px solid;
+    margin: 0 auto;
+}
+
+#calendario-container td,
+#calendario-container th {
+    color: #000000;
 }
