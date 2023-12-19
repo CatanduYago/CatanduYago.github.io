@@ -51,7 +51,7 @@ body {
     color: #ffffee;
     background-color: #FF1801;
     border: 2px solid #FF1801;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 5px;
 }
 
@@ -59,7 +59,7 @@ body {
     color: black;
     background-color: #ffffee;
     border: 2px solid #FF1801;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 #log {
@@ -466,4 +466,23 @@ button {
 #calendario-container td,
 #calendario-container th {
     color: #000000;
+}
+
+#proxima-carrera {
+    background-color: rgb(186, 186, 186);
+    max-width: 100%;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 5px;
+}
+
+#circuit {
+    float: right;
+    width: 200px;
+}
+
+#horario {
+    border: 2px solid #000000;
+    border-radius: 5px;
+    text-align: center;
 }
