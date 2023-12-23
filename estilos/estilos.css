@@ -469,8 +469,11 @@ button {
 }
 
 #proxima-carrera {
-    background-color: rgb(186, 186, 186);
+    background-color: rgba(209, 209, 209, 0.452);
     max-width: 100%;
+    width: 1415px;
+    display: flex;
+    flex-direction: column;
     border-radius: 15px;
     margin: 5px;
     padding: 5px;
@@ -479,10 +482,27 @@ button {
 #circuit {
     float: right;
     width: 200px;
+    
 }
 
 #horario {
     border: 2px solid #000000;
-    border-radius: 5px;
-    text-align: center;
+    border-radius: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    
 }
+.imgcircuitos {
+    border: 2px solid black;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 5px;
+    margin-top: 10px;
+    padding: 10px;
+    
+    float: right;
+}
+
+
