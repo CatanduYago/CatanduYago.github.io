@@ -477,6 +477,9 @@ button {
     border-radius: 15px;
     margin: 5px;
     padding: 5px;
+    max-height: 330px;
+    height: 330px;
+    overflow: auto;
 }
 
 #circuit {
@@ -506,4 +509,11 @@ button {
 #descripcion_carrera{
     margin: 15px;
 }
-
+#img-desplegable{
+    width: 200px;
+    display: none;
+}
+#horario:hover #img-desplegable{
+    display: block;
+    justify-content: center;
+}
