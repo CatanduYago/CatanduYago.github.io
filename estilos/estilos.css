@@ -488,21 +488,22 @@ button {
 #horario {
     border: 2px solid #000000;
     border-radius: 20px;
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    width: 80%;
+    width: 98%;
+    margin: 5px;
+    padding: 5px;
+    padding-top: 10px;
     
 }
 .imgcircuitos {
-    border: 2px solid black;
     justify-content: center;
-    border-radius: 10px;
+    float: right;
+    display: flex;
+    flex-direction: row;
     margin: 5px;
     margin-top: 10px;
     padding: 10px;
-    
-    float: right;
 }
-
+#descripcion_carrera{
+    margin: 15px;
+}
 
