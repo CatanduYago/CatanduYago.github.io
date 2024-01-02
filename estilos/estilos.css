@@ -469,7 +469,7 @@ button {
 }
 
 #proxima-carrera {
-    background-color: rgba(209, 209, 209, 0.452);
+    background-color: rgba(240, 240, 240, 0.829);
     max-width: 100%;
     width: 1415px;
     display: flex;
@@ -480,6 +480,7 @@ button {
     max-height: 330px;
     height: 330px;
     overflow: auto;
+    border:solid 2px;
 }
 
 #circuit {
@@ -495,7 +496,6 @@ button {
     margin: 5px;
     padding: 5px;
     padding-top: 10px;
-    
 }
 .imgcircuitos {
     justify-content: center;
@@ -516,4 +516,5 @@ button {
 #horario:hover #img-desplegable{
     display: block;
     justify-content: center;
+    padding-right: 500px ;
 }
