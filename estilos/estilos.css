@@ -242,6 +242,7 @@ iframe {
 }
 
 .dentro-noticias {
+    display: flex;
     border: 2px solid black;
     justify-content: center;
     background-color: #ffffee;
