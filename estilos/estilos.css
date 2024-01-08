@@ -470,7 +470,7 @@ button {
 }
 
 #proxima-carrera {
-    background-color: rgba(240, 240, 240, 0.829);
+    background-color: rgb(255, 255, 233);
     max-width: 100%;
     width: 1415px;
     display: flex;
@@ -520,7 +520,7 @@ button {
     padding-right: 500px ;
 }
 #mundial-pilotos {
-    background-color: rgba(240, 240, 240, 0.829);
+    background-color: rgb(255, 255, 238);
     max-width: 100%;
     width: 1415px;
     display: flex;
