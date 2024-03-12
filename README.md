@@ -10,8 +10,6 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
 - [Portal de Traducción](https://catanduyago.github.io/Traduccion/Web/)
     
-    Aquí está la corrección:
-
     Esta página forma parte de un proyecto que tuve que realizar en la 2da Evaluación de Lenguaje de Marcas. Mi idea con esta página era crear un portal en el que los usuarios pudieran solicitar una traducción de un archivo o texto y en el que los traductores pudieran acceder a esos archivos.
 
     El usuario solo debe rellenar un formulario, aunque también puede iniciar sesión. El traductor, al iniciar sesión, accede a una página en la que puede elegir con qué idioma quiere trabajar.
@@ -22,7 +20,6 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
 
-   Aquí tienes el texto corregido:
 
     Esta página es un proyecto personal. Soy un gran consumidor de YouTube, sobre todo de contenido fructífero del cual puedo aprender. Por eso, un día me topé con un video de una chica de habla inglesa que criticaba el diseño deficiente de la página oficial de Steam y ofrecía un rediseño detallado. El vídeo original se encuentra [aquí](https://www.youtube.com/watch?v=cDY2p1CTkPo), y el diseño original se puede encontrar [aquí](https://www.figma.com/file/DoO6aRMVQB0ZQt0TULkR4F/Steam-Redesign-(Community)?type=design&node-id=18-946&mode=design&t=yz55TpGb3pgrgAVI-0) y en la descripción de su video.
 
