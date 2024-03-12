@@ -2,17 +2,19 @@
 
 ## Qué es esto.
 
-Esta página recoge todos los proyectos, acabados o en progreso, realizados tanto para cumplir con lo exigido en mi curso (1º DAW) como de manera personal.
+Esta página recopila todos los proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (1º DAW) como de forma personal.
 
-A continuacion se encuentran las distintas paginas, sus accesos y una breve descripción.
+A continuación se encuentran las diferentes páginas, sus accesos y una breve descripción de cada una.
 
 ## Proyectos finalizados:
 
 - [Portal de Traducción](https://catanduyago.github.io/Traduccion/Web/)
     
+    Aquí está la corrección:
+
     Esta página forma parte de un proyecto que tuve que realizar en la 2da Evaluación de Lenguaje de Marcas. Mi idea con esta página era crear un portal en el que los usuarios pudieran solicitar una traducción de un archivo o texto y en el que los traductores pudieran acceder a esos archivos.
 
-    El usuario solo debe rellenar un formulario aunque también puede iniciar sesión. El traductor, al iniciar sesión, accede a una página en la que puede elegir con qué idioma quiere trabajar.
+    El usuario solo debe rellenar un formulario, aunque también puede iniciar sesión. El traductor, al iniciar sesión, accede a una página en la que puede elegir con qué idioma quiere trabajar.
 
     También tuve que implementar un administrador, el cual tiene acceso a una página desde la que realizar acciones CRUD.
 
@@ -20,7 +22,9 @@ A continuacion se encuentran las distintas paginas, sus accesos y una breve desc
 
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/)
 
-   Esta página es un proyecto personal. Soy un gran consumidor de YouTube, sobre todo de contenido fructífero del cual pueda aprender. Por esto, un día me encontré con un video de una chica de habla inglesa que criticaba el diseño deficiente de la página oficial de Steam y ofrecía un rediseño detallado. El vídeo original es [este](https://www.youtube.com/watch?v=cDY2p1CTkPo) y el diseño original se puede encontrar [aquí](https://www.figma.com/file/DoO6aRMVQB0ZQt0TULkR4F/Steam-Redesign-(Community)?type=design&node-id=18-946&mode=design&t=yz55TpGb3pgrgAVI-0) y en la descripcion de su video
+   Aquí tienes el texto corregido:
+
+    Esta página es un proyecto personal. Soy un gran consumidor de YouTube, sobre todo de contenido fructífero del cual puedo aprender. Por eso, un día me topé con un video de una chica de habla inglesa que criticaba el diseño deficiente de la página oficial de Steam y ofrecía un rediseño detallado. El vídeo original se encuentra [aquí](https://www.youtube.com/watch?v=cDY2p1CTkPo), y el diseño original se puede encontrar [aquí](https://www.figma.com/file/DoO6aRMVQB0ZQt0TULkR4F/Steam-Redesign-(Community)?type=design&node-id=18-946&mode=design&t=yz55TpGb3pgrgAVI-0) y en la descripción de su video.
 
     Bien, he tomado su rediseño y lo he desarrollado para que sea una página web (el diseño original de ella es una aplicación).
 
