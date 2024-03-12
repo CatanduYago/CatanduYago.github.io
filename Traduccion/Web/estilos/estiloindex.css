@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Mukta';
-    src: url('fuentes/Mukta-SemiBold.ttf') format('truetype');
+    src: url('/fuentes/Mukta-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Saira';
-    src: url('fuentes/Saira-Regular.ttf') format('truetype');
+    src: url('/fuentes/Saira-Regular.ttf') format('truetype');
 }
 
 nav {
