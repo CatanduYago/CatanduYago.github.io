@@ -20,7 +20,7 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
 ## Proyectos en progreso:
 
-- [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/)
+- [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
 
    Aquí tienes el texto corregido:
 
