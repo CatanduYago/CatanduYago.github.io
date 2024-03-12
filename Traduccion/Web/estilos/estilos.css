@@ -1,0 +1,302 @@
+@font-face {
+    font-family: 'Mukta';
+    src: url('/Web/fuentes/Mukta-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Saira';
+    src: url('/Web/fuentes/Saira-Regular.ttf') format('truetype');
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Mukta';
+    background-color: #034464;
+    font-size: 18px;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: #000000 3px solid;
+}
+
+#logo1 {
+    float: left;
+    width: 60px;
+    margin-right: 150px;
+    filter: drop-shadow(2px 2px 1px #00000080);
+}
+
+#menu {
+    list-style: none;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    margin-right: 30px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+li a {
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+li a:hover {
+    cursor: pointer;
+}
+
+#boton-acceso {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 150px;
+    background-color: #06CC99;
+    border: 0px;
+    font-family: 'Mukta';
+    font-size: 18px;
+    color: transparent;
+}
+
+#boton-acceso:hover {
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Saira';
+    background-color: #afd1e1;
+    margin-top: 110px;
+}
+
+table {
+    margin-top: 100px;
+}
+
+td {
+    padding: 10px;
+}
+
+#foto-perfil {
+    padding-left: 120px;
+    padding-right: 22px;
+}
+
+#nombre-trabajador {
+    font-size: 22px;
+}
+
+#descripcion-trabajador {
+    font-size: 15px;
+    padding-right: 150px;
+}
+
+input {
+    height: 40px;
+    font-family: 'Saira';
+    border-radius: 6px;
+    background-color: #034464;
+    color: #ffffff;
+    margin-right: 75px;
+    border: 0;
+    padding-left: 10px;
+}
+
+input::placeholder {
+    color: white;
+}
+
+#asterisco {
+    position: static;
+    padding: 0px;
+    font-size: 15px;
+}
+
+select {
+    height: 40px;
+    font-family: 'Saira';
+    border-radius: 6px;
+    background-color: #034464;
+    color: #ffffff;
+    margin-right: 75px;
+    border: 0;
+    padding-left: 10px;
+}
+
+input[type='file'] {
+    padding-top: 20px;
+    text-align: center;
+}
+
+input[type='file']::placeholder {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#recordar {
+    margin-top: 30px;
+    margin-right: 10px;
+    padding: 0px;
+    height: min-content;
+    width: min-content;
+}
+
+span {
+    padding: 11px;
+    position: absolute;
+    font-size: 14px;
+}
+
+input[type='submit'] {
+    background-color: #06CC99;
+    padding: 10px;
+}
+
+input[type='reset'] {
+    background-color: #cc0606;
+}
+
+input[type='submit']:hover,
+input[type='reset']:hover {
+    cursor: pointer;
+}
+
+#inicio-sesion {
+    background-color: #ffffff;
+    height: auto;
+    width: 450px;
+    clip-path: polygon(0 0, 40% 0, 40% 15%, 100% 15%, 100% 15%, 100% 15%, 100% 100%, 0 100%);
+    margin-left: 35%;
+    margin-bottom: 85px;
+    margin-top: 180px;
+    padding: 10px;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+#inicio-sesion form {
+    text-align: center;
+}
+
+#inicio-sesion span {
+    margin-top: 0;
+}
+
+#cuenta {
+    background-color: #ffffff;
+    border-bottom: 2px solid #000000;
+    border-radius: 0;
+    margin-right: auto;
+    color: #000000;
+}
+
+#cuenta::placeholder {
+    color: #000000;
+}
+
+#boton-acceder {
+    border: #000000 2px solid;
+    position: static;
+    background-color: #000000;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    margin-right: auto;
+    width: min-content;
+    height: min-content;
+}
+
+#boton-traducir {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 150px;
+    background-color: #06CC99;
+    border: 0px;
+    font-family: 'Mukta';
+    font-size: 19px;
+    color: #034464;
+    width: 130px;
+    height: 50px;
+    inset: (0px 5px 4px #222222);
+}
+
+button a {
+    text-decoration: none;
+    color: #034464;
+    filter: drop-shadow(2px 2px 2px 1px #00000080);
+}
+
+#opcion-acceso {
+    text-decoration: none;
+    color: #000000;
+}
+
+#admin-forms {
+    border-bottom: 2px solid #000000;
+    border-left: 2px solid #000000;
+    width: 650px;
+    padding: 5px;
+    margin-right: 35px;
+    margin-left: 45px;
+    display: inline-block;
+    height: auto;
+    margin-bottom: 0;
+}
+
+footer {
+    border-top: #000000 3px solid;
+    background-color: #034464;
+    height: auto;
+    width: 100%;
+    left: 0px;
+    bottom: 2;
+    position: absolute;
+}
+
+footer ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    position: static;
+    bottom: 0px;
+    height: 140px;
+}
+
+footer li {
+    bottom: 0px;
+}
+
+#logo2 {
+    width: 80px;
+    filter: drop-shadow(4px 4px 2px #00000080);
+}
+
+#linea-vertical {
+    border-left: 3px solid #ffffff;
+    height: 170.5px;
+}
+
+#linea-horizontal {
+    border-bottom: 3px solid #ffffff;
+    width: 99.9%;
+}

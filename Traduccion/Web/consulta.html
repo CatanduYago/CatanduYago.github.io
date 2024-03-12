@@ -1,0 +1,63 @@
+<!-- Pagina intermedia en el que el usuario pueda ingresar en un select que idioma quiere traducir -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Web/img/logo.png" type="image/x-icon">
+    <title>Consulta</title>
+    <link rel="stylesheet" href="/Web/estilos/estilos.css">
+</head>
+<nav>
+    <ul id="menu">
+        <li><img src="/Web/img/logo.png" id="logo1"></li>
+        <li><a href="/Web/index.html">INICIO</a></li>
+        <li><a href="/Web/traducir.html">TRADUCIR</a></li>
+        <li><a href="/Web/trabajadores.html">NUESTROS TRABAJADORES</a></li>
+        <li><a href="/Web/acercade.html">ACERCA DE</a></li>
+        <li id="boton"><button type="submit" id="boton-acceso"><a href="/Web/acceder.html">ACCEDER</a> </button>
+        </li>
+    </ul>
+</nav>
+
+<body>
+
+    <div>
+        <form action="solicitudes.php" method="post">
+            <h2 style="text-align:left;padding-left:10px"> Selecciona el idioma que quieres traducir: </h2>
+            <select name="idioriginal" style="font-family: 'Saira';">
+                <option disabled selected >Seleccionar idioma </option>
+                <option value="ingles">Inglés</option>
+                <option value="espanol">Español</option>
+                <option value="frances">Francés</option>
+                <option value="aleman">Aleman</option>
+                <option value="catalan">Catalán</option>
+                <option value="italiano">Italiano</option>
+            </select> <br> <br>
+            <input type="submit" value="CONSULTAR">
+            <p></p>
+        </form>
+    </div>
+</body>
+<footer style="bottom: 0;">
+    <ul>
+        <li><img src="/Web/img/logo.png" id="logo2"></li>
+        <li style="font-family: Mukta;font-size:20px;color:#ffffff">TRADUCEMÁS</li>
+        <hr id="linea-vertical">
+        <li style="color:#ffffff;font-size: 15px;">¿Quieres trabajar con nosotros? Contactanos mediante el boton de abajo o registrate como traductor. <br>
+            <p></p><button type="submit" id="boton-traducir"> <a href="contacto.html">CONTACTA</a></button>
+        </li>
+        <hr id="linea-vertical">
+        <li style="font-family: Mukta;color:#ffffff"> <img src="/Web/img/contacto.png " style="width: 30px; "> SERVICIO AL CLIENTE
+            <p style="font-family: Saira;font-size: 15px;">Para más información sobre nuestros servicios escribenos a traducemas@gmail.com o llama al 924 45 67 89.</p>
+        </li>
+    </ul>
+    <hr id="linea-horizontal">
+    <p style="font-family: Mukta;text-align:center;color:#ffffff;font-size: 10px;"><u>AVISO LEGAL</u> | <u>POLÍTICA DE
+            COOKIES</u></p>
+    <p></p>
+</footer>
+
+</html>

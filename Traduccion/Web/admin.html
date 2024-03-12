@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Web/img/logo.png" type="image/x-icon">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/Web/estilos/estilos.css">
+</head>
+<nav>
+    <ul id="menu">
+        <li><img src="/Web/img/logo.png" id="logo1"></li>
+        <li><a href="/Web/index.html">INICIO</a></li>
+        <li><a href="/Web/traducir.html">TRADUCIR</a></li>
+        <li><a href="/Web/trabajadores.html">NUESTROS TRABAJADORES</a></li>
+        <li><a href="/Web/acercade.html">ACERCA DE</a></li>
+        <li id="boton"><button type="submit" id="boton-acceso"><a href="/Web/acceder.html">ACCEDER</a> </button>
+        </li>
+    </ul>
+</nav>
+
+<body>
+    <form action="admin_consultar.php" method="post" id="admin-forms" style="border-top: 2px solid #000000;">
+        <h3>Consultar datos de traduccion</h3>
+        <input type="submit" value="VER">
+        <br><br>
+    </form>
+    <form action="admin_contactos.php" method="post" id="admin-forms" style="border-top: 2px solid #000000;">
+        <h3>Consultar contactos</h3>
+        <input type="submit" value="VER">
+        <br><br>
+    </form>
+
+    <form action="admin_eliminar.php" method="post" id="admin-forms" style="height: 300px;">
+        
+        <h3>Eliminar datos de traduccion</h3>
+        <input type="text" name="nom" placeholder="Nombre" size="20" required> <br><br>
+        <input type="submit" value="ELIMINAR REGISTRO">
+        <input type="reset" value="CANCELAR"><br><br><br><br>
+        <p></p>
+    </form>
+    <form action="admin_actualizar.php" method="post" id="admin-forms"  style="height: 300px;">
+        <h3>Actualizar datos de traduccion</h3>
+        <input type="text" name="nom" placeholder="Nombre" size="20" required> <br> <br>
+        <select name="idioriginal" required>
+            <option disabled selected >Seleccionar idioma original</option>
+            <option value="ingles">Inglés</option>
+            <option value="espanol">Español</option>
+            <option value="frances">Francés</option>
+            <option value="aleman">Aleman</option>
+            <option value="catalan">Catalán</option>
+            <option value="italiano">Italiano</option>
+        </select>
+        <select name="iditraducir" required>
+            <option disabled selected>Seleccionar idioma deseado</option>
+            <option value="ingles">Inglés</option>
+            <option value="espanol">Español</option>
+            <option value="frances">Francés</option>
+            <option value="aleman">Aleman</option>
+            <option value="catalan">Catalán</option>
+            <option value="italiano">Italiano</option>
+        </select> <br><br>
+        <input type="submit" value="ACTUALIZAR REGISTRO">
+        <input type="reset" value="CANCELAR"><br><br>
+        <p></p>
+
+    </form>
+    <form action="admin_insertar.php" method="post" id="admin-forms">
+        <h3>Introducir datos</h3>
+        <input type="text" name="nom" placeholder="Nombre" size="20" required> <input type="text" name="ape" placeholder="Apellidos" size="29" required oninvalid="this.setCustomValidity('Se necesitan unos apellidos')"> <br><br>
+        <input type="text" name="correo" placeholder="Correo Electrónico" size="63" required><br><br>
+        <input type="text" name="comentarios" placeholder="Comentarios a tener en cuenta" size="63"><br><br>
+        <select name="idioriginal">
+            <option disabled selected >Seleccionar idioma original</option>
+            <option value="ingles">Inglés</option>
+            <option value="espanol">Español</option>
+            <option value="frances">Francés</option>
+            <option value="aleman">Aleman</option>
+            <option value="catalan">Catalán</option>
+            <option value="italiano">Italiano</option>
+        </select>
+        <select name="iditraducir">
+            <option disabled selected>Seleccionar idioma deseado</option>
+            <option value="ingles">Inglés</option>
+            <option value="espanol">Español</option>
+            <option value="frances">Francés</option>
+            <option value="aleman">Aleman</option>
+            <option value="catalan">Catalán</option>
+            <option value="italiano">Italiano</option>
+        </select> <br><br>
+        <input type="file" name="archivo" required> <br> <br>
+        <input type="submit" value="INSERTAR TRADUCCIÓN">
+        <input type="reset" value="CANCELAR"><br><br>
+    </form>
+
+</body>
+
+</html>

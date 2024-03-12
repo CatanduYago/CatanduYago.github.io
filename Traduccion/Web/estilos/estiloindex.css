@@ -1,0 +1,162 @@
+@font-face {
+    font-family: 'Mukta';
+    src: url('/Web/fuentes/Mukta-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Saira';
+    src: url('/Web/fuentes/Saira-Regular.ttf') format('truetype');
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Mukta';
+    background-color: #034464;
+    font-size: 18px;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: #000000 3px solid;
+}
+
+#logo1 {
+    float: left;
+    width: 60px;
+    margin-right: 150px;
+    filter: drop-shadow(2px 2px 1px #00000080);
+}
+
+#menu {
+    list-style: none;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+li {
+    margin-right: 30px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+li a {
+    padding: 10px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+li a:hover {
+    cursor: pointer;
+}
+
+#boton-acceso {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 150px;
+    background-color: #06CC99;
+    border: 0px;
+    font-family: 'Mukta';
+    font-size: 18px;
+    color: transparent;
+}
+
+#boton-acceso:hover {
+    cursor: pointer;
+}
+
+body {
+    font-family: 'Saira';
+    background-color: #afd1e1;
+}
+
+#fondo {
+    display: inline-block;
+    text-align: center;
+    margin-top: 85px;
+}
+
+#texto {
+    position: absolute;
+    top: 0px;
+    right: 500px;
+    transform: translate(55%, 20%);
+    color: #000000;
+    font-size: 17px;
+    width: 850px;
+}
+
+#boton-traducir {
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 150px;
+    background-color: #06CC99;
+    border: 0px;
+    font-family: 'Mukta';
+    font-size: 19px;
+    color: #034464;
+    width: 130px;
+    height: 50px;
+    inset: (0px 5px 4px #222222);
+}
+
+button a {
+    text-decoration: none;
+    color: #034464;
+    filter: drop-shadow(2px 2px 2px 1px #00000080);
+}
+
+footer {
+    border-top: #000000 3px solid;
+    background-color: #034464;
+    height: auto;
+    width: 100%;
+    left: 0px;
+    position: absolute;
+}
+
+footer ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    position: static;
+    bottom: 0px;
+    height: 140px;
+}
+
+footer li {
+    bottom: 0px;
+}
+
+#logo2 {
+    width: 80px;
+    filter: drop-shadow(4px 4px 2px #00000080);
+}
+
+#linea-vertical {
+    border-left: 3px solid #ffffff;
+    height: 170.5px;
+}
+
+#linea-horizontal {
+    border-bottom: 3px solid #ffffff;
+    width: 99.9%;
+}

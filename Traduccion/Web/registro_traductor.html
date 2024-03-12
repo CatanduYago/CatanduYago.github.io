@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/Web/img/logo.png" type="image/x-icon">
+    <title>Registrate</title>
+    <link rel="stylesheet" href="/Web/estilos/estilos.css">
+</head>
+<nav>
+    <ul id="menu">
+        <li><img src="/Web/img/logo.png" id="logo1"></li>
+        <li><a href="/Web/index.html">INICIO</a></li>
+        <li><a href="/Web/traducir.html">TRADUCIR</a></li>
+        <li><a href="/Web/trabajadores.html">NUESTROS TRABAJADORES</a></li>
+        <li><a href="/Web/acercade.html">ACERCA DE</a></li>
+        <li id="boton"><button type="submit" id="boton-acceso"><a href="/Web/acceder.html">ACCEDER</a> </button>
+        </li>
+    </ul>
+</nav>
+
+<body>
+    <div id="inicio-sesion">
+        <span style="text-shadow: 2px 2px 5px #06CC99;">Traductor</span> &emsp;&emsp;&emsp;&emsp;&emsp;<span> 
+            <a href="/Web/registro_usuario.html" id="opcion-acceso">Usuario</a></span><br><br>
+        <form action="registro_traductor.php" method="post">
+            <h2 style="text-align:left;padding-left:10px">Registrate como traductor</h2>
+            <input type="text" required placeholder="Usuario" id="cuenta" size="25" name="usuario"><br><br>
+            <input type="password" required placeholder="Contraseña" id="cuenta" size="25" name="contrasena"> <br><br>
+            <input type="text" required placeholder="Correo Electrónico" id="cuenta" size="25" name="correo"> <br><br>
+            <input type="submit" value="ENTRAR" id="boton-acceder"> <br> <br>
+            <p style="font-family: Mukta;">¿YA FORMA PARTE DEL EQUIPO? <a href="acceder.html">INICIE SESION</a>.</p>
+            <p></p>
+        </form>
+    </div>
+</body>
+<footer>
+    <ul>
+        <li><img src="/Web/img/logo.png" id="logo2"></li>
+        <li style="font-family: Mukta;font-size:20px;color:#ffffff">TRADUCEMÁS</li>
+        <hr id="linea-vertical">
+        <li style="color:#ffffff;font-size: 15px;">¿Quieres trabajar con nosotros? Contactanos mediante el boton de abajo o registrate como traductor. <br>
+            <p></p><button type="submit" id="boton-traducir"> <a href="contacto.html">CONTACTA</a></button>
+        </li>
+        <hr id="linea-vertical">
+        <li style="font-family: Mukta;color:#ffffff"> <img src="/Web/img/contacto.png " style="width: 30px; "> SERVICIO AL CLIENTE
+            <p style="font-family: Saira;font-size: 15px;">Para más información sobre nuestros servicios escribenos a traducemas@gmail.com o llama al 924 45 67 89.</p>
+        </li>
+    </ul>
+    <hr id="linea-horizontal">
+    <p style="font-family: Mukta;text-align:center;color:#ffffff;font-size: 10px;"><u>AVISO LEGAL</u> | <u>POLÍTICA DE
+            COOKIES</u></p>
+    <p></p>
+</footer>
+
+</html>
