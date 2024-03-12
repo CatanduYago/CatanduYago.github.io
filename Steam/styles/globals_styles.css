@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Motiva';
-    src: url("/SteamRedisign/fonts/MotivaSans-Regular.otf") format('truetype');
+    src: url("fonts/MotivaSans-Regular.otf") format('truetype');
 }
 
 body {
