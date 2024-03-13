@@ -22,10 +22,17 @@ body {
 }
 
 #a_nav1 {
+    text-decoration: none;
     text-transform: uppercase;
     font-family: 'Motiva';
+    color: #F3F3F3;
 }
+.a_nav2{
+    text-decoration: none;
+    font-family: 'Motiva';
+    color: #F3F3F3;
 
+}
 .button_direccion {
     background: transparent;
     border: none;
