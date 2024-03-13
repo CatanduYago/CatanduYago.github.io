@@ -6,6 +6,7 @@
 body {
     margin: 0;
     padding: 0;
+
 }
 
 .navegacion {
@@ -27,12 +28,14 @@ body {
     font-family: 'Motiva';
     color: #F3F3F3;
 }
-.a_nav2{
+
+.a_nav2 {
     text-decoration: none;
     font-family: 'Motiva';
     color: #F3F3F3;
 
 }
+
 .button_direccion {
     background: transparent;
     border: none;
@@ -59,10 +62,43 @@ body {
     flex-direction: row;
     justify-content: center;
     justify-content: space-around;
+    align-items: center;
     background-color: #212B45;
     color: #F3F3F3;
     font-size: 15px;
     font-family: 'Motiva';
     font-weight: lighter;
-    padding: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 40px;
+}
+.navegacion2 a{
+    padding: 35px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 5px;
+}
+#buscador {
+    width: 270px;
+    background-color: #16202b;
+    padding: 10px;
+    border: none;
+    font-family: 'Motiva';
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 13px
+}
+
+#buscador::placeholder {
+    color: #4B619B;
+
+}
+
+.navegacion2 a:hover {
+    background-color: #76808C50;
+    
+}
+#buscador:focus {
+    outline: none;
+    border-bottom: 2px solid #76808C50;
 }
