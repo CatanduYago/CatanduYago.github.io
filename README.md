@@ -1,6 +1,6 @@
-# Bienvenido a este repositorio.
+# Portfolio.
 
-## Qué es esto.
+## Que se puede encontrar en esta página.
 
 Esta página recopila todos los proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (1º DAW) como de forma personal.
 
