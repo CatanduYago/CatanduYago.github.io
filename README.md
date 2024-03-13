@@ -14,7 +14,7 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
     El usuario solo debe rellenar un formulario, aunque también puede iniciar sesión. El traductor, al iniciar sesión, accede a una página en la que puede elegir con qué idioma quiere trabajar.
 
-    También tuve que implementar un administrador, el cual tiene acceso a una página desde la que realizar acciones CRUD.
+    También tuve que implementar un administrador, el cual tiene acceso a una página desde la que realizar acciones CRUD sobre las distintas bases de datos.
 
 ## Proyectos en progreso:
 
