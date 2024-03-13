@@ -6,7 +6,6 @@
 body {
     margin: 0;
     padding: 0;
-
 }
 
 .navegacion {
@@ -33,7 +32,6 @@ body {
     text-decoration: none;
     font-family: 'Motiva';
     color: #F3F3F3;
-
 }
 
 .button_direccion {
@@ -72,12 +70,14 @@ body {
     padding-bottom: 20px;
     height: 40px;
 }
-.navegacion2 a{
+
+.navegacion2 a {
     padding: 35px;
     padding-bottom: 15px;
     padding-top: 15px;
     border-radius: 5px;
 }
+
 #buscador {
     width: 270px;
     background-color: #16202b;
@@ -91,14 +91,30 @@ body {
 
 #buscador::placeholder {
     color: #4B619B;
-
 }
 
 .navegacion2 a:hover {
     background-color: #76808C50;
-    
 }
+
 #buscador:focus {
     outline: none;
     border-bottom: 2px solid #76808C50;
+}
+
+#iconos-nav1 {
+    width: 20px;
+    filter: invert;
+}
+
+#button_amigos {
+    background-color: #212B45;
+    background: transparent;
+    filter: brightness(100%);
+}
+
+button {
+    background-color: #76808C50;
+    border: none;
+    width: 50px;
 }

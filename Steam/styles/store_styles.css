@@ -1,81 +1,75 @@
 :root {
-  /* System greys */
-  --gpSystemLightestGrey: #DCDEDF;
-  --gpSystemLighterGrey: #B8BCBF;
-  --gpSystemLightGrey: #8B929A;
-  --gpSystemGrey: #67707B;
-  --gpSystemDarkGrey: #3D4450;
-  --gpSystemDarkerGrey: #23262E;
-  --gpSystemDarkestGrey: #0E141B;
-  /* Store blue greys */
-  --gpStoreLightestGrey: #CCD8E3;
-  --gpStoreLighterGrey: #A7BACC;
-  --gpStoreLightGrey: #7C8EA3;
-  --gpStoreGrey: #4e697d;
-  --gpStoreDarkGrey: #2A475E;
-  --gpStoreDarkerGrey: #1B2838;
-  --gpStoreDarkestGrey: #000F18;
-  /* Gradients */
-  --gpGradient-StoreBackground: linear-gradient(180deg, var(--gpStoreDarkGrey) 0%, var(--gpStoreDarkerGrey) 80%);
-  --gpGradient-LibraryBackground: radial-gradient(farthest-corner at 40px 40px, #3D4450 0%, #23262E 80%);
-  /* Colours */
-  --gpColor-Blue: #1A9FFF;
-  --gpColor-BlueHi: #00BBFF;
-  --gpColor-Green: #5ba32b;
-  --gpColor-GreenHi: #59BF40;
-  --gpColor-Orange: #E35E1C;
-  --gpColor-Red: #D94126;
-  --gpColor-RedHi: #EE563B;
-  --gpColor-DustyBlue: #417a9b;
-  --gpColor-LightBlue: #B3DFFF;
-  --gpColor-Yellow: #FFC82C;
-  --gpColor-ChalkyBlue: #66C0F4;
-  /* Backgrounds */
-  --gpBackground-LightSofter: #6998bb24;
-  --gpBackground-LightSoft: #3b5a7280;
-  --gpBackground-LightMedium: #678BA670;
-  --gpBackground-LightHard: #93B8D480;
-  --gpBackground-LightHarder: #aacce6a6;
-  --gpBackground-DarkSofter: #0e141b33;
-  --gpBackground-DarkSoft: #0e141b66;
-  --gpBackground-DarkMedium: #0e141b99;
-  --gpBackground-DarkHard: #0e141bcc;
-  --gpBackground-Neutral-LightSofter: rgba(235, 246, 255, 0.10);
-  --gpBackground-Neutral-LightSoft: rgba(235, 246, 255, 0.20);
-  --gpBackground-Neutral-LightMedium: rgba(235, 246, 255, 0.30);
-  --gpBackground-Neutral-LightHard: rgba(235, 246, 255, 0.40);
-  --gpBackground-Neutral-LightHarder: rgba(235, 246, 255, 0.50);
+    /* System greys */
+    --gpSystemLightestGrey: #DCDEDF;
+    --gpSystemLighterGrey: #B8BCBF;
+    --gpSystemLightGrey: #8B929A;
+    --gpSystemGrey: #67707B;
+    --gpSystemDarkGrey: #3D4450;
+    --gpSystemDarkerGrey: #23262E;
+    --gpSystemDarkestGrey: #0E141B;
+    /* Store blue greys */
+    --gpStoreLightestGrey: #CCD8E3;
+    --gpStoreLighterGrey: #A7BACC;
+    --gpStoreLightGrey: #7C8EA3;
+    --gpStoreGrey: #4e697d;
+    --gpStoreDarkGrey: #2A475E;
+    --gpStoreDarkerGrey: #1B2838;
+    --gpStoreDarkestGrey: #000F18;
+    /* Gradients */
+    --gpGradient-StoreBackground: linear-gradient(180deg, var(--gpStoreDarkGrey) 0%, var(--gpStoreDarkerGrey) 80%);
+    --gpGradient-LibraryBackground: radial-gradient(farthest-corner at 40px 40px, #3D4450 0%, #23262E 80%);
+    /* Colours */
+    --gpColor-Blue: #1A9FFF;
+    --gpColor-BlueHi: #00BBFF;
+    --gpColor-Green: #5ba32b;
+    --gpColor-GreenHi: #59BF40;
+    --gpColor-Orange: #E35E1C;
+    --gpColor-Red: #D94126;
+    --gpColor-RedHi: #EE563B;
+    --gpColor-DustyBlue: #417a9b;
+    --gpColor-LightBlue: #B3DFFF;
+    --gpColor-Yellow: #FFC82C;
+    --gpColor-ChalkyBlue: #66C0F4;
+    /* Backgrounds */
+    --gpBackground-LightSofter: #6998bb24;
+    --gpBackground-LightSoft: #3b5a7280;
+    --gpBackground-LightMedium: #678BA670;
+    --gpBackground-LightHard: #93B8D480;
+    --gpBackground-LightHarder: #aacce6a6;
+    --gpBackground-DarkSofter: #0e141b33;
+    --gpBackground-DarkSoft: #0e141b66;
+    --gpBackground-DarkMedium: #0e141b99;
+    --gpBackground-DarkHard: #0e141bcc;
+    --gpBackground-Neutral-LightSofter: rgba(235, 246, 255, 0.10);
+    --gpBackground-Neutral-LightSoft: rgba(235, 246, 255, 0.20);
+    --gpBackground-Neutral-LightMedium: rgba(235, 246, 255, 0.30);
+    --gpBackground-Neutral-LightHard: rgba(235, 246, 255, 0.40);
+    --gpBackground-Neutral-LightHarder: rgba(235, 246, 255, 0.50);
 }
 
 body {
-  background: var(--gpGradient-StoreBackground);
-  height: 100vh;
+    background: var(--gpGradient-StoreBackground);
+    height: 100vh;
 }
 
 #header {
-
-  align-items: center;
-  padding: 15px;
-  color: #F3F3F3;
-  font-size: 18px;
-  font-family: 'Motiva';
-  font-weight: bold;
-  padding-top: 0;
-
+    padding: 15px;
+    color: #F3F3F3;
+    font-size: 18px;
+    font-family: 'Motiva';
+    font-weight: bold;
+    padding-top: 0;
 }
 
 #div-header {
-  display: grid;
-  justify-content: center;
-  margin-top: 0;
-  padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 70%;
 }
 
 #div-header img {
-  height: 70%;
-  filter: drop-shadow(0px 100px 100px  #000000) ;
+    height: 70%;
+    filter: drop-shadow(0px 100px 100px #000000);
 }
 
-#juegos-mas-vendidos{
-
-}
+#juegos-mas-vendidos {}
