@@ -26,23 +26,27 @@
             <a href="#" id="a_nav1">UserProfile</a>
             <a href="#" id="a_nav1">Library</a>
             <a href="#" id="a_nav1">Downloads</a>
+
             <div id="derecha-perfil">
                 <button class="button_amigos"><img src="img/amigos.png" id="iconos-nav1"></button>
                 <button class="button_amigos"><img src="img/notificacion.png" id="iconos-nav1"></button>
-                <details id="perfil">
-                    <summary id="usuario">Perfil</summary>
-                    <a href="#">Perfil</a>
-                    <a href="#">Cuenta</a>
-                    <a href="#">Cerrar sesión</a>
-                </details>
+                <div class="dropdown" id="miDropdown">
+                    <span>Perfil &ensp;<img src="img/abajo.png" id="flechita_dropdown"></span>
+                    <div class="dropdown-content" id="miDropdownContent">
+                        <a href="#">Administrar perfil</a>
+                        <a href="#">Cuenta</a>
+                        <a href="#">Cartera</a>
+                        <a href="#">Ayuda</a>
+                        <a href="#">Cerrar sesión</a>
+                    </div>
+                </div>
 
 
             </div>
 
         </div>
         <nav class="navegacion2">
-            <a href="store.html" class="a_nav2"
-                style="background-color: #4B619B;padding: 35px;padding-bottom: 15px;padding-top: 15px;border-radius: 5px;">Inicio</a>
+            <a href="store.html" class="a_nav2" style="background-color: #4B619B;padding: 35px;padding-bottom: 15px;padding-top: 15px;border-radius: 5px;">Inicio</a>
             <a href="#" class="a_nav2">Buscar</a>
             <a href="#" class="a_nav2">Tienda de Puntos</a>
             <a href="#" class="a_nav2">Mentores</a>
@@ -62,7 +66,28 @@
     <div id="juegos-mas-vendidos">
 
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdown = document.getElementById("miDropdown");
+            var dropdownContent = document.getElementById("miDropdownContent");
+            var flechaDropdown = document.getElementById("flechita_dropdown");
 
+            dropdown.addEventListener("click", function(event) {
+                event.stopPropagation();
+                dropdown.classList.toggle("show");
+                flechaDropdown.style.transform = dropdown.classList.contains("show") ? "rotate(180deg)" : "rotate(0deg)";
+            });
+
+            window.addEventListener("click", function() {
+                dropdown.classList.remove("show");
+                flechaDropdown.style.transform = "rotate(0deg)";
+            });
+
+            dropdownContent.addEventListener("click", function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
 </body>
 
 </html>

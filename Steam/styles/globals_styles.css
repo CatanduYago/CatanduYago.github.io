@@ -122,19 +122,6 @@ button {
     height: 25px;
 }
 
-#perfil {
-    background-color: #76808C50;
-    width: 55px;
-    font-size: 12px;
-    height: 15px;
-    padding: 5px;
-    color: #76808C;
-}
-
-summary {
-    background: none;
-}
-
 #derecha-perfil {
     display: flex;
     flex-direction: row;
@@ -142,13 +129,62 @@ summary {
     align-items: center;
     width: 200px;
     max-height: 25px;
+    font-weight: 400;
 }
 
-details a {
-    text-decoration: none;
+.dropdown {
+    display: inline-block;
+    position: relative;
     background-color: #76808C50;
-    color: #76808C;
+    color: #F3F3F3;
+    font-size: 13px;
+    padding: 5px;
+    padding-left: 0;
+    padding-right: 10px;
+    width: 60px;
+    height: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    width: auto;
+    box-shadow: 0px 10px 10px 0px #00000066;
+    background-color: #1E2329;
+    text-align: start;
     height: auto;
-    margin: 5px;
-    width: 200px;
+    padding-top: 5px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    transition: 0.5s;
+}
+
+.dropdown.show .dropdown-content {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    transition: 0.5s;
+}
+
+.dropdown-content a {
+    font-size: 12px;
+    height: 15px;
+    padding: 5px;
+    margin-right: 0px;
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    color: #f3f3f3;
+    background-color: #212B45;
+}
+
+#flechita_dropdown {
+    width: 15px;
+    position: absolute;
+    right: 5px;
+    filter: invert();
+    transition: transform 0.5s;
 }
