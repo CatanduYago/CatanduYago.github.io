@@ -1,8 +1,6 @@
 # Portfolio.
 
-## Que se puede encontrar en esta página.
-
-Esta página recopila todos los proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (1º DAW) como de forma personal.
+En este portfolio se hayan todos mis proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (1º DAW) como de forma personal.
 
 A continuación se encuentran las diferentes páginas, sus accesos y una breve descripción de cada una.
 
@@ -25,4 +23,4 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
     Bien, he tomado su rediseño y lo he desarrollado para que sea una página web (el diseño original de ella es una aplicación).
 
-    Me parece un rediseño con mucho potencial, tanto para mí, para aprender y progresar en mis conocimientos de desarrollo web, como para el resto de personas acostumbradas a un diseño deficiente en la página oficial.
+    Me parece un rediseño con mucho potencial, tanto para mí, para aprender y progresar en mis conocimientos de desarrollo web, como para el resto de personas acostumbradas a un diseño deficiente de la página oficial.

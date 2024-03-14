@@ -27,7 +27,7 @@ body {
     font-size: 16px;
     font-family: 'Motiva';
     color: #F3F3F3;
-align-self: center;
+    align-self: center;
 }
 
 .a_nav2 {
@@ -52,9 +52,8 @@ align-self: center;
 }
 
 #flechas {
-filter: invert();
+    filter: invert();
     height: 20px;
-    
 }
 
 .navegacion2 {
@@ -105,7 +104,7 @@ filter: invert();
 }
 
 #iconos-nav1 {
-    width: 20px;
+    width: 15px;
     filter: invert;
 }
 
@@ -120,26 +119,31 @@ button {
     background-color: #76808C50;
     border: none;
     width: 50px;
+    height: 25px;
 }
+
 #perfil {
     background-color: #76808C50;
     width: 55px;
     font-size: 12px;
-    height: 21px;
-    padding-left: 5px;
-    padding-top: 5px;
+    height: 15px;
+    padding: 5px;
     color: #76808C;
 }
-summary{
+
+summary {
     background: none;
 }
-#derecha-perfil{
+
+#derecha-perfil {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
     width: 200px;
+    max-height: 25px;
 }
+
 details a {
     text-decoration: none;
     background-color: #76808C50;
