@@ -1,6 +1,6 @@
 # Portfolio.
 
-En este portfolio se hayan todos mis proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (1º DAW) como de forma personal.
+En este portfolio se hayan todos mis proyectos, ya sean acabados o en progreso, realizados tanto para cumplir con los requisitos de mi curso (DAW) como de forma personal.
 
 A continuación se encuentran las diferentes páginas, sus accesos y una breve descripción de cada una.
 
@@ -19,7 +19,7 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
 
 
-    Esta página es un proyecto personal. Soy un gran consumidor de YouTube, sobre todo de contenido fructífero del cual puedo aprender. Por eso, un día me topé con un video de una chica de habla inglesa que criticaba el diseño deficiente de la página oficial de Steam y ofrecía un rediseño detallado. El vídeo original se encuentra [aquí](https://www.youtube.com/watch?v=cDY2p1CTkPo), y el diseño original se puede encontrar [aquí](https://www.figma.com/file/DoO6aRMVQB0ZQt0TULkR4F/Steam-Redesign-(Community)?type=design&node-id=18-946&mode=design&t=yz55TpGb3pgrgAVI-0) y en la descripción de su video.
+    Esta página es un proyecto personal. Un día me topé con un video de una chica de habla inglesa que criticaba el diseño deficiente de la página oficial de Steam y ofrecía un rediseño detallado. El vídeo original se encuentra [aquí](https://www.youtube.com/watch?v=cDY2p1CTkPo), y el diseño original se puede encontrar [aquí](https://www.figma.com/file/DoO6aRMVQB0ZQt0TULkR4F/Steam-Redesign-(Community)?type=design&node-id=18-946&mode=design&t=yz55TpGb3pgrgAVI-0) y en la descripción de su video.
 
     Bien, he tomado su rediseño y lo he desarrollado para que sea una página web (el diseño original de ella es una aplicación).
 
