@@ -4,28 +4,45 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inicio</title>
+    <title>Bienvenidos a Steam</title>
     <link rel="stylesheet" href="styles/store_styles.css">
     <link rel="stylesheet" href="styles/globals_styles.css">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
 </head>
 
 <body>
     <header class="menu_superior">
         <div class="navegacion">
-            <div><button class="button_direccion"><span id="flechas"><</span></button>
-                <button class="button_direccion"><span id="flechas">></span></button></div>
+            <div>
+                <a class="button_direccion"><img src="img/atras.png" id="flechas">
+                </a>
+                <a class="button_direccion"><img src="img/delante.png" id="flechas">
+                </a>
+            </div>
 
             <img src="img/logo.png" class="logo">
-            <a href="#" id="a_nav1">Store</a>
+            <a href="store.html" id="a_nav1">Store</a>
             <a href="#" id="a_nav1">Community</a>
             <a href="#" id="a_nav1">UserProfile</a>
             <a href="#" id="a_nav1">Library</a>
             <a href="#" id="a_nav1">Downloads</a>
-            <button class="button_amigos"><img src="img/amigos.png" id="iconos-nav1"></button>
+            <div id="derecha-perfil">
+                <button class="button_amigos"><img src="img/amigos.png" id="iconos-nav1"></button>
+                <button class="button_amigos"><img src="img/notificacion.png" id="iconos-nav1"></button>
+                <details id="perfil">
+                    <summary id="usuario">Perfil</summary>
+                    <a href="#">Perfil</a>
+                    <a href="#">Cuenta</a>
+                    <a href="#">Cerrar sesión</a>
+                </details>
+
+
+            </div>
 
         </div>
         <nav class="navegacion2">
-            <a href="#" class="a_nav2" style="background-color: #4B619B;padding: 35px;padding-bottom: 15px;padding-top: 15px;border-radius: 5px;">Inicio</a>
+            <a href="store.html" class="a_nav2"
+                style="background-color: #4B619B;padding: 35px;padding-bottom: 15px;padding-top: 15px;border-radius: 5px;">Inicio</a>
             <a href="#" class="a_nav2">Buscar</a>
             <a href="#" class="a_nav2">Tienda de Puntos</a>
             <a href="#" class="a_nav2">Mentores</a>

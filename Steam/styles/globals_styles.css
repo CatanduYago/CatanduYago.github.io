@@ -24,8 +24,10 @@ body {
 #a_nav1 {
     text-decoration: none;
     text-transform: uppercase;
+    font-size: 16px;
     font-family: 'Motiva';
     color: #F3F3F3;
+align-self: center;
 }
 
 .a_nav2 {
@@ -50,9 +52,9 @@ body {
 }
 
 #flechas {
-    font-family: 'Motiva';
-    font-size: 20px;
-    font-weight: bolder;
+filter: invert();
+    height: 20px;
+    
 }
 
 .navegacion2 {
@@ -111,10 +113,38 @@ body {
     background-color: #212B45;
     background: transparent;
     filter: brightness(100%);
+    color: #76808C;
 }
 
 button {
     background-color: #76808C50;
     border: none;
     width: 50px;
+}
+#perfil {
+    background-color: #76808C50;
+    width: 55px;
+    font-size: 12px;
+    height: 21px;
+    padding-left: 5px;
+    padding-top: 5px;
+    color: #76808C;
+}
+summary{
+    background: none;
+}
+#derecha-perfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+}
+details a {
+    text-decoration: none;
+    background-color: #76808C50;
+    color: #76808C;
+    height: auto;
+    margin: 5px;
+    width: 200px;
 }
