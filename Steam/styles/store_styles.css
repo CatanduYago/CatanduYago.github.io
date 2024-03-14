@@ -48,7 +48,7 @@
 }
 
 body {
-    background: var(--gpGradient-StoreBackground);
+    background: linear-gradient(180deg, #040011 20%, #202B3C 100%);
     height: 100vh;
 }
 

@@ -17,8 +17,9 @@ body {
     color: #F3F3F3;
     font-size: 18px;
     font-family: 'Motiva';
-    font-weight: bold;
+    font-weight: 600;
     padding: 15px;
+    letter-spacing: 1px;
 }
 
 #a_nav1 {
@@ -76,7 +77,7 @@ body {
     padding: 35px;
     padding-bottom: 15px;
     padding-top: 15px;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 #buscador {
@@ -88,6 +89,7 @@ body {
     margin-top: 0;
     margin-bottom: 5px;
     font-size: 13px;
+    border-radius: 3px;
 }
 
 #buscador::placeholder {
@@ -113,11 +115,12 @@ body {
     filter: invert;
 }
 
-#button_amigos {
-    background-color: #212B45;
-    background: transparent;
-    filter: brightness(100%);
-    color: #76808C;
+#pagina-actual {
+    background-color: #4B619B;
+    padding: 35px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 3px;
 }
 
 button {
@@ -125,6 +128,7 @@ button {
     border: none;
     width: 50px;
     height: 25px;
+    border-radius: 3px;
 }
 
 #derecha-perfil {
@@ -138,6 +142,7 @@ button {
 }
 
 .dropdown {
+    border-radius: 3px;
     display: inline-block;
     position: relative;
     background-color: #76808C50;
@@ -162,7 +167,8 @@ button {
     padding-top: 5px;
     font-weight: lighter;
     letter-spacing: 1px;
-    transition: 0.5s;
+    transition: 0.1s;
+    border-radius: 3px;
 }
 
 .dropdown.show .dropdown-content {
@@ -191,5 +197,5 @@ button {
     position: absolute;
     right: 5px;
     filter: invert();
-    transition: transform 0.5s;
+    transition: transform 0.25s;
 }
