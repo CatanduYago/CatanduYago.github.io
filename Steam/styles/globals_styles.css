@@ -87,11 +87,16 @@ body {
     font-family: 'Motiva';
     margin-top: 0;
     margin-bottom: 5px;
-    font-size: 13px
+    font-size: 13px;
 }
 
 #buscador::placeholder {
     color: #4B619B;
+}
+
+#buscador:focus {
+    color: #F3F3F3;
+    font-weight: lighter;
 }
 
 .navegacion2 a:hover {
