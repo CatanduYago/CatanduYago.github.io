@@ -8,7 +8,7 @@ Hay 2 portales de acceso, uno como profesional y otro como usuario de la página
 
 La página consta de información del equipo, de la empresa y de un formulario para contactar por si quiere ser traductor al siguiente nivel.
 
-Página montada [aquí](https://yagocatalanotraduccion.github.io/Web/) (los formularios no van a funcionar, pero he incluido una BBDD que se puede importar para usarlos)
+Página montada [aquí](https://catanduyago.github.io/Traduccion/Web/) (los formularios no van a funcionar, pero he incluido una BBDD que se puede importar para usarlos)
 ## Bibliografía
 
 El logo de la empresa es completamente original, creado por mí.
