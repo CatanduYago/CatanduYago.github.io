@@ -47,9 +47,16 @@
     --gpBackground-Neutral-LightHarder: rgba(235, 246, 255, 0.50);
 }
 
+@font-face {
+    font-family: 'Motiva';
+    src: url("fonts/MotivaSans-Regular.otf") format('truetype');
+}
+
 body {
+    background-size: cover;
     background: linear-gradient(180deg, #040011 20%, #202B3C 100%);
     height: 100vh;
+    justify-content: center;
 }
 
 #header {
@@ -62,14 +69,69 @@ body {
 }
 
 #div-header {
-    display: flex;
+    display: block;
     justify-content: center;
-    height: 80%;
+    height: 100%;
 }
 
-#div-header img, video {
-    height: 70%;
+#div-header img,
+video {
+    height: 68%;
     filter: drop-shadow(0px 100px 100px #000000);
 }
 
-#juegos-mas-vendidos {}
+#juegos-inicio {
+    background: linear-gradient(180deg, #0e132575 20%, #0E1325 100%);
+    font-family: 'Motiva';
+    width: 75%;
+}
+
+.carousel {
+    display: grid;
+    justify-content: center;
+}
+
+.btn-left,
+.btn-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.btn-left {
+    left: 10px;
+}
+
+.btn-right {
+    right: 10px;
+}
+
+.extra-images {
+    display: flex;
+    margin-top: 10px;
+}
+
+.extra-images img {
+    width: 50px;
+    height: 50px;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px 10px 0;
+    font-size: 12px;
+    border-radius: 5px;
+    background-color: #ddd;
+}
+
+#fotos_juegos {
+    width: 500px
+}

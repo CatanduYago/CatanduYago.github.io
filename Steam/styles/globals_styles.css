@@ -17,7 +17,7 @@ body {
     color: #F3F3F3;
     font-size: 18px;
     font-family: 'Motiva';
-    font-weight: 600;
+    font-weight: 500;
     padding: 15px;
     letter-spacing: 1px;
 }
@@ -173,6 +173,7 @@ button:hover {
     letter-spacing: 1px;
     transition: 0.1s;
     border-radius: 3px;
+    z-index: 100;
 }
 
 .dropdown.show .dropdown-content {

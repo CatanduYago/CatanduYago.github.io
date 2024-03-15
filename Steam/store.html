@@ -21,11 +21,11 @@
             </div>
 
             <img src="img/logo.png" class="logo">
-            <a href="store.html" id="a_nav1">Store</a>
-            <a href="#" id="a_nav1">Community</a>
-            <a href="#" id="a_nav1">UserProfile</a>
-            <a href="#" id="a_nav1">Library</a>
-            <a href="#" id="a_nav1">Downloads</a>
+            <a href="store.html" id="a_nav1">Tienda</a>
+            <a href="#" id="a_nav1">Comunidad</a>
+            <a href="#" id="a_nav1">PerfilUsuario</a>
+            <a href="#" id="a_nav1">Acerca De</a>
+            <a href="#" id="a_nav1">Soporte</a>
 
             <div id="derecha-perfil">
                 <button class="button_amigos"><a href="#"><img src="img/amigos.png" id="iconos-nav1"></a></button>
@@ -60,7 +60,31 @@
         <video src="img/header.webm" id="header" muted loop autoplay>
     </div>
 
-    <div id="juegos-mas-vendidos">
+    <div id="juegos-inicio">
+        <div class="carousel">
+            <button class="btn-left" onclick="moveLeft()">‹</button>
+            <div class="card">
+                <img src="img/red-dead-r2.jpg" id="fotos_juegos">
+                <h3>Red Dead Redemption 2</h3>
+                <p>Con más de 175 premios al Juego del año y más de 250 valoraciones perfectas, Red Dead Redemption 2 es la épica historia de Arthur Morgan y la banda de Van der Linde, que huyen por toda América en el albor de una nueva era. También incluye acceso al mundo multijugador compartido de Red Dead Online</p>
+                <div class="extra-images">
+                  <img src="imagen-extra-1.jpg" alt="Imagen extra 1">
+                  <img src="imagen-extra-2.jpg" alt="Imagen extra 2">
+                </div>
+              </div>
+              <div class="card">
+                <img src="imagen-juego-1.jpg" alt="Juego 1">
+                <h3>Juego 1</h3>
+                <p>Descripción del juego 1</p>
+                <div class="extra-images">
+                  <img src="imagen-extra-1.jpg" alt="Imagen extra 1">
+                  <img src="imagen-extra-2.jpg" alt="Imagen extra 2">
+                </div>
+              <span class="tag">Acción</span>
+              </div>
+              
+            <button class="btn-right" onclick="moveRight()">›</button>
+          </div>
 
     </div>
     <script>
@@ -84,6 +108,14 @@
                 event.stopPropagation();
             });
         });
+        function moveLeft() {
+            carousel.scrollLeft -= 200;
+          }
+          
+          function moveRight() {
+            carousel.scrollLeft += 200;
+          }
+          
     </script>
 </body>
 
