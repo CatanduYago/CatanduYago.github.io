@@ -24,3 +24,9 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
     Bien, he tomado su rediseño y lo he desarrollado para que sea una página web (el diseño original de ella es una aplicación).
 
     Me parece un rediseño con mucho potencial, tanto para mí, para aprender y progresar en mis conocimientos de desarrollo web, como para el resto de personas acostumbradas a un diseño deficiente de la página oficial.
+
+- Gimnasio MazaoGym
+
+      Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo.
+
+      Uso de CSS, HTML, JavaScript, PHP, SQL y más
