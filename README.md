@@ -29,4 +29,8 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
     Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo.
 
-    Uso de CSS, HTML, JavaScript, PHP, SQL y más
+    Uso de CSS, HTML, JavaScript, PHP, SQL y más.
+
+-  [Juego de Mazmorras en Java]()
+
+    Este proyecto se trata de un juego de mazmorras clasico hecho en Java para la asignatura de Programación.
