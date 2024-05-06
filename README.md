@@ -14,6 +14,13 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
 
     También tuve que implementar un administrador, el cual tiene acceso a una página desde la que realizar acciones CRUD sobre las distintas bases de datos.
 
+- [Gimnasio MazaoGym](http://mazaogym.kesug.com)
+
+    Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo. Se centra en proporcionar una plataforma interactiva donde los usuarios puedan acceder a información relevante sobre el gimnasio, como horarios de clases, detalles de entrenamientos, y datos importantes. Además, permitirá a los usuarios inscribirse en clases y entrenamientos de manera conveniente y 
+eficiente.
+
+    Uso de CSS, HTML, JavaScript, PHP y SQL.
+  
 ## Proyectos en progreso:
 
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
@@ -24,12 +31,6 @@ A continuación se encuentran las diferentes páginas, sus accesos y una breve d
     Bien, he tomado su rediseño y lo he desarrollado para que sea una página web (el diseño original de ella es una aplicación).
 
     Me parece un rediseño con mucho potencial, tanto para mí, para aprender y progresar en mis conocimientos de desarrollo web, como para el resto de personas acostumbradas a un diseño deficiente de la página oficial.
-
-- Gimnasio MazaoGym
-
-    Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo.
-
-    Uso de CSS, HTML, JavaScript, PHP, SQL y más.
 
 -  [Juego de Mazmorras en Java]()
 
