@@ -31,6 +31,21 @@ Below are the different pages, their accesses, and a brief description of each o
 
     I also had to implement an administrator, who has access to a page from which to perform CRUD actions on the different databases.
 
+- [Gimnasio MazaoGym](http://mazaogym.kesug.com/Web)
+
+    [ESP]
+  
+    Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo. Se centra en proporcionar una plataforma interactiva donde los usuarios puedan acceder a información relevante sobre el gimnasio, como horarios de clases, detalles de entrenamientos, y datos importantes. Además, permitirá a los usuarios inscribirse en clases y entrenamientos de manera conveniente y 
+eficiente.
+
+    Uso de CSS, HTML, JavaScript, PHP y SQL.
+  
+     [ENG]
+  
+    This page is a complete project, with all the documentation involved in creating a website, the databases, the design, and its development. It is a final project for Development Environments. It focuses on providing an interactive platform where users can access relevant information about the gym, such as class schedules, training details, and important data. Additionally, it will allow users to conveniently and efficiently sign up for classes and training sessions.
+
+    It uses CSS, HTML, JavaScript, PHP, and SQL.
+  
 ## Proyectos en progreso:
 
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
@@ -50,21 +65,6 @@ Below are the different pages, their accesses, and a brief description of each o
     Well, I took her redesign and developed it into a webpage (her original design was for an application).
 
     I find it a redesign with a lot of potential, both for me, to learn and progress in my web development skills, and for other people accustomed to poor design on the official page.
-  
-- [Gimnasio MazaoGym](http://mazaogym.kesug.com/Web)
-
-    [ESP]
-  
-    Esta pagina es un proyecto completo, con toda la documentacion que conlleva la creacion de una pagina, las base de datos, el diseño y el desarrollo de la misma. Es un proyecto final para Entornos de Desarrollo. Se centra en proporcionar una plataforma interactiva donde los usuarios puedan acceder a información relevante sobre el gimnasio, como horarios de clases, detalles de entrenamientos, y datos importantes. Además, permitirá a los usuarios inscribirse en clases y entrenamientos de manera conveniente y 
-eficiente.
-
-    Uso de CSS, HTML, JavaScript, PHP y SQL.
-  
-     [ENG]
-  
-    This page is a complete project, with all the documentation involved in creating a website, the databases, the design, and its development. It is a final project for Development Environments. It focuses on providing an interactive platform where users can access relevant information about the gym, such as class schedules, training details, and important data. Additionally, it will allow users to conveniently and efficiently sign up for classes and training sessions.
-
-    It uses CSS, HTML, JavaScript, PHP, and SQL.
   
 -  [Juego de Mazmorras en Java]()
   
