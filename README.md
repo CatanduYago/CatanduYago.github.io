@@ -45,7 +45,16 @@ eficiente.
     This page is a complete project, with all the documentation involved in creating a website, the databases, the design, and its development. It is a final project for Development Environments. It focuses on providing an interactive platform where users can access relevant information about the gym, such as class schedules, training details, and important data. Additionally, it will allow users to conveniently and efficiently sign up for classes and training sessions.
 
     It uses CSS, HTML, JavaScript, PHP, and SQL.
+
+-  [Juego de Mazmorras en Java](https://github.com/CatanduYago/Mazmorras-en-Java)
   
+    [ESP]
+   
+    Este proyecto se trata de un juego de mazmorras clasico hecho en Java para la asignatura de Programación. 
+   
+    [ENG]
+    This proyect is a classic dungeon game made in Java.
+
 ## Proyectos en progreso:
 
 - [Rediseño de la pagina de Steam](https://catanduyago.github.io/Steam/store.html)
@@ -66,11 +75,3 @@ eficiente.
 
     I find it a redesign with a lot of potential, both for me, to learn and progress in my web development skills, and for other people accustomed to poor design on the official page.
   
--  [Juego de Mazmorras en Java]()
-  
-    [ESP]
-   
-    Este proyecto se trata de un juego de mazmorras clasico hecho en Java para la asignatura de Programación.
-   
-    [ENG]
-    This proyect is a classic dungeon game made in Java.
