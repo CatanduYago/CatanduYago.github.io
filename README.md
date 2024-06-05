@@ -50,10 +50,10 @@ eficiente.
   
     [ESP]
    
-    Este proyecto se trata de un juego de mazmorras clasico hecho en Java para la asignatura de Programación. 
+    Este proyecto se trata de un juego de mazmorras clasico hecho en Java usando JavaFX para la asignatura de Programación. 
    
     [ENG]
-    This proyect is a classic dungeon game made in Java.
+    This proyect is a classic dungeon game made in Java using JavaFX.
 
 ## Proyectos en progreso:
 
