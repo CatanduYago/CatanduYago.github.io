@@ -57,65 +57,191 @@
         </nav>
     </header>
     <div id="div-header">
-        <video src="img/header.webm" id="header" muted loop autoplay>
+        <img src="img/header.gif" id="header">
     </div>
+    <div class="slider-container">
+    <h2>FEATURED</h2>
 
-    <div id="juegos-inicio">
-        <div class="carousel">
-            <button class="btn-left" onclick="moveLeft()">‹</button>
-            <div class="card">
-                <img src="img/red-dead-r2.jpg" id="fotos_juegos">
-                <h3>Red Dead Redemption 2</h3>
-                <p>Con más de 175 premios al Juego del año y más de 250 valoraciones perfectas, Red Dead Redemption 2 es la épica historia de Arthur Morgan y la banda de Van der Linde, que huyen por toda América en el albor de una nueva era. También incluye acceso al mundo multijugador compartido de Red Dead Online</p>
-                <div class="extra-images">
-                  <img src="imagen-extra-1.jpg" alt="Imagen extra 1">
-                  <img src="imagen-extra-2.jpg" alt="Imagen extra 2">
+        <div class="slider" id="slider">
+
+            <div class="slide">
+                <div class="image-container">
+                    <img src="/Steam/img/red-dead-r2.jpg" alt="Game Image">
                 </div>
-              </div>
-              <div class="card">
-                <img src="imagen-juego-1.jpg" alt="Juego 1">
-                <h3>Juego 1</h3>
-                <p>Descripción del juego 1</p>
-                <div class="extra-images">
-                  <img src="imagen-extra-1.jpg" alt="Imagen extra 1">
-                  <img src="imagen-extra-2.jpg" alt="Imagen extra 2">
+                <div class="info-container">
+                    <h3>Red Dead Redemption 2</h3>
+                    <p>Con más de 175 premios al Juego del año y más de 250 valoraciones perfectas, Red Dead Redemption 2 es la épica historia de Arthur Morgan y la banda de Van der Linde, que huyen por toda América en el albor de una nueva era. También incluye acceso al mundo multijugador compartido de Red Dead Online.</p>
+                    <div class="mini-images">
+                        <img src="/Steam/img/rdr2_peque1.jpg" alt="Mini Image 1">
+                        <img src="/Steam/img/rdr2_peque2.jpg" alt="Mini Image 2">
+                        <img src="/Steam/img/rdr2_peque3.jpg" alt="Mini Image 3">
+                        <img src="/Steam/img/rdr2_peque4.jpg" alt="Mini Image 4">
+                    </div>
+                    <div class="tags"> <ul><li>Acción</li><li>Aventura</li><li>Mundo abierto</li><li>Vaqueros</li><li>+</li></ul></div>
+                    <div class="user">
+                    <div class="price">$59.99</div>
+                    <button class="buy-button">Comprar</button>
                 </div>
-              <span class="tag">Acción</span>
-              </div>
-              
-            <button class="btn-right" onclick="moveRight()">›</button>
-          </div>
+            </div>
+        </div>
+            <div class="slide">
+                <div class="image-container">
+                    <img src="/Steam/img/elden-ring.png" alt="Game Image">
+                </div>
+                <div class="info-container">
+                    <h3>Elden Ring</h3>
+                    <p>EL NUEVO JUEGO DE ROL Y ACCIÓN DE AMBIENTACIÓN FANTÁSTICA. Álzate, Sinluz, y que la gracia te guíe para abrazar el poder del Círculo de Elden y encumbrarte como señor del Círculo en las Tierras Intermedias.</p>
+                    <div class="mini-images">
+                        <img src="/Steam/img/er_peque1.jpg" alt="Mini Image 1">
+                        <img src="/Steam/img/er_peque2.jpg" alt="Mini Image 2">
+                        <img src="/Steam/img/er_peque3.jpg" alt="Mini Image 3">
+                        <img src="/Steam/img/er_peque4.jpg" alt="Mini Image 4">
+                    </div>
+                    <div class="tags"> <ul><li>Fantasia Oscura</li><li>Aventura</li><li>Mundo abierto</li><li>Soulslike</li><li>+</li></ul></div>
+                    <div class="user">
+                    <div class="price">$59.99</div>
+                    <button class="buy-button">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <div class="image-container">
+                <img src="/Steam/img/r96.jpg" alt="Game Image">
+            </div>
+            <div class="info-container">
+                <h3>Road 96 🛣️</h3>
+                <p>Haz autostop para llegar a la libertad en este loco viaje por carretera generado de forma procedural de la mano de reconocidos creadores independientes. ¡No hay un camino que sea el mismo para nadie!</p>
+                <div class="mini-images">
+                    <img src="/Steam/img/r96_peque1.jpg" alt="Mini Image 1">
+                    <img src="/Steam/img/r96_peque2.jpg" alt="Mini Image 2">
+                    <img src="/Steam/img/r96_peque3.jpg" alt="Mini Image 3">
+                    <img src="/Steam/img/r96_peque4.jpg" alt="Mini Image 4">
+                </div>
+                <div class="tags"> <ul><li>Primera Persona</li><li>Coloridos</li><li>Años 90</li><li>Aventura</li><li>+</li></ul></div>
+                <div class="user">
+                <div class="price">$19.96</div>
+                <button class="buy-button">Comprar</button>
+            </div>
+        </div>
+    </div>
+        </div>
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <div class="slider-indicators" id="slider-indicators"></div>
 
     </div>
+    <div class="special-offers">
+        <h2>OFERTAS ESPECIALES</h2>
+        <div class="offer-slider">
+            <div class="offer-slide">
+                <div class="offer">
+                    <img src="img/TLOU.jpg" alt="The Last of Us: Part 1">
+                    <div class="offer-info">
+                        <h3>The Last of Us: Part 1</h3>
+                        <p>Until Nov 2</p>
+                        <p class="discount">-20%</p>
+                        <p class="price">
+                            <span class="old-price">$59.99</span>
+                            <span class="new-price">$47.99</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="offer-slider">
+                <div class="offer-slide">
+                    <div class="offer">
+                        <img src="img/TLOU.jpg" alt="The Last of Us: Part 1">
+                        <div class="offer-info">
+                            <h3>The Last of Us: Part 1</h3>
+                            <p>Until Nov 2</p>
+                            <p class="discount">-20%</p>
+                            <p class="price">
+                                <span class="old-price">$59.99</span>
+                                <span class="new-price">$47.99</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+    </div>
+    
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dropdown = document.getElementById("miDropdown");
-            var dropdownContent = document.getElementById("miDropdownContent");
-            var flechaDropdown = document.getElementById("flechita_dropdown");
+        document.addEventListener("DOMContentLoaded", function () {
+    var dropdown = document.getElementById("miDropdown");
+    var dropdownContent = document.getElementById("miDropdownContent");
+    var flechaDropdown = document.getElementById("flechita_dropdown");
 
-            dropdown.addEventListener("click", function(event) {
-                event.stopPropagation();
-                dropdown.classList.toggle("show");
-                flechaDropdown.style.transform = dropdown.classList.contains("show") ? "rotate(180deg)" : "rotate(0deg)";
-            });
+    dropdown.addEventListener("click", function (event) {
+        event.stopPropagation();
+        dropdown.classList.toggle("show");
+        flechaDropdown.style.transform = dropdown.classList.contains("show") ? "rotate(180deg)" : "rotate(0deg)";
+    });
 
-            window.addEventListener("click", function() {
-                dropdown.classList.remove("show");
-                flechaDropdown.style.transform = "rotate(0deg)";
-            });
+    window.addEventListener("click", function () {
+        dropdown.classList.remove("show");
+        flechaDropdown.style.transform = "rotate(0deg)";
+    });
 
-            dropdownContent.addEventListener("click", function(event) {
-                event.stopPropagation();
+    dropdownContent.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let slideInterval;
+
+    function showSlide(index) {
+        slideIndex = (index + totalSlides) % totalSlides;
+        const offset = -slideIndex * 100;
+        document.getElementById('slider').style.transform = `translateX(${offset}%)`;
+        updateIndicators();
+    }
+
+    function moveSlide(n) {
+        showSlide(slideIndex + n);
+        resetInterval();
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            moveSlide(1);
+        }, 5000);
+    }
+
+    function createIndicators() {
+        const indicatorContainer = document.getElementById('slider-indicators');
+        for (let i = 0; i < totalSlides; i++) {
+            const span = document.createElement('span');
+            span.addEventListener('click', () => {
+                showSlide(i);
+                resetInterval();
             });
+            indicatorContainer.appendChild(span);
+        }
+    }
+
+    function updateIndicators() {
+        const indicators = document.querySelectorAll('.slider-indicators span');
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === slideIndex);
         });
-        function moveLeft() {
-            carousel.scrollLeft -= 200;
-          }
-          
-          function moveRight() {
-            carousel.scrollLeft += 200;
-          }
-          
+    }
+
+    createIndicators();
+    slideInterval = setInterval(() => {
+        moveSlide(1);
+    }, 5000);
+
+    document.querySelector('.prev').addEventListener('click', () => moveSlide(-1));
+    document.querySelector('.next').addEventListener('click', () => moveSlide(1));
+
+    showSlide(slideIndex);
+});
+
+
     </script>
 </body>
 
