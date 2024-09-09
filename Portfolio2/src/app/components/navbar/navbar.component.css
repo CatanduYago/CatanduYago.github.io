@@ -14,7 +14,7 @@
   align-items: center;
   width: 100%;
   margin: 0 auto; 
-  padding: 0px 30px; 
+  padding: 0px ; 
 }
   
 .navbar.scrolled {
@@ -66,7 +66,6 @@
   text-decoration: none;
   border-radius: 12px;
   transition: background-color 0.3s ease;
-  margin-right: 60px;
 }
 .language-switcher {
   background: none;
