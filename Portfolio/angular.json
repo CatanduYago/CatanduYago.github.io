@@ -12,6 +12,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+          "baseHref": "/CatanduYago.github.io/",
           "options": {
             "outputPath": "dist/portfolio",
             "index": "src/index.html",
