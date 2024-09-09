@@ -1,0 +1,152 @@
+
+.section {
+  
+  margin: 20px 300px;
+  padding: 55px;
+  font-weight: normal;
+  line-height: 1.5; 
+}
+
+#sec0, #sec2, #sec4, #sec6 {
+  background-color: #F1DEC6;
+  color: #A44A3F;
+}
+
+#sec1, #sec3, #sec5 {
+  background-color: #1D726F;
+  color: #F1DEC6;
+}
+
+#sec0 {
+  justify-content: center;
+}
+
+.title {
+  color: #A44A3F;
+  font-size: 50px;
+  margin-bottom:0px;
+  white-space: nowrap;
+
+}
+
+#title-about {
+  white-space: nowrap;
+
+  color: #F1DEC6;
+  margin-top: 0px;
+  border-bottom: #F1DEC6 2px solid;
+  width: 138px;
+}
+
+.content-container {
+  display: flex;
+  align-items: center;
+  margin-top: 0px; 
+  max-width: calc(100% - 120px);
+}
+
+.content-container p {
+  margin: 0;
+  flex: 1; 
+  max-width: 800px; 
+  overflow: hidden; 
+}
+
+#profile {
+  height: 300px; 
+  width: auto;
+  margin-left: 80px; 
+  box-shadow: 35px 35px 0px #1D726F; 
+  border: 8px solid #F1DEC6; 
+}
+
+.location-icon, .availability-gif {
+  height: 25px;
+  width: 25px;
+}
+
+.availability-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.availability-item {
+  display: flex;
+  align-items: center; 
+  margin-bottom: 5px; 
+}
+
+.availability-item img {
+  margin-right: 10px; 
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 10px; 
+  margin-top: 10px;
+}
+
+.social-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+
+.about-image {
+  height: 400px;
+  width: auto;
+  margin-right: 80px;
+  box-shadow: 35px 35px 0px #F1DEC6; 
+  border: 8px solid #1D726F;
+}
+
+.about-text {
+  max-width: 800px;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.skills h2 {
+  font-size: 24px;
+  color: #F1DEC6;
+  margin-bottom: 10px;
+}
+
+.skills ul {
+  list-style-type: disc; 
+  padding-left: 20px; 
+}
+
+.skills ul li {
+  font-size: 18px;
+  margin-bottom: 8px;
+  position: relative; 
+}
+
+.skills ul li::before {
+  content: '';
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-color: #F1DEC6; 
+  border-radius: 50%; 
+  margin-right: 10px;
+  position: absolute;
+  left: -20px; 
+  top: 5px; 
+}
+
+

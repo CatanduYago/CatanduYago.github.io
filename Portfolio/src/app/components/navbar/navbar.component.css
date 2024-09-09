@@ -1,0 +1,92 @@
+
+.navbar {
+  position: sticky;
+  top: 0;
+  background-color: #f1dec6;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto; 
+  padding: 0px 30px; 
+}
+  
+.navbar.scrolled {
+  border-bottom: 2px solid #1D726F;
+}
+
+.navbar-logo {
+  height: 50px;
+  fill: #1D726F;
+  padding-right: 450px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0px ;
+  gap: 15px;
+}
+
+.navbar-links li :hover {
+  color: #1D726F;
+}
+
+.vl {
+  border-left: 2px solid #1D726F;
+  height: 30px;
+  margin: 0px 20px 0px;
+}
+.navbar-links li {
+  white-space: nowrap;
+  margin: 0 15px;
+  padding: 0px 5px 0px;
+  font-weight: 500;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #679e9c;
+  font-weight: 500;
+
+}
+
+.navbar-download-btn {
+  white-space: nowrap;
+  background-color: #1D726F;
+  color: #F1DEC6;
+  padding: 7px 15px;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+  margin-right: 60px;
+}
+.language-switcher {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0px 25px 0px 10px;
+}
+
+.language-icon {
+  height: 35px;
+}
+
+
+.navbar-download-btn:hover {
+  background-color: #f1dec6;
+  color: #1D726F;
+  border: 2px solid #1D726F;
+  padding: 5px 13px;
+  cursor: pointer;
+
+}
+
