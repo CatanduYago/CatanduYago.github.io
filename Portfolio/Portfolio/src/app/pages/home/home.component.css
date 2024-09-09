@@ -1,13 +1,13 @@
 
 .section {
-  
+    
     margin: 20px 300px;
     padding: 55px;
     font-weight: normal;
     line-height: 1.5; 
   }
   
-  #sec0, #sec2, #sec4, #sec6 {
+  #sec0, #sec2, #sec4 {
     background-color: #F1DEC6;
     color: #A44A3F;
   }
@@ -20,7 +20,40 @@
   #sec0 {
     justify-content: center;
   }
+  #sec6 {
+    text-align: center;
+    padding: 20px;
+  }
+  #sec6 p {
+    font-size: 20px;
+    color: #A44A3F;
+
+  }
   
+  .skills-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .skill {
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .skill-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .skill p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #A44A3F;
+  }
+  .skill-icon:hover{
+    transform: scale(1.1);
+  }
   .title {
     color: #A44A3F;
     font-size: 50px;
@@ -29,15 +62,34 @@
   
   }
   
-  #title-about {
+  #title-about{
     white-space: nowrap;
-  
     color: #F1DEC6;
     margin-top: 0px;
     border-bottom: #F1DEC6 2px solid;
     width: 138px;
   }
-  
+  #title-skills{
+    white-space: nowrap;
+    color: #A44A3F;
+    margin-top: 0px;
+    border-bottom: #A44A3F 2px solid;
+    width: 80px;
+  }
+  #title-experience{
+    white-space: nowrap;
+    color: #F1DEC6;
+    margin-top: 0px;
+    border-bottom: #F1DEC6 2px solid;
+    width: 183px;
+  }
+  #title-work{
+    white-space: nowrap;
+    color: #A44A3F;
+    margin-top: 0px;
+    border-bottom: #A44A3F 2px solid;
+    width: 130px;
+  }
   .content-container {
     display: flex;
     align-items: center;
@@ -150,4 +202,105 @@
   }
   
   
+  #sec5 {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .experience-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+  }
+  
+  .experience-item {
+    display: flex;
+    align-items: center;
+    border: 2px solid #F1DEC6;
+    border-radius: 10px;
+    padding: 10px;
+    width: 80%; 
+    max-width: 800px; 
+    background-color: #679e9c;
+  }
+  
+  .experience-logo {
+    margin-right: 20px; 
+  }
+  
+  .logo-image {
+    width: 80px; 
+    height: auto;
+  }
+  
+  .experience-details {
+    flex: 1;
+  }
+  
+  .experience-details p {
+    max-width: 400px;
+  }
+
+  .experience-period {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  #sec2 {
+    text-align: center;
+    padding: 20px;
+    margin: 20px 300px;
+    background-color: #F1DEC6;
+    color: #A44A3F;
+  }
+  
+  .portfolio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .portfolio-item {
+    display: flex;
+    align-items: center;
+    border: 2px solid #A44A3F;
+    border-radius: 10px;
+    padding: 15px;
+    width: 90%; 
+    max-width: 1000px;
+    background-color: #FFF3E0; /* Color de fondo para el div de cada proyecto */
+  }
+  
+  .portfolio-image {
+    width: 500px;
+    height: auto;
+    margin-right: 20px;
+  }
+  
+  .portfolio-details {
+    flex: 1;
+
+  }
+  .portfolio-details p{
+    justify-content: start;
+  }
+  .portfolio-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #A44A3F;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .portfolio-title:hover {
+    text-decoration: underline;
+  }
+  
+  .portfolio-details p {
+    margin: 0;
+    font-size: 16px;
+  }
   
