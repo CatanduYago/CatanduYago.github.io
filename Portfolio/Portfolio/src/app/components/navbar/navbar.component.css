@@ -94,6 +94,7 @@
 .navbar-toggler {
   border: none;
   outline: none;
+  transition: 1s;
 }
 
 .navbar-toggler:focus {

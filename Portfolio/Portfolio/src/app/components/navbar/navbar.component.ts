@@ -9,6 +9,7 @@ export class NavbarComponent {
   currentLanguage: string = 'es'; // Idioma por defecto
   languageIcon: string = 'assets/espana.png'; // Imagen del idioma por defecto
   isMenuOpen = false;
+  cvurl: string = 'assets/Yago_CV.pdf';
 
   toggleLanguage(): void {
     if (this.currentLanguage === 'es') {
