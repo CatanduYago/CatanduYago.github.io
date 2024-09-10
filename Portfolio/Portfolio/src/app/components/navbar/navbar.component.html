@@ -1,5 +1,6 @@
-<nav class="navbar">
-  <div class="navbar-content">
+<!-- Navbar para escritorio -->
+<nav class="navbar d-none d-lg-flex">
+  <div class="navbar-content container-fluid">
     <img src="assets/Logo.png" alt="Logo" class="navbar-logo">
     <ul class="navbar-links">
       <li><a href="#sec1" data-lang="es">Sobre mí</a><a href="#sec1" data-lang="en" style="display:none;">About Me</a>
@@ -18,24 +19,39 @@
     <a (click)="downloadFile()" class="navbar-download-btn" data-lang="en" style="display:none;">Download CV</a>
   </div>
 </nav>
-<nav class="navbar-mobile" style="display: none;">
-  <!-- Logo -->
-  <div class="navbar-logo">
-    <img src="assets/Logo.png" alt="Logo">
-  </div>
 
-  <!-- Icono del menú para móviles -->
-  <div class="menu-icon" (click)="toggleMenu()">
-    <img src="/Portfolio/assets/menu.png" alt="Menu Icon">
+<nav class="navbar navbar-expand-lg d-lg-none">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/Logo.png" alt="Logo" class="navbar-logo-mobile">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+        <img src="assets/menu.png" alt="Menu Icon">
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="#sec1" data-lang="es" class="nav-link">Sobre mí</a><a href="#sec1" data-lang="en"
+            class="nav-link" style="display:none;">About Me</a></li>
+        <li class="nav-item"><a href="#sec2" data-lang="es" class="nav-link">Trabajo</a><a href="#sec2" data-lang="en"
+            class="nav-link" style="display:none;">Work</a></li>
+        <li class="nav-item"><a href="#sec3" data-lang="es" class="nav-link">Testimonios</a><a href="#sec3"
+            data-lang="en" class="nav-link" style="display:none;">Testimonials</a></li>
+        <li class="nav-item"><a href="#sec4" data-lang="es" class="nav-link">Contacto</a><a href="#sec4" data-lang="en"
+            class="nav-link" style="display:none;">Contact</a></li>
+        <li class="nav-item">
+          <button class="language-switcher nav-link" (click)="toggleLanguage()">
+            <img [src]="languageIcon" alt="Idioma" class="language-icon">
+          </button>
+        </li>
+        <li class="nav-item">
+          <a (click)="downloadFile()" class="navbar-download-btn nav-link" data-lang="es">Descargar CV</a>
+          <a (click)="downloadFile()" class="navbar-download-btn nav-link" data-lang="en" style="display:none;">Download
+            CV</a>
+        </li>
+      </ul>
+    </div>
   </div>
-
-  <!-- Opciones del menú (ocultas en móvil, visibles en escritorio) -->
-  <ul [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
-    <li><a href="#sec0" (click)="toggleMenu()">Inicio</a></li>
-    <li><a href="#sec1" (click)="toggleMenu()">Sobre mí</a></li>
-    <li><a href="#sec2" (click)="toggleMenu()">Habilidades</a></li>
-    <li><a href="#sec3" (click)="toggleMenu()">Experiencia</a></li>
-    <li><a href="#sec4" (click)="toggleMenu()">Portafolio</a></li>
-    <li><a href="#sec5" (click)="toggleMenu()">Contacto</a></li>
-  </ul>
 </nav>

@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^14.2.13",
     "@angular/platform-browser-dynamic": "^14.2.13",
     "@angular/router": "^14.2.13",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
     "portfolio": "file:",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

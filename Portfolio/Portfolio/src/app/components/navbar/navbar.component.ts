@@ -33,9 +33,6 @@ export class NavbarComponent {
     });
   }
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-  }
   @HostListener('window:scroll', ['$event'])
   checkScroll(): void {
     const navbar = document.querySelector('.navbar') as HTMLElement;
