@@ -65,9 +65,9 @@
   white-space: nowrap;
 }
 
-#title-about,
-#title-testimonials,
-#title-experience {
+.title-about,
+.title-testimonials,
+.title-experience {
   white-space: nowrap;
   color: #f1dec6;
   margin-top: 0px;
@@ -75,9 +75,9 @@
   width: fit-content;
 }
 
-#title-skills,
-#title-work,
-#title-contact {
+.title-skills,
+.title-work,
+.title-contact {
   white-space: nowrap;
   color: #a44a3f;
   margin-top: 0px;
@@ -246,13 +246,6 @@
   text-align: right;
 }
 
-#sec2 {
-  padding: 20px;
-  margin: 20px 300px;
-  background-color: #f1dec6;
-  color: #a44a3f;
-}
-
 .portfolio-container {
   display: flex;
   flex-direction: column;
@@ -319,7 +312,7 @@
   height: 350px;
 }
 
-#def-prof-pic {
+.def-prof-pic {
   align-self: center;
   width: 100px;
 }

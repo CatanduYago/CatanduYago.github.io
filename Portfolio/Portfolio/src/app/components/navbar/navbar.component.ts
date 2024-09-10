@@ -3,26 +3,27 @@ import { Component, HostListener } from '@angular/core';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
   currentLanguage: string = 'es'; // Idioma por defecto
   languageIcon: string = 'assets/espana.png'; // Imagen del idioma por defecto
+  isMenuOpen = false;
 
   toggleLanguage(): void {
     if (this.currentLanguage === 'es') {
       this.currentLanguage = 'en';
-      this.languageIcon = 'assets/eeuu.png'; // Cambia la imagen al inglés
+      this.languageIcon = 'assets/eeuu.png'; // Cambia la imagen a inglés
     } else {
       this.currentLanguage = 'es';
-      this.languageIcon = 'assets/espana.png'; // Cambia la imagen al español
+      this.languageIcon = 'assets/espana.png'; // Cambia la imagen a español
     }
     this.updateLanguage();
   }
 
   updateLanguage(): void {
     const elements = document.querySelectorAll('[data-lang]');
-    elements.forEach(el => {
+    elements.forEach((el) => {
       const lang = (el as HTMLElement).getAttribute('data-lang');
       if (lang === this.currentLanguage) {
         (el as HTMLElement).style.display = '';
@@ -32,6 +33,9 @@ export class NavbarComponent {
     });
   }
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
   @HostListener('window:scroll', ['$event'])
   checkScroll(): void {
     const navbar = document.querySelector('.navbar') as HTMLElement;
@@ -44,7 +48,7 @@ export class NavbarComponent {
 
   downloadFile(): void {
     const link = document.createElement('a');
-    link.href = 'assets/Yago_CV.pdf'; 
+    link.href = 'assets/Yago_CV.pdf';
     link.download = 'Yago_Catalano_Andújar_CV.pdf';
     link.click();
   }

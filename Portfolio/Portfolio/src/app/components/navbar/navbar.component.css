@@ -90,28 +90,25 @@
 /* Media queries for responsiveness */
 
 /* For mobile devices (max-width: 768px) */
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .navbar {
-    padding: 5px;
+    display: none;
   }
-  .navbar-content {
-    flex-direction: column;
-    align-items: center;
+
+  .navbar-mobile {
+    display: block;
   }
-  .navbar-logo {
-    padding-right: 0;
+
+  .navbar-mobile ul {
+    display: none;
+    list-style: none;
   }
-  .navbar-links {
-    flex-direction: column;
-    gap: 5px;
+
+  .navbar-mobile ul.menu-open {
+    display: block;
   }
-  .navbar-links li {
-    margin: 5px 0;
-  }
-  .navbar-download-btn {
-    padding: 5px 10px;
-  }
-  .language-switcher {
-    margin: 0px 10px 0px 5px;
+
+  .navbar-mobile ul.menu-closed {
+    display: none;
   }
 }

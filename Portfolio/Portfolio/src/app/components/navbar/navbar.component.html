@@ -18,3 +18,24 @@
     <a (click)="downloadFile()" class="navbar-download-btn" data-lang="en" style="display:none;">Download CV</a>
   </div>
 </nav>
+<nav class="navbar-mobile" style="display: none;">
+  <!-- Logo -->
+  <div class="navbar-logo">
+    <img src="assets/Logo.png" alt="Logo">
+  </div>
+
+  <!-- Icono del menú para móviles -->
+  <div class="menu-icon" (click)="toggleMenu()">
+    <img src="/Portfolio/assets/menu.png" alt="Menu Icon">
+  </div>
+
+  <!-- Opciones del menú (ocultas en móvil, visibles en escritorio) -->
+  <ul [ngClass]="{'menu-open': isMenuOpen, 'menu-closed': !isMenuOpen}">
+    <li><a href="#sec0" (click)="toggleMenu()">Inicio</a></li>
+    <li><a href="#sec1" (click)="toggleMenu()">Sobre mí</a></li>
+    <li><a href="#sec2" (click)="toggleMenu()">Habilidades</a></li>
+    <li><a href="#sec3" (click)="toggleMenu()">Experiencia</a></li>
+    <li><a href="#sec4" (click)="toggleMenu()">Portafolio</a></li>
+    <li><a href="#sec5" (click)="toggleMenu()">Contacto</a></li>
+  </ul>
+</nav>
