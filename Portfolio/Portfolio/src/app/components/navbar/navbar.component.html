@@ -88,15 +88,13 @@
         </li>
         <li class="nav-item">
           <a
-            [href]="cvurl"
-            download="Yago_Catalano_Andújar_CV.pdf"
+            (click)="downloadFile()"
             class="navbar-download-btn nav-link"
             data-lang="es"
             >Descargar CV</a
           >
           <a
-            [href]="cvurl"
-            download="Yago_Catalano_Andújar_CV.pdf"
+            (click)="downloadFile()"
             class="navbar-download-btn nav-link"
             data-lang="en"
             style="display: none"
