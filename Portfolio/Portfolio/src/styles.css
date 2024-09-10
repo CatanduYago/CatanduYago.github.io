@@ -1,14 +1,13 @@
 @font-face {
-    font-family: 'Inter';
-    src: url('assets/fonts/INTER-MEDIUM.OTF') format('opentype');  
-    font-weight: normal;
-    font-style: normal;
-  }
-  
+  font-family: "Inter";
+  src: url("assets/fonts/INTER-MEDIUM.OTF") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 body {
-    margin: 0;
-    background-color: #f1dec6 ;
-    padding: 0;
-    font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: #f1dec6;
+  padding: 0;
+  font-family: "Inter", sans-serif;
 }

@@ -12,17 +12,17 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin: 0 auto; 
-  padding: 0px; 
+  margin: 0 auto;
+  padding: 0px;
 }
 
 .navbar.scrolled {
-  border-bottom: 2px solid #1D726F;
+  border-bottom: 2px solid #1d726f;
 }
 
 .navbar-logo {
   height: 50px;
-  fill: #1D726F;
+  fill: #1d726f;
   padding-right: 450px;
 }
 
@@ -35,11 +35,11 @@
 }
 
 .navbar-links li :hover {
-  color: #1D726F;
+  color: #1d726f;
 }
 
 .vl {
-  border-left: 2px solid #1D726F;
+  border-left: 2px solid #1d726f;
   height: 30px;
   margin: 0px 20px 0px;
 }
@@ -59,8 +59,8 @@
 
 .navbar-download-btn {
   white-space: nowrap;
-  background-color: #1D726F;
-  color: #F1DEC6;
+  background-color: #1d726f;
+  color: #f1dec6;
   padding: 7px 15px;
   text-decoration: none;
   border-radius: 12px;
@@ -81,8 +81,8 @@
 
 .navbar-download-btn:hover {
   background-color: #f1dec6;
-  color: #1D726F;
-  border: 2px solid #1D726F;
+  color: #1d726f;
+  border: 2px solid #1d726f;
   padding: 5px 13px;
   cursor: pointer;
 }
@@ -92,26 +92,26 @@
 /* For mobile devices (max-width: 768px) */
 @media only screen and (max-width: 768px) {
   .navbar {
-      padding: 5px;
+    padding: 5px;
   }
   .navbar-content {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
   .navbar-logo {
-      padding-right: 0;
+    padding-right: 0;
   }
   .navbar-links {
-      flex-direction: column;
-      gap: 5px;
+    flex-direction: column;
+    gap: 5px;
   }
   .navbar-links li {
-      margin: 5px 0;
+    margin: 5px 0;
   }
   .navbar-download-btn {
-      padding: 5px 10px;
+    padding: 5px 10px;
   }
   .language-switcher {
-      margin: 0px 10px 0px 5px;
+    margin: 0px 10px 0px 5px;
   }
 }
