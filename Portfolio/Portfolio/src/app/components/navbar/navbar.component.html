@@ -22,6 +22,10 @@
     </ul>
     <div class="vl"></div>
     <button class="language-switcher" (click)="toggleLanguage()">
+      <span data-lang="es" class="language-desc">ESP</span>
+      <span data-lang="en" style="display: none" class="language-desc"
+        >ENG</span
+      >
       <img [src]="languageIcon" alt="Idioma" class="language-icon" />
     </button>
     <a (click)="downloadFile()" class="navbar-download-btn" data-lang="es"
