@@ -20,6 +20,7 @@ Below are the different pages, their accesses, and a brief description of each o
     Esta página es un proyecto personal sencillo estilo portfolio usando Angular y Bootstrap. Este fue primer proyecto responsive para moviles. 
    
     [ENG]
+   
     This page is a simple personal project made using Angular and Bootstrap. This was my first time doing a responsive page.
 
 -  [Lista de deseados](https://cantaduyago.github.io/wishlist/)
@@ -29,6 +30,7 @@ Below are the different pages, their accesses, and a brief description of each o
     Esta página es una lista de deseados sencilla creada usando Angular y Bootstrap e implementando un sistema de filtrado. 
    
     [ENG]
+   
     This page is a simple wishlist page made using Angular and Bootstramp and adding a sorting system.
 
 - [Portal de Traducción](https://catanduyago.github.io/Traduccion/Web/)
@@ -71,6 +73,7 @@ eficiente.
     Este proyecto se trata de un juego de mazmorras clasico hecho en Java usando JavaFX para la asignatura de Programación. 
    
     [ENG]
+   
     This proyect is a classic dungeon game made in Java using JavaFX.
 
 
