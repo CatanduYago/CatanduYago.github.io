@@ -23,7 +23,7 @@ Below are the different pages, their accesses, and a brief description of each o
    
     This page is a simple personal project made using Angular and Bootstrap. This was my first time doing a responsive page.
 
--  [Lista de deseados](https://cantaduyago.github.io/wishlist/)
+-  [Lista de deseados](https://catanduyago.github.io/wishlist/)
   
     [ESP]
    
