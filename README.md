@@ -27,11 +27,11 @@ Below are the different pages, their accesses, and a brief description of each o
   
     [ESP]
    
-    Esta página es una lista de deseados sencilla creada usando Angular y Bootstrap e implementando un sistema de filtrado. 
+    Esta página es una lista de deseados sencilla creada usando Angular y Bootstrap e implementando un sistema de filtrado. También es responsive para moviles.
    
     [ENG]
    
-    This page is a simple wishlist page made using Angular and Bootstramp and adding a sorting system.
+    This page is a simple wishlist page made using Angular and Bootstramp and adding a sorting system. It also is responsive on mobile phones.
 
 - [Portal de Traducción](https://catanduyago.github.io/Traduccion/Web/)
 
