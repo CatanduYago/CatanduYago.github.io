@@ -2,3 +2,30 @@
   z-index: 1050; 
   display: none;
 }
+/* Modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .bg-light {
+  background-color: #121212 !important;
+}
+
+body.dark-mode .bg-dark {
+  background-color: #000000 !important;
+}
+
+body.dark-mode .text-white {
+  color: #ffffff !important;
+}
+
+body.dark-mode .btn-secondary {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+body.dark-mode .btn-danger {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
