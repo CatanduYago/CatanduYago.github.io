@@ -2,9 +2,9 @@
   z-index: 1050; 
   display: none;
 }
-/* Modo oscuro */
+
 body.dark-mode {
-  background-color: #121212;
+  background-color: #121212 !important;
   color: #ffffff;
 }
 
