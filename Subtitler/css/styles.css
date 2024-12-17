@@ -1,0 +1,4 @@
+#overlay {
+  z-index: 1050; 
+  display: none;
+}
