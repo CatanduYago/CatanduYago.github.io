@@ -94,7 +94,7 @@ Below are the different pages, their links, and a brief description of each one.
 
 ## 📧 Contacto
 
-Si tienes alguna pregunta o comentario, no dudes en contactarme a través de [mi correo electrónico](mailto:tu-email@example.com).
+Si tienes alguna pregunta o comentario, no dudes en contactarme a través de [mi correo electrónico](mailto:ycatalanoa01@gmail.com).
 
 ---
 
