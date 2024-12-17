@@ -97,5 +97,3 @@ Below are the different pages, their links, and a brief description of each one.
 Si tienes alguna pregunta o comentario, no dudes en contactarme a través de [mi correo electrónico](mailto:ycatalanoa01@gmail.com).
 
 ---
-
-¡Gracias por visitar el repositorio y feliz programación! 🚀
