@@ -39,10 +39,10 @@ Below are the different pages, their links, and a brief description of each one.
 ### 🎤 **[Subtitler](https://catanduyago.github.io/Subtitler/)**
 
   - **[ESP]**  
-    Esta aplicación transcribe en tiempo real el audio recibido a través del micrófono del usuario. Utiliza tecnologías como JavaScript, HTML y CSS para ofrecer una interfaz amigable y fácil de usar.
+    Esta aplicación transcribe en tiempo real el audio recibido a través del micrófono del usuario. Utiliza JavaScript y [webkitSpeechRecognition](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition). 
   
   - **[ENG]**  
-    This application transcribes in real-time the audio received through the user's microphone. It uses technologies like JavaScript, HTML, and CSS to provide a user-friendly and easy-to-use interface.
+    This application transcribes in real-time the audio received through the user's microphone. It uses technologies like JavaScript and [webkitSpeechRecognition](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition).
 
 ---
 
