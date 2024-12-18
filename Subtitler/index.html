@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
   <script src="./js/script.js" defer></script>
   <script src="./js/darkmode.js" defer></script>
 </head>
+
 <body class="bg-light d-flex flex-column min-vh-100">
 
   <!-- Contenido principal -->
@@ -21,10 +23,12 @@
     <button id="dark-mode-btn" class="btn btn-secondary">Modo Oscuro</button>
 
     <h1 class="mb-4">Transcripción en Tiempo Real</h1>
-    <p>Esta aplicación transcribe en tiempo real el audio recibido por el micrófono. Funciona en los navegadores Chrome, Edge y Safari. Tanto en ordenadores como en teléfonos móviles</p>
+    <p>Esta aplicación transcribe en tiempo real el audio recibido por el micrófono. Funciona en los navegadores Chrome,
+      Edge y Safari. Tanto en ordenadores como en teléfonos móviles</p>
 
-    <!-- Selector de idioma hablado -->
+  
     <div class="row mb-3 justify-content-center">
+        <!-- Selector de idioma hablado -->
       <div class="col-md-4">
         <label for="input-lang" class="form-label">Idioma de Entrada:</label>
         <select id="input-lang" class="form-select">
@@ -35,6 +39,19 @@
           <option value="it-IT">Italiano</option>
         </select>
       </div>
+          <!-- Selector de idioma de salida -->
+      <div class="col-md-4">
+        <label for="output-lang" class="form-label">Idioma de Salida:</label>
+        <select id="output-lang" class="form-select">
+          <option value="en">Inglés</option>
+          <option value="es">Español</option>
+          <option value="fr">Francés</option>
+          <option value="de">Alemán</option>
+          <option value="it">Italiano</option>
+          <option value="zh-CN">Chino (Simplificado)</option>
+          <option value="ja">Japonés</option>
+        </select>
+      </div>
     </div>
 
     <div class="d-grid gap-2 d-md-block">
@@ -43,7 +60,8 @@
   </div>
 
   <!-- Overlay para la transcripción -->
-  <div id="overlay" class="position-fixed top-0 start-0 w-100 h-100 d-none bg-dark text-white align-items-center justify-content-center">
+  <div id="overlay"
+    class="position-fixed top-0 start-0 w-100 h-100 d-none bg-dark text-white align-items-center justify-content-center">
     <div class="text-center">
       <div id="live-caption-container" class="fs-4 mb-3">Capturando audio...</div>
       <button id="exit-btn" class="btn btn-danger">Salir</button>
@@ -56,17 +74,19 @@
       <p class="mb-2">© 2024 Todos los derechos reservados | Creado por <strong>Yago Catalano</strong>❤️</p>
       <div>
         <a href="https://twitter.com/ycatalanoa" target="_blank" class="text-white me-3">
-        <i class="bi bi-twitter-x fs-4"></i>
+          <i class="bi bi-twitter-x fs-4"></i>
         </a>
         <a href="https://www.linkedin.com/in/yagocatalanoandujar" target="_blank" class="text-white">
-        <i class="bi bi-linkedin fs-4"></i>
+          <i class="bi bi-linkedin fs-4"></i>
         </a>
       </div>
       <div>
-        Contáctame a través de mi correo <a href="mailto:ycatalanoa01@gmail.com" class="text-white">ycatalanoa01@gmail.com</a>
+        Contáctame a través de mi correo <a href="mailto:ycatalanoa01@gmail.com"
+          class="text-white">ycatalanoa01@gmail.com</a>
       </div>
     </div>
   </footer>
 
 </body>
+
 </html>
