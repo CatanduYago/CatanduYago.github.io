@@ -93,7 +93,7 @@ if ("webkitSpeechRecognition" in window) {
     console.log("Reconocimiento detenido.");
   };
 } else {
-  
+
   // Alerta si el navegador no soporta webkitSpeechRecognition.
   alert("El navegador no soporta webkitSpeechRecognition.");
 }
