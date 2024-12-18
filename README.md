@@ -34,6 +34,16 @@ Below are the different pages, their links, and a brief description of each one.
   
   This page is a simple wishlist page made using Angular and Bootstrap, adding a sorting system. It is also responsive on mobile phones.
 
+- [Subtitler](https://catanduyago.github.io/Subtitler)
+
+  [ESP]
+  
+  Esta aplicación transcribe en tiempo real el audio recibido a través del micrófono del usuario. Utiliza tecnologías como JavaScript, HTML y CSS para ofrecer una interfaz amigable y fácil de usar.
+  
+  [ENG]
+  
+  This application transcribes in real-time the audio received through the user's microphone. It uses technologies like JavaScript, HTML, and CSS to provide a user-friendly and easy-to-use interface.
+
 - [Portal de Traducción](https://catanduyago.github.io/Traduccion/Web/)
 
   [ESP]
@@ -51,16 +61,6 @@ Below are the different pages, their links, and a brief description of each one.
   The user only needs to fill out a form, although they can also log in. The translator, upon logging in, accesses a page where they can choose which language they want to work with.
   
   I also had to implement an administrator, who has access to a page from which to perform CRUD actions on the different databases.
-
-- [Subtitler](https://catanduyago.github.io/Subtitler)
-
-  [ESP]
-  
-  Esta aplicación transcribe en tiempo real el audio recibido a través del micrófono del usuario. Utiliza tecnologías como JavaScript, HTML y CSS para ofrecer una interfaz amigable y fácil de usar.
-  
-  [ENG]
-  
-  This application transcribes in real-time the audio received through the user's microphone. It uses technologies like JavaScript, HTML, and CSS to provide a user-friendly and easy-to-use interface.
 
 - [Gimnasio MazaoGym](http://mazaogym.kesug.com/Web)
 
