@@ -52,6 +52,16 @@ Below are the different pages, their links, and a brief description of each one.
   
   I also had to implement an administrator, who has access to a page from which to perform CRUD actions on the different databases.
 
+- [Subtitler](https://catanduyago.github.io/Subtitler)
+
+  [ESP]
+  
+  Esta aplicación transcribe en tiempo real el audio recibido a través del micrófono del usuario. Utiliza tecnologías como JavaScript, HTML y CSS para ofrecer una interfaz amigable y fácil de usar.
+  
+  [ENG]
+  
+  This application transcribes in real-time the audio received through the user's microphone. It uses technologies like JavaScript, HTML, and CSS to provide a user-friendly and easy-to-use interface.
+
 - [Gimnasio MazaoGym](http://mazaogym.kesug.com/Web)
 
   [ESP]
