@@ -29,3 +29,66 @@ body.dark-mode .btn-danger {
   background-color: #ff0000;
   border-color: #ff0000;
 }
+
+/* From Uiverse.io by ami-hp */ 
+#dark-mode-btn * {
+  transition: all 0.3s;
+}
+
+#dark-mode-btn input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+#dark-mode-btn label {
+  border: 1px solid #efefef;
+  background: rgba(0, 0, 0, 0.76);
+  border-radius: 15px;
+  height: 46px;
+  width: 46px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+#dark-mode-btn label:active {
+  border-radius: 5px;
+}
+
+#dark-mode-btn label svg {
+  position: absolute;
+  width: 19px;
+  transition: 0.3s;
+  z-index: 1;
+  fill: #fff;
+}
+
+#dark-mode-btn label svg.sun {
+  width: 20px;
+  opacity: 0;
+  fill: #000000;
+}
+
+#dark-mode-btn label svg.moon {
+  opacity: 1;
+}
+
+#dark-mode-btn input:checked + label {
+  background: #f4f74a;
+}
+
+#dark-mode-btn input:checked + label svg.sun {
+  opacity: 1;
+}
+
+#dark-mode-btn input:checked + label svg.moon {
+  opacity: 0;
+}
+
+#dark-mode-btn input:checked ~ span {
+  background-color: #16174b;
+}
