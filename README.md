@@ -100,4 +100,6 @@ Below are the different pages, their links, and a brief description of each one.
 
 Si tienes alguna pregunta o comentario, no dudes en contactarme a través de [mi correo electrónico](mailto:ycatalanoa01@gmail.com).
 
+If you have any questions, you can contact me trough my [email](mailto:ycatalanoa01@gmail.com).
+
 ---
