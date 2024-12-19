@@ -14,6 +14,7 @@
 
   <script src="./js/script.js" defer></script>
   <script src="./js/darkmode.js" defer></script>
+  <script src="./js/language.js" defer></script>
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
@@ -21,11 +22,7 @@
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <div class="navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          
-          <li class="nav-item">
-
-          </li>
+        <ul class="navbar-nav justify-content-evenly w-100">
           <li class="nav-item">
             <!-- /* From Uiverse.io by ami-hp */  -->
             <div class="my-body">
@@ -75,6 +72,15 @@
               </div>
             </div>
           </li>
+
+          <li class="nav-item">
+            <button class="language-switcher" onclick="toggleLanguage()">
+              <span data-lang="es" class="language-desc">ESP</span>
+              <span data-lang="en" style="display: none" class="language-desc">ENG</span>
+              <img src="./assets/espana.png" alt="Control de idioma" class="language-icon" />
+            </button>
+          </li>
+
         </ul>
       </div>
     </div>
@@ -151,4 +157,16 @@
 
 </body>
 
-</html>
+</html><!--             
+    ___     
+   /() \    
+ _|_____|_  
+| | === | | 
+|_|  O  |_| 
+ ||  O  ||  
+ ||__*__||  
+|~ \___/ ~| 
+/=\ /=\ /=\ 
+[_]_[_]_[_]
+
+-->

@@ -92,3 +92,24 @@ body.dark-mode .btn-danger {
 #dark-mode-btn input:checked ~ span {
   background-color: #16174b;
 }
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0px 25px 0px 10px;
+}
+.language-switcher:hover {
+  scale: 1.1;
+  font-size: 16px;
+}
+.language-icon {
+  height: 35px;
+}
+.language-desc {
+  margin-right: 10px;
+  color: #1d726f;
+}
