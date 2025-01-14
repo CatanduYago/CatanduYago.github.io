@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;500;700;800&family=Delius+Swash+Caps&display=swap');
+
+* {
+  font-family: 'Almarai', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #5DC1B9;
+  color: #000000;
+  padding: 20px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.soundboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+button {
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#btn-sound {
+  width: 90px;
+  height: 90px;
+  border: none;
+  border-radius: 10px;
+  background-size: cover;
+  background-image: url('./images/button.png');
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#btn-sound:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.controls {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#stop-all {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #E4717A;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#stop-all:hover {
+  background-color: #b84d55;
+}
+
+.volume-control {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#volume-slider {
+  margin-top: 100px;
+  width: 200px;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+footer span {
+  text-align: center;
+}
+footer img{
+  width: 200px;
+  height: 200px;
+  align-self: center;
+  padding: 10px;
+  
+
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  #btn-sound {
+    width: 70px;
+    height: 70px;
+  }
+  #btn-sound:hover {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  }
+  button img {
+    width: 70px;
+    height: 70px;
+  }
+  #volume-slider {
+  display: none;
+
+  }
+
+  #stop-all {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  #stop-all:hover {
+    background-color: #E4717A;
+
+  }
+  footer {
+    font-size: 15px;
+  }
+}
