@@ -1,31 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+    --teal-dark: #124D5B;
+    --cream: #FFFFEE;
+    --yellow-light: #FFF29E;
+    --navy-dark: #072226;
+
+}
+
 #overlay {
   z-index: 1050; 
   display: none;
 }
-
-body.dark-mode {
-  background-color: #121212 !important;
-  color: #ffffff;
+/* class="position-fixed top-0 start-0 w-100 h-100 
+d-none bg-dark text-white align-items-center justify-
+content-center" */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(140deg, #89e2f5 0%, #4c97a6 35%, #307482 57%, #003844 100%);
 }
 
-body.dark-mode .bg-light {
-  background-color: #121212 !important;
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 10px 10px 15px #000000a4;
+    overflow: hidden;
 }
 
-body.dark-mode .bg-dark {
-  background-color: #000000 !important;
+.top {
+    display: flex;
+    flex: 1;
 }
 
-body.dark-mode .text-white {
-  color: #ffffff !important;
+.left {
+    flex: 1;
+    background: linear-gradient(120.21deg,
+            #638672 2.5%,
+            #406d68 13%,
+            #124d5b 28.5%);
+    padding: 30px 45px;
+    
 }
 
-body.dark-mode .btn-secondary {
-  background-color: #333333;
-  border-color: #333333;
+.left h1 {
+    font-family: 'Playfair Display', sans-serif;
+    font-size: 50px;
+    color: var(--yellow-light);
+    margin: 0;
 }
 
-body.dark-mode .btn-danger {
-  background-color: #ff0000;
-  border-color: #ff0000;
+.left hr {
+    border: 3px solid var(--cream);
+    width: 80%;
+    margin: 10px 20px 35px 0px;
+}
+
+.left p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: var(--yellow-light);
+    width: 80%;
+    text-align: left;
+    
+}
+
+.right {
+    flex: 1;
+    background-color: var(--cream);
+    padding: 100px 50px 0px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.right p {
+    font-weight: 600;
+    font-size: 25px;
+    color: var(--teal-dark);
+}
+
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 60%;
+    font-size: 17px;
+
+}
+
+.form-select {
+    display: block;
+    width: 50%;
+    background-color: var(--teal-dark);
+    color: var(--yellow-light);
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    margin: 10px 0;
+    border-radius: 0;
+
+}
+
+.form-select:focus {
+    outline: 2px solid var(--cream);
+
+}
+
+.form-select option {
+  
+    background-color: var(--teal-dark);
+    color: var(--yellow-light);
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.right button {
+    background: linear-gradient(98.94deg,
+            rgba(255, 255, 238, 1) 0%,
+            rgba(254, 242, 158, 1) 15.999999642372131%,
+            rgba(254, 242, 158, 1) 63.999998569488525%,
+            rgba(248, 143, 24, 1) 100%);
+    border-radius: 10px;
+    font-size: 17px;
+    padding: 12px;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-top: 50px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px #00000079;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 20px ;
+    font-size:16px;
+    background-color: var(--teal-dark);
+    color: var(--yellow-light);
+    font-family: 'Montserrat', sans-serif;
+    text-align: right;
+    align-items: center;
+    
+}
+
+.bottom #redes {
+    display: flex;
+    flex-direction: row;
+}
+
+.bottom #redes i {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 28px;
+
+}
+.bottom #redes a {
+    margin: 10px;
+    font-size: 18px;
+
+}
+
+.bottom button{
+    color: var(--yellow-light);
+    background-color: var(--teal-dark);
+    border: 2px solid var(--yellow-light);
+    margin: 0px 30px 5px;
+    font-size: 18px;
+    padding: 2px 10px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+a {
+    color: var(--yellow-light);
+    text-decoration: none;
+}
+#overlay {
+  z-index: 1050;
+  display: none;
 }
