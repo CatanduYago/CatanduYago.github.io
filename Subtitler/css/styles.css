@@ -9,9 +9,10 @@
 }
 
 #overlay {
-  z-index: 1050; 
-  display: none;
+    z-index: 1050;
+    display: none;
 }
+
 /* class="position-fixed top-0 start-0 w-100 h-100 
 d-none bg-dark text-white align-items-center justify-
 content-center" */
@@ -46,7 +47,7 @@ body {
             #406d68 13%,
             #124d5b 28.5%);
     padding: 30px 45px;
-    
+
 }
 
 .left h1 {
@@ -68,7 +69,7 @@ body {
     color: var(--yellow-light);
     width: 80%;
     text-align: left;
-    
+
 }
 
 .right {
@@ -114,14 +115,15 @@ body {
 }
 
 .form-select option {
-  
+
     background-color: var(--teal-dark);
     color: var(--yellow-light);
     font-family: 'Montserrat', sans-serif;
 
 }
 
-.right button {
+.right button,
+#exit-btn {
     background: linear-gradient(98.94deg,
             rgba(255, 255, 238, 1) 0%,
             rgba(254, 242, 158, 1) 15.999999642372131%,
@@ -142,14 +144,14 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 20px ;
-    font-size:16px;
+    padding-right: 20px;
+    font-size: 16px;
     background-color: var(--teal-dark);
     color: var(--yellow-light);
     font-family: 'Montserrat', sans-serif;
     text-align: right;
     align-items: center;
-    
+
 }
 
 .bottom #redes {
@@ -164,13 +166,14 @@ body {
     font-size: 28px;
 
 }
+
 .bottom #redes a {
     margin: 10px;
     font-size: 18px;
 
 }
 
-.bottom button{
+.bottom button {
     color: var(--yellow-light);
     background-color: var(--teal-dark);
     border: 2px solid var(--yellow-light);
@@ -185,7 +188,33 @@ a {
     color: var(--yellow-light);
     text-decoration: none;
 }
-#overlay {
-  z-index: 1050;
-  display: none;
+
+/* Fondo uniforme */
+body.uniform-background {
+    background: var(--teal-dark);
+    transition: background 0.5s ease-in-out;
+}
+
+/* Contenedor transparente */
+.container.transparent {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Mostrar el overlay con un fondo invisible */
+#overlay.visible {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    float: left;
+    background-color: var(--teal-dark);
+    transition: background-color 1s ease-in-out;
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    width: 100%;
+
 }
