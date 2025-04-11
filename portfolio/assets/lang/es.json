@@ -1,0 +1,113 @@
+{
+  "NAVBAR": {
+    "ABOUT": "Sobre mí",
+    "WORK": "Trabajo",
+    "TESTIMONIALS": "Testimonios",
+    "CONTACT": "Contacto",
+    "DOWNLOAD_CV": "Descargar CV"
+  },
+  "LANG": {
+    "SHORT": "ESP"
+  },
+  "HERO": {
+    "TITLE": "Hola, soy Yago 👋",
+    "DESCRIPTION": "Soy un estudiante de grado superior en desarrollo web con experiencia práctica en el desarrollo de aplicaciones web utilizando tecnologías como Angular y Node.js. Durante mis estudios, he trabajado con herramientas como PostgreSQL y MySQL. Aunque estoy en las etapas iniciales de mi carrera, me apasiona profundamente el desarrollo web y disfruto cada oportunidad para aprender y crecer en este campo.",
+    "LOCATION": "Badajoz, España",
+    "STATUS": "Estudiante"
+  },
+  "ABOUT": {
+    "TITLE": "Sobre mí",
+    "ABOUT_TEXT": "Soy un desarrollador web apasionado con experiencia en diversas tecnologías. Me gusta enfrentar desafíos y mejorar mis habilidades día a día.",
+    "ADDITIONAL": "He trabajado en varios proyectos donde he podido desarrollar tanto habilidades técnicas como personales. Algunas de mis habilidades más destacadas son:",
+    "SOFT_SKILLS_TITLE": "Soft Skills",
+    "SOFT_SKILLS": [
+      "Trabajo en equipo",
+      "Comunicación efectiva",
+      "Resolución de problemas",
+      "Trabajo bajo presión",
+      "Adaptabilidad",
+      "Proactividad",
+      "Análisis de resultados"
+    ]
+  },
+  "CONTACT": {
+    "TITLE": "Contáctame",
+    "DESCRIPTION": "Si quieres hablar conmigo o seguirme aquí puedes:"
+  },
+  "EXPERIENCE.TITLE": "Experiencia",
+  "EXPERIENCE.PERIOD": "Enero 2025 - Actualidad ({{duration}} meses)",
+  "EXPERIENCE.DESCRIPTION": "Actualmente estoy realizando las practicas en {{company}}.",
+  "FOOTER": {
+    "COPYRIGHT": "© 2025 | Diseñado y programado con ❤️ por Yago Catalano"
+  },
+  "WORK.TITLE": "Trabajo",
+  "WORK.DESCRIPTION": "Algunos de los proyectos que he hecho:",
+  "PROJECTS": {
+    "SUBTITLER": {
+      "TITLE": "Subtitler",
+      "DESCRIPTION": "Aplicación web de transcripción de voz en tiempo real. Permite capturar audio desde el micrófono y mostrar subtítulos instantáneamente. Desarrollada con JavaScript y Bootstrap."
+    },
+    "WISHLIST": {
+      "TITLE": "Lista de deseados",
+      "DESCRIPTION": "Lista de deseos responsive con filtros hecha usando Angular y Bootstrap."
+    },
+    "MAZAOGYM": {
+      "TITLE": "MazaoGym",
+      "DESCRIPTION": "Proyecto de Gimnasio realizado para el final de una de las asignaturas de 1º de DAW usando PHP."
+    },
+    "DUNGEON": {
+      "TITLE": "Juego de mazmorras en Java",
+      "DESCRIPTION": "Juego de mazmorras programado en Java usando JavaFX. Proyecto fin de curso de programación."
+    },
+    "PORTFOLIO": {
+      "TITLE": "CatanduYago.github.io",
+      "DESCRIPTION": "Este es mi repositorio de github pages en el que despliego la mayoría de mis proyectos."
+    }
+  },
+  "SKILLS": {
+    "TITLE": "Habilidades",
+    "DESCRIPTION": "Estas son algunas de las habilidades que he adquirido durante mi curso:",
+    "ITEMS": {
+      "ORACLE_DATABASE": "Oracle database",
+      "POSTGRESQL": "PostgreSQL",
+      "MYSQL": "MySQL",
+      "ANGULAR": "Angular",
+      "LARAVEL": "Laravel",
+      "NODEJS": "Node.js",
+      "BOOTSTRAP": "Bootstrap",
+      "SPRING_BOOT": "Spring Boot",
+      "PHP": "PHP",
+      "JAVA": "Java",
+      "JAVASCRIPT": "Java Script",
+      "HTML": "HTML",
+      "CSS": "CSS",
+      "GIT": "Git",
+      "DOCKER": "Docker",
+      "VAGRANT": "Vagrant",
+      "FIGMA": "Figma"
+    }
+  },
+  "SOCIAL": {
+    "GITHUB": "GitHub",
+    "TWITTER": "Twitter",
+    "LINKEDIN": "LinkedIn"
+  },
+  "TESTIMONIALS": {
+    "TITLE": "Testimonios",
+    "DESCRIPTION": "Personas que hablan bien de mí:",
+    "ITEMS": {
+      "BORJA": {
+        "TEXT": "\"Un compañero excepcional, estudiante de desarrollo web con un gran talento. Siempre atento y con una increíble capacidad para captar incluso los conceptos más complejos. Su habilidad para resolver problemas técnicos es impresionante, y su dedicación lo convierte en una pieza clave en cualquier equipo. Inteligente, proactivo y con una actitud positiva. ¡Totalmente recomendable!\"",
+        "ROLE": "Compañero de clase"
+      },
+      "ALBERT": {
+        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
+        "ROLE": "BBC CEO"
+      },
+      "ALBERT2": {
+        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
+        "ROLE": "BBC CEO"
+      }
+    }
+  }
+}

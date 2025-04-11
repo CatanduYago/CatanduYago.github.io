@@ -1,0 +1,113 @@
+{
+  "NAVBAR": {
+    "ABOUT": "About Me",
+    "WORK": "Work",
+    "TESTIMONIALS": "Testimonials",
+    "CONTACT": "Contact",
+    "DOWNLOAD_CV": "Download CV"
+  },
+  "LANG": {
+    "SHORT": "ENG"
+  },
+  "HERO": {
+    "TITLE": "Hi, I'm Yago! 👋",
+    "DESCRIPTION": "I am a higher education student in web development with practical experience in developing web applications using technologies like Angular and Node.js. During my studies, I have worked with tools like PostgreSQL and MySQL. Although I am in the early stages of my career, I am deeply passionate about web development and enjoy every opportunity to learn and grow in this field.",
+    "LOCATION": "Badajoz, Spain",
+    "STATUS": "Student"
+  },
+  "ABOUT": {
+    "TITLE": "About Me",
+    "ABOUT_TEXT": "I am a passionate web developer with experience in various technologies. I enjoy facing challenges and improving my skills day by day.",
+    "ADDITIONAL": "I have worked on several projects where I have been able to develop both technical and personal skills. Some of my most notable skills are:",
+    "SOFT_SKILLS_TITLE": "Soft Skills",
+    "SOFT_SKILLS": [
+      "Teamwork",
+      "Effective communication",
+      "Problem solving",
+      "Under pressure work",
+      "Adaptability",
+      "Proactivity",
+      "Results analysis"
+    ]
+  },
+  "CONTACT": {
+    "TITLE": "Contact",
+    "DESCRIPTION": "Here you can talk with me or follow me:"
+  },
+  "EXPERIENCE.TITLE": "Experience",
+  "EXPERIENCE.PERIOD": "January 2025 - Present ({{duration}} months)",
+  "EXPERIENCE.DESCRIPTION": "Currently, I am doing an internship at {{company}}.",
+  "FOOTER": {
+    "COPYRIGHT": "© 2025 | Designed and developed with ❤️ by Yago Catalano"
+  },
+  "WORK.TITLE": "Work",
+  "WORK.DESCRIPTION": "These are some of the projects I have built:",
+  "PROJECTS": {
+    "SUBTITLER": {
+      "TITLE": "Subtitler",
+      "DESCRIPTION": "A web application for real-time voice transcription. Captures audio from the microphone and displays subtitles instantly. Developed with JavaScript and Bootstrap."
+    },
+    "WISHLIST": {
+      "TITLE": "Wish list",
+      "DESCRIPTION": "Responsive wishlist website with filters made using Angular and Bootstrap."
+    },
+    "MAZAOGYM": {
+      "TITLE": "MazaoGym",
+      "DESCRIPTION": "Gym project completed for the end of one of the first-year DAW courses using PHP."
+    },
+    "DUNGEON": {
+      "TITLE": "Dungeon game in Java",
+      "DESCRIPTION": "Dungeon game programmed in Java using JavaFX. End-of-course programming project."
+    },
+    "PORTFOLIO": {
+      "TITLE": "CatanduYago.github.io",
+      "DESCRIPTION": "This is my Github pages repository where I deploy most of my apps."
+    }
+  },
+  "SKILLS": {
+    "TITLE": "Skills",
+    "DESCRIPTION": "These are some of the skills I have acquired during my career:",
+    "ITEMS": {
+      "ORACLE_DATABASE": "Oracle database",
+      "POSTGRESQL": "PostgreSQL",
+      "MYSQL": "MySQL",
+      "ANGULAR": "Angular",
+      "LARAVEL": "Laravel",
+      "NODEJS": "Node.js",
+      "BOOTSTRAP": "Bootstrap",
+      "SPRING_BOOT": "Spring Boot",
+      "PHP": "PHP",
+      "JAVA": "Java",
+      "JAVASCRIPT": "Java Script",
+      "HTML": "HTML",
+      "CSS": "CSS",
+      "GIT": "Git",
+      "DOCKER": "Docker",
+      "VAGRANT": "Vagrant",
+      "FIGMA": "Figma"
+    }
+  },
+  "SOCIAL": {
+    "GITHUB": "GitHub",
+    "TWITTER": "Twitter",
+    "LINKEDIN": "LinkedIn"
+  },
+  "TESTIMONIALS": {
+    "TITLE": "Testimonials",
+    "DESCRIPTION": "People that talk great about me:",
+    "ITEMS": {
+      "BORJA": {
+        "TEXT": "\"An exceptional teammate, a web development student with great talent. Always attentive and with an incredible ability to grasp even the most complex concepts. His skill in solving technical problems is impressive, and his dedication makes him a key asset in any team. Intelligent, proactive, and with a positive attitude. Highly recommended!\"",
+        "ROLE": "Classmate"
+      },
+      "ALBERT": {
+        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
+        "ROLE": "BBC CEO"
+      },
+      "ALBERT2": {
+        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
+        "ROLE": "BBC CEO"
+      }
+    }
+  }
+}
