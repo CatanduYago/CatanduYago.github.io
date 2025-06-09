@@ -4,7 +4,9 @@
     "WORK": "Work",
     "TESTIMONIALS": "Testimonials",
     "CONTACT": "Contact",
-    "DOWNLOAD_CV": "Download CV"
+    "DOWNLOAD_CV": "Download CV",
+    "EXPERIENCE": "Experience"
+
   },
   "LANG": {
     "SHORT": "ENG"
@@ -36,19 +38,19 @@
   },
   "EXPERIENCE.TITLE": "Experience",
   "EXPERIENCE.PERIOD": "January 2025 - Present ({{duration}} months)",
-  "EXPERIENCE.DESCRIPTION": "Currently, I am doing an internship at {{company}}.",
+  "EXPERIENCE.DESCRIPTION": "I am currently doing my internship at {{company}}. I am part of a development team, where I am responsible for making various fixes and improvements to several applications created by the team itself. \n\n This experience allows me to work directly on real projects, understand existing code, and contribute to the maintenance and enhancement of solutions in a collaborative environment",
   "FOOTER": {
-    "COPYRIGHT": "© 2025 | Designed and developed with ❤️ by Yago Catalano"
+    "COPYRIGHT": "© 2025 | Designed and developed with ❤️ by Yago Catalano Andújar"
   },
   "WORK.TITLE": "Work",
   "WORK.DESCRIPTION": "These are some of the projects I have built:",
   "PROJECTS": {
     "SUBTITLER": {
-      "TITLE": "Subtitler",
-      "DESCRIPTION": "A web application for real-time voice transcription. Captures audio from the microphone and displays subtitles instantly. Developed with JavaScript and Bootstrap."
+      "TITLE": "Subtitler: Live",
+      "DESCRIPTION": "This web application allows you to capture screen audio in real time and transcribe it using Amazon Transcribe. Developed with JavaScript and Amazon Transcribe."
     },
     "WISHLIST": {
-      "TITLE": "Wish list",
+      "TITLE": "Wishlist",
       "DESCRIPTION": "Responsive wishlist website with filters made using Angular and Bootstrap."
     },
     "MAZAOGYM": {
@@ -84,7 +86,8 @@
       "GIT": "Git",
       "DOCKER": "Docker",
       "VAGRANT": "Vagrant",
-      "FIGMA": "Figma"
+      "FIGMA": "Figma",
+      "JSP": "JavaServer Pages"
     }
   },
   "SOCIAL": {

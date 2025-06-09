@@ -4,7 +4,8 @@
     "WORK": "Trabajo",
     "TESTIMONIALS": "Testimonios",
     "CONTACT": "Contacto",
-    "DOWNLOAD_CV": "Descargar CV"
+    "DOWNLOAD_CV": "Descargar CV",
+    "EXPERIENCE": "Experiencia"
   },
   "LANG": {
     "SHORT": "ESP"
@@ -32,20 +33,20 @@
   },
   "CONTACT": {
     "TITLE": "Contáctame",
-    "DESCRIPTION": "Si quieres hablar conmigo o seguirme aquí puedes:"
+    "DESCRIPTION": "Si quieres hablar conmigo o seguirme aquí puedes hacerlo:"
   },
   "EXPERIENCE.TITLE": "Experiencia",
   "EXPERIENCE.PERIOD": "Enero 2025 - Actualidad ({{duration}} meses)",
-  "EXPERIENCE.DESCRIPTION": "Actualmente estoy realizando las practicas en {{company}}.",
+  "EXPERIENCE.DESCRIPTION": "Actualmente estoy realizando las practicas en {{company}}. Formo parte de un equipo de desarrollo, donde me encargo de realizar distintos arreglos y mejoras en varias de las aplicaciones creadas por el propio equipo. \n\n Esta experiencia me permite trabajar directamente con proyectos reales, comprender el código existente y contribuir al mantenimiento y mejora de soluciones en un entorno colaborativo",
   "FOOTER": {
-    "COPYRIGHT": "© 2025 | Diseñado y programado con ❤️ por Yago Catalano"
+    "COPYRIGHT": "© 2025 | Diseñado y programado con ❤️ por Yago Catalano Andújar"
   },
   "WORK.TITLE": "Trabajo",
   "WORK.DESCRIPTION": "Algunos de los proyectos que he hecho:",
   "PROJECTS": {
     "SUBTITLER": {
-      "TITLE": "Subtitler",
-      "DESCRIPTION": "Aplicación web de transcripción de voz en tiempo real. Permite capturar audio desde el micrófono y mostrar subtítulos instantáneamente. Desarrollada con JavaScript y Bootstrap."
+      "TITLE": "Subtitler: Live",
+      "DESCRIPTION": "Esta aplicación web permite capturar audio de pantalla en tiempo real y transcribirlo utilizando Amazon Transcribe. Desarrollada con JavaScript y usando Amazon Transcribe. Es mi trabajo de fin de ciclo (TFC)."
     },
     "WISHLIST": {
       "TITLE": "Lista de deseados",
@@ -84,7 +85,8 @@
       "GIT": "Git",
       "DOCKER": "Docker",
       "VAGRANT": "Vagrant",
-      "FIGMA": "Figma"
+      "FIGMA": "Figma",
+      "JSP": "JavaServer Pages"
     }
   },
   "SOCIAL": {
