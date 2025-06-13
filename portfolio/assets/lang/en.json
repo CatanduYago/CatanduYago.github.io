@@ -6,7 +6,6 @@
     "CONTACT": "Contact",
     "DOWNLOAD_CV": "Download CV",
     "EXPERIENCE": "Experience"
-
   },
   "LANG": {
     "SHORT": "ENG"
@@ -104,10 +103,6 @@
         "ROLE": "Classmate"
       },
       "ALBERT": {
-        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
-        "ROLE": "BBC CEO"
-      },
-      "ALBERT2": {
         "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
         "ROLE": "BBC CEO"
       }
