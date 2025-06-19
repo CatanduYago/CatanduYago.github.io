@@ -35,9 +35,15 @@
     "TITLE": "Contáctame",
     "DESCRIPTION": "Si quieres hablar conmigo o seguirme aquí puedes hacerlo:"
   },
-  "EXPERIENCE.TITLE": "Experiencia",
-  "EXPERIENCE.PERIOD": "Enero 2025 - Actualidad ({{duration}} meses)",
-  "EXPERIENCE.DESCRIPTION": "Actualmente estoy realizando las practicas en {{company}}. Formo parte de un equipo de desarrollo, donde me encargo de realizar distintos arreglos y mejoras en varias de las aplicaciones creadas por el propio equipo. \n\n Esta experiencia me permite trabajar directamente con proyectos reales, comprender el código existente y contribuir al mantenimiento y mejora de soluciones en un entorno colaborativo",
+  "EXPERIENCE": {
+    "TITLE": "Experiencia",
+    "ITEMS": {
+      "VITALY": {
+        "PERIOD": "Enero 2025 - Junio 2025 (6 meses)",
+        "DESCRIPTION": "Formé parte de un equipo de desarrollo, donde realicé distintos arreglos y mejoras en varias de las aplicaciones creadas por el propio equipo. Esta experiencia me permitió trabajar directamente con proyectos reales, comprender el código existente y contribuir al mantenimiento y mejora de soluciones en un entorno colaborativo."
+      }
+    }
+  },
   "FOOTER": {
     "COPYRIGHT": "© 2025 | Diseñado y programado con ❤️ por Yago Catalano Andújar"
   },
