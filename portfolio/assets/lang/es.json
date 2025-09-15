@@ -40,7 +40,11 @@
     "ITEMS": {
       "VITALY": {
         "PERIOD": "Enero 2025 - Junio 2025 (6 meses)",
-        "DESCRIPTION": "Formé parte de un equipo de desarrollo, donde realicé distintos arreglos y mejoras en varias de las aplicaciones creadas por el propio equipo. Esta experiencia me permitió trabajar directamente con proyectos reales, comprender el código existente y contribuir al mantenimiento y mejora de soluciones en un entorno colaborativo."
+        "DESCRIPTION": "Como parte de un equipo de desarrollo, he participado en el mantenimiento y la implementación de mejoras tanto en la lógica del back-end como en la optimización responsiva del front-end, asegurando un rendimiento sólido y una experiencia de usuario adaptada a diferentes dispositivos. Además, he desarrollado y desplegado un CRM completo, gestionando todo el ciclo de vida del proyecto, desde la concepción hasta su puesta en producción. También he trabajado en la documentación de APIs mediante Swagger, facilitando su comprensión e integración, y he implementado mejoras persistentes en la base de datos, garantizando su eficiencia y escalabilidad."
+      },
+      "VKS": {
+        "PERIOD": "Junio 2025 - Actualidad",
+        "DESCRIPTION": "He trabajado en el diseño y desarrollo de una web para un equipo de deportes electrónicos extremeño. Me encargué de la ideación de la interactividad orientada al usuario, del diseño completo en Figma y del desarrollo en solitario con Angular 20, además de la preparación para su despliegue en servidor. Adicionalmente, creé una segunda página para AEXVES que enlaza con la web interactiva, respetando el diseño de la página principal y desarrollándola en WIX para su futura publicación."
       }
     }
   },
@@ -69,6 +73,10 @@
     "PORTFOLIO": {
       "TITLE": "CatanduYago.github.io",
       "DESCRIPTION": "Este es mi repositorio de github pages en el que despliego la mayoría de mis proyectos."
+    },
+    "VKS":{
+      "TITLE": "Valkiria's Vikings",
+      "DESCRIPTION": "Esta página web ha sido diseñada y desarrollada por mí como parte de un proyecto para el equipo de deportes electrónicos extremeño Valkiria's Vikings. Aún está por publicar por motivos ajenos al desarrollo."
     }
   },
   "SKILLS": {

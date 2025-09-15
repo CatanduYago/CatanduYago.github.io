@@ -40,7 +40,11 @@
     "ITEMS": {
       "VITALY": {
         "PERIOD": "January 2025 - June 2025 (6 months)",
-        "DESCRIPTION": "I was part of a development team, where I made various fixes and improvements to several applications created by the team itself. This experience allowed me to work directly on real projects, understand existing code, and contribute to the maintenance and enhancement of solutions in a collaborative environment."
+        "DESCRIPTION": "As part of a development team, I contributed to the maintenance and implementation of improvements in back-end logic as well as responsive optimizations on the front-end, ensuring solid performance and a seamless user experience across devices. I also developed and deployed a complete CRM, managing the entire project lifecycle from conception to production. Additionally, I worked on API documentation using Swagger to facilitate understanding and integration, and implemented persistent improvements in the database to ensure efficiency and scalability."
+      },
+      "VKS": {
+        "PERIOD": "June 2025 - Present",
+        "DESCRIPTION": "I designed and developed a website for an esports team from Extremadura. I led the ideation of user-facing interactivity, created the full visual design in Figma, and built the site solo with Angular 20, preparing it for future server deployment. I also built a secondary page for AEXVES that links to the interactive site, aligning with the main site's design and implementing it in WIX for later publication."
       }
     }
   },
@@ -69,7 +73,11 @@
     "PORTFOLIO": {
       "TITLE": "CatanduYago.github.io",
       "DESCRIPTION": "This is my Github pages repository where I deploy most of my apps."
-    }
+    },
+    "VKS": {
+  "TITLE": "Valkiria's Vikings",
+  "DESCRIPTION": "This website was designed and developed by me as part of a project for the esports team from Extremadura, Valkiria's Vikings. It has not yet been published due to reasons beyond development."
+}
   },
   "SKILLS": {
     "TITLE": "Skills",
@@ -115,3 +123,4 @@
     }
   }
 }
+
