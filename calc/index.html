@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Horas de Trabajo</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding: 20px; background-color: #f4f4f9; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 300px; }
+        input { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        #resultado { margin-top: 20px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>¿Cuánto te cuesta?</h2>
+    
+    <label>Precio del artículo (€)</label>
+    <input type="number" id="precio" placeholder="Ej: 100">
+
+    <label>Sueldo por hora (€)</label>
+    <input type="number" id="sueldo" placeholder="Ej: 8.31">
+
+    <label>Horas de trabajo al día</label>
+    <input type="number" id="jornada" placeholder="Ej: 6">
+
+    <button onclick="calcular()">Calcular esfuerzo</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+    function calcular() {
+        const precio = parseFloat(document.getElementById('precio').value);
+        const sueldo = parseFloat(document.getElementById('sueldo').value);
+        const jornada = parseFloat(document.getElementById('jornada').value);
+
+        if (precio > 0 && sueldo > 0 && jornada > 0) {
+            // Cálculo de horas totales
+            const horasTotales = precio / sueldo;
+            // Cálculo de días de trabajo
+            const diasTotales = horasTotales / jornada;
+
+            document.getElementById('resultado').innerHTML = `
+                <p>Necesitas trabajar:</p>
+                <ul>
+                    <li>${horasTotales.toFixed(2)} horas totales</li>
+                    <li>${diasTotales.toFixed(1)} días de trabajo</li>
+                </ul>
+            `;
+        } else {
+            document.getElementById('resultado').innerText = "Por favor, rellena todos los campos con números válidos.";
+        }
+    }
+</script>
+
+</body>
+</html>
