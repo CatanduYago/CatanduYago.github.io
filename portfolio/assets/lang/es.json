@@ -1,7 +1,7 @@
 {
   "NAVBAR": {
     "ABOUT": "Sobre mí",
-    "WORK": "Trabajo",
+    "WORK": "Proyectos",
     "TESTIMONIALS": "Testimonios",
     "CONTACT": "Contacto",
     "DOWNLOAD_CV": "Descargar CV",
@@ -11,15 +11,25 @@
     "SHORT": "ESP"
   },
   "HERO": {
-    "TITLE": "Hola, soy Yago 👋",
-    "DESCRIPTION": "Soy un estudiante de grado superior en desarrollo web con experiencia práctica en el desarrollo de aplicaciones web utilizando tecnologías como Angular y Node.js. Durante mis estudios, he trabajado con herramientas como PostgreSQL y MySQL. Aunque estoy en las etapas iniciales de mi carrera, me apasiona profundamente el desarrollo web y disfruto cada oportunidad para aprender y crecer en este campo.",
+    "TAG": "Desarrollador & Diseñador Web",
+    "NAME_FIRST": "Yago",
+    "NAME_MIDDLE": "Catalano",
+    "NAME_LAST": "Andújar",
+    "TITLE": "Yago Catalano Andújar",
+    "DESCRIPTION": "Full-stack developer con base en Angular y Spring Boot. Apasionado por crear interfaces que unen lógica y estética. Disponibilidad completa y movilidad geográfica.",
     "LOCATION": "Badajoz, España",
-    "STATUS": "Estudiante"
+    "STATUS": "Disponible",
+    "CTA_PRIMARY": "Ver experiencia",
+    "CTA_SECONDARY": "Contactar",
+    "AWARD_1": "1.º Extremadura Skills 2025",
+    "AWARD_2": "Competidor en SpainSkills 2026"
   },
   "ABOUT": {
     "TITLE": "Sobre mí",
-    "ABOUT_TEXT": "Soy un desarrollador web apasionado con experiencia en diversas tecnologías. Me gusta enfrentar desafíos y mejorar mis habilidades día a día.",
-    "ADDITIONAL": "He trabajado en varios proyectos donde he podido desarrollar tanto habilidades técnicas como personales. Algunas de mis habilidades más destacadas son:",
+    "HEADING_1": "Quién soy &",
+    "HEADING_2": "qué me mueve",
+    "ABOUT_TEXT": "Soy un desarrollador web full-stack con formación en Desarrollo de Aplicaciones Web y una fuerte inclinación por el diseño de interfaz. Me apasiona construir productos digitales donde la lógica del back-end y la experiencia del usuario conviven sin fricciones.",
+    "ADDITIONAL": "Rápido para aprender, curioso por naturaleza y con determinación para llevar proyectos de la idea al despliegue. He trabajado tanto en entornos de equipo como de forma completamente independiente — desde la conceptualización en Figma hasta el deploy en servidor.",
     "SOFT_SKILLS_TITLE": "Soft Skills",
     "SOFT_SKILLS": [
       "Trabajo en equipo",
@@ -29,61 +39,79 @@
       "Adaptabilidad",
       "Proactividad",
       "Análisis de resultados"
-    ]
+    ],
+    "AWARD_CATEGORY": "Categoría Desarrollo Web"
   },
   "CONTACT": {
-    "TITLE": "Contáctame",
-    "DESCRIPTION": "Si quieres hablar conmigo o seguirme aquí puedes hacerlo:"
+    "TITLE": "Contacto",
+    "HEADING_1": "¿Trabajamos",
+    "HEADING_2": "juntos?",
+    "DESCRIPTION": "Estoy disponible para nuevas oportunidades — freelance, prácticas o posición estable. Cuéntame en qué puedo ayudarte."
   },
   "EXPERIENCE": {
     "TITLE": "Experiencia",
+    "HEADING_1": "Trayectoria",
+    "HEADING_2": "profesional",
     "ITEMS": {
       "VITALY": {
-        "PERIOD": "Enero 2025 - Junio 2025 (6 meses)",
-        "DESCRIPTION": "Como parte de un equipo de desarrollo, he participado en el mantenimiento y la implementación de mejoras tanto en la lógica del back-end como en la optimización responsiva del front-end, asegurando un rendimiento sólido y una experiencia de usuario adaptada a diferentes dispositivos. Además, he desarrollado y desplegado un CRM completo, gestionando todo el ciclo de vida del proyecto, desde la concepción hasta su puesta en producción. También he trabajado en la documentación de APIs mediante Swagger, facilitando su comprensión e integración, y he implementado mejoras persistentes en la base de datos, garantizando su eficiencia y escalabilidad."
+        "PERIOD": "Ene 2025 — Jun 2025",
+        "COMPANY": "Vitaly Tech · Grupo Preving",
+        "ROLE": "Desarrollador Full-Stack",
+        "TYPE": "Prácticas · FCT",
+        "DESCRIPTION": "Como parte del equipo de desarrollo: mantenimiento e implementación de mejoras lógicas en el back-end y actualizaciones responsive en el front-end. Desarrollo e implementación de un CRM completo de cero, documentación de API con Swagger y mejoras persistentes en la base de datos con PostgreSQL y optimización de consultas JPQL."
       },
       "VKS": {
-        "PERIOD": "Junio 2025 - Actualidad",
-        "DESCRIPTION": "He trabajado en el diseño y desarrollo de una web para un equipo de deportes electrónicos extremeño. Me encargué de la ideación de la interactividad orientada al usuario, del diseño completo en Figma y del desarrollo en solitario con Angular 20, además de la preparación para su despliegue en servidor. Adicionalmente, creé una segunda página para AEXVES que enlaza con la web interactiva, respetando el diseño de la página principal y desarrollándola en WIX para su futura publicación."
+        "PERIOD": "Jun 2025 — Ene 2026",
+        "COMPANY": "Valkiria's Vikings",
+        "ROLE": "Desarrollador & Diseñador Web",
+        "TYPE": "Freelance · Independiente",
+        "DESCRIPTION": "Desarrollo completo de un sitio web para un equipo de e-sports de Extremadura. Diseño del sistema visual en Figma, desarrollo independiente con Angular 20, despliegue en servidor y desarrollo de una segunda página para AEXVES usando WIX. Ideación y definición de la experiencia de usuario e interactividad del sitio."
       }
     }
   },
   "FOOTER": {
-    "COPYRIGHT": "© 2025 | Diseñado y programado con ❤️ por Yago Catalano Andújar"
+    "COPYRIGHT": "© 2026 Yago Catalano Andújar",
+    "MADE_WITH": "Hecho con"
   },
-  "WORK.TITLE": "Trabajo",
-  "WORK.DESCRIPTION": "Algunos de los proyectos que he hecho:",
+  "WORK": {
+    "TITLE": "Proyectos",
+    "HEADING_1": "Proyectos",
+    "HEADING_2": "destacados",
+    "DESCRIPTION": "Una selección de los proyectos que he construido — desde apps en producción hasta experimentos personales."
+  },
   "PROJECTS": {
     "SUBTITLER": {
       "TITLE": "Subtitler: Live",
-      "DESCRIPTION": "Esta aplicación web permite capturar audio de pantalla en tiempo real y transcribirlo utilizando Amazon Transcribe. Desarrollada con JavaScript y usando Amazon Transcribe. Es mi trabajo de fin de ciclo (TFC)."
+      "DESCRIPTION": "App web que captura audio de pantalla en tiempo real y lo transcribe con Amazon Transcribe. Trabajo de fin de ciclo. Desarrollada con JavaScript."
     },
     "WISHLIST": {
       "TITLE": "Lista de deseados",
-      "DESCRIPTION": "Lista de deseos responsive con filtros hecha usando Angular y Bootstrap."
+      "DESCRIPTION": "Lista de deseos responsive con filtros, desarrollada con Angular y Bootstrap."
     },
     "MAZAOGYM": {
       "TITLE": "MazaoGym",
-      "DESCRIPTION": "Proyecto de Gimnasio realizado para el final de una de las asignaturas de 1º de DAW usando PHP."
+      "DESCRIPTION": "Proyecto de gimnasio realizado para una asignatura de 1.º DAW usando PHP."
     },
     "DUNGEON": {
-      "TITLE": "Juego de mazmorras en Java",
-      "DESCRIPTION": "Juego de mazmorras programado en Java usando JavaFX. Proyecto fin de curso de programación."
+      "TITLE": "Dungeon en Java",
+      "DESCRIPTION": "Juego de mazmorras programado en Java con JavaFX. Proyecto fin de curso de programación."
     },
     "PORTFOLIO": {
       "TITLE": "CatanduYago.github.io",
-      "DESCRIPTION": "Este es mi repositorio de github pages en el que despliego la mayoría de mis proyectos."
+      "DESCRIPTION": "Repositorio de GitHub Pages donde despliego la mayoría de mis proyectos y apps."
     },
-    "VKS":{
+    "VKS": {
       "TITLE": "Valkiria's Vikings",
-      "DESCRIPTION": "Esta página web ha sido diseñada y desarrollada por mí como parte de un proyecto para el equipo de deportes electrónicos extremeño Valkiria's Vikings. Aún está por publicar por motivos ajenos al desarrollo."
+      "DESCRIPTION": "Sitio web diseñado y desarrollado íntegramente por mí para el equipo de e-sports extremeño. Diseño en Figma + Angular 20. Pendiente de publicación."
     }
   },
   "SKILLS": {
-    "TITLE": "Habilidades",
-    "DESCRIPTION": "Estas son algunas de las habilidades que he adquirido durante mi curso:",
+    "TITLE": "Skills",
+    "HEADING_1": "Stack",
+    "HEADING_2": "técnico",
+    "DESCRIPTION": "Tecnologías con las que trabajo habitualmente — tanto en front-end como en back-end y bases de datos.",
     "ITEMS": {
-      "ORACLE_DATABASE": "Oracle database",
+      "ORACLE_DATABASE": "Oracle DB",
       "POSTGRESQL": "PostgreSQL",
       "MYSQL": "MySQL",
       "ANGULAR": "Angular",
@@ -93,14 +121,14 @@
       "SPRING_BOOT": "Spring Boot",
       "PHP": "PHP",
       "JAVA": "Java",
-      "JAVASCRIPT": "Java Script",
-      "HTML": "HTML",
-      "CSS": "CSS",
+      "JAVASCRIPT": "JavaScript",
+      "HTML": "HTML5",
+      "CSS": "CSS3",
       "GIT": "Git",
       "DOCKER": "Docker",
       "VAGRANT": "Vagrant",
       "FIGMA": "Figma",
-      "JSP": "JavaServer Pages"
+      "JSP": "JSP"
     }
   },
   "SOCIAL": {
@@ -110,15 +138,13 @@
   },
   "TESTIMONIALS": {
     "TITLE": "Testimonios",
-    "DESCRIPTION": "Personas que hablan bien de mí:",
+    "HEADING_1": "Lo que dicen",
+    "HEADING_2": "de mí",
+    "DESCRIPTION": "Personas que han trabajado o estudiado conmigo.",
     "ITEMS": {
       "BORJA": {
-        "TEXT": "\"Un compañero excepcional, estudiante de desarrollo web con un gran talento. Siempre atento y con una increíble capacidad para captar incluso los conceptos más complejos. Su habilidad para resolver problemas técnicos es impresionante, y su dedicación lo convierte en una pieza clave en cualquier equipo. Inteligente, proactivo y con una actitud positiva. ¡Totalmente recomendable!\"",
+        "TEXT": "Un compañero excepcional, con un gran talento para el desarrollo web. Siempre atento y con una increíble capacidad para captar incluso los conceptos más complejos. Su habilidad para resolver problemas técnicos es impresionante, y su dedicación lo convierte en una pieza clave en cualquier equipo. Inteligente, proactivo y con una actitud positiva. ¡Totalmente recomendable!",
         "ROLE": "Compañero de clase"
-      },
-      "ALBERT": {
-        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
-        "ROLE": "BBC CEO"
       }
     }
   }

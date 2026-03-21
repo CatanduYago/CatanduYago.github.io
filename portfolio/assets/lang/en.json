@@ -1,7 +1,7 @@
 {
   "NAVBAR": {
-    "ABOUT": "About Me",
-    "WORK": "Work",
+    "ABOUT": "About",
+    "WORK": "Projects",
     "TESTIMONIALS": "Testimonials",
     "CONTACT": "Contact",
     "DOWNLOAD_CV": "Download CV",
@@ -11,79 +11,107 @@
     "SHORT": "ENG"
   },
   "HERO": {
-    "TITLE": "Hi, I'm Yago! 👋",
-    "DESCRIPTION": "I am a higher education student in web development with practical experience in developing web applications using technologies like Angular and Node.js. During my studies, I have worked with tools like PostgreSQL and MySQL. Although I am in the early stages of my career, I am deeply passionate about web development and enjoy every opportunity to learn and grow in this field.",
+    "TAG": "Web Developer & Designer",
+    "NAME_FIRST": "Yago",
+    "NAME_MIDDLE": "Catalano",
+    "NAME_LAST": "Andújar",
+    "TITLE": "Yago Catalano Andújar",
+    "DESCRIPTION": "Full-stack developer specialising in Angular and Spring Boot. Passionate about building interfaces where back-end logic and great user experience coexist seamlessly.",
     "LOCATION": "Badajoz, Spain",
-    "STATUS": "Student"
+    "STATUS": "Available",
+    "CTA_PRIMARY": "See experience",
+    "CTA_SECONDARY": "Get in touch",
+    "AWARD_1": "1st Extremadura Skills 2025",
+    "AWARD_2": "Competitor at SpainSkills 2026"
   },
   "ABOUT": {
-    "TITLE": "About Me",
-    "ABOUT_TEXT": "I am a passionate web developer with experience in various technologies. I enjoy facing challenges and improving my skills day by day.",
-    "ADDITIONAL": "I have worked on several projects where I have been able to develop both technical and personal skills. Some of my most notable skills are:",
+    "TITLE": "About me",
+    "HEADING_1": "Who I am &",
+    "HEADING_2": "what drives me",
+    "ABOUT_TEXT": "I am a full-stack web developer with a degree in Web Application Development and a strong leaning towards interface design. I am passionate about building digital products where back-end logic and user experience coexist without friction.",
+    "ADDITIONAL": "Fast learner, naturally curious and determined to take projects from idea to deployment. I have worked both in team environments and completely independently — from concept in Figma through to server deployment.",
     "SOFT_SKILLS_TITLE": "Soft Skills",
     "SOFT_SKILLS": [
       "Teamwork",
       "Effective communication",
       "Problem solving",
-      "Under pressure work",
+      "Working under pressure",
       "Adaptability",
       "Proactivity",
       "Results analysis"
-    ]
+    ],
+    "AWARD_CATEGORY": "Web Development category"
   },
   "CONTACT": {
     "TITLE": "Contact",
-    "DESCRIPTION": "Here you can talk with me or follow me:"
+    "HEADING_1": "Let's work",
+    "HEADING_2": "together",
+    "DESCRIPTION": "Open to new opportunities — freelance, internships or full-time roles. Tell me how I can help."
   },
   "EXPERIENCE": {
     "TITLE": "Experience",
+    "HEADING_1": "Professional",
+    "HEADING_2": "journey",
     "ITEMS": {
       "VITALY": {
-        "PERIOD": "January 2025 - June 2025 (6 months)",
-        "DESCRIPTION": "As part of a development team, I contributed to the maintenance and implementation of improvements in back-end logic as well as responsive optimizations on the front-end, ensuring solid performance and a seamless user experience across devices. I also developed and deployed a complete CRM, managing the entire project lifecycle from conception to production. Additionally, I worked on API documentation using Swagger to facilitate understanding and integration, and implemented persistent improvements in the database to ensure efficiency and scalability."
+        "PERIOD": "Jan 2025 — Jun 2025",
+        "COMPANY": "Vitaly Tech · Grupo Preving",
+        "ROLE": "Full-Stack Developer",
+        "TYPE": "Internship · FCT",
+        "DESCRIPTION": "As part of the development team: maintenance and implementation of back-end logic improvements and responsive front-end updates. Developed and deployed a complete CRM from scratch, documented the API with Swagger, and implemented persistent database improvements using PostgreSQL with JPQL query optimisation."
       },
       "VKS": {
-        "PERIOD": "June 2025 - Present",
-        "DESCRIPTION": "I designed and developed a website for an esports team from Extremadura. I led the ideation of user-facing interactivity, created the full visual design in Figma, and built the site solo with Angular 20, preparing it for future server deployment. I also built a secondary page for AEXVES that links to the interactive site, aligning with the main site's design and implementing it in WIX for later publication."
+        "PERIOD": "Jun 2025 — Jan 2026",
+        "COMPANY": "Valkiria's Vikings",
+        "ROLE": "Web Developer & Designer",
+        "TYPE": "Freelance · Independent",
+        "DESCRIPTION": "End-to-end development of a website for an esports team from Extremadura. Full visual system design in Figma, solo development with Angular 20, server deployment setup, and a secondary page for AEXVES built with WIX. Responsible for all UX strategy and interactive experience decisions."
       }
     }
   },
-      "FOOTER": {
-    "COPYRIGHT": "© 2025 | Designed and developed with ❤️ by Yago Catalano Andújar"
+  "FOOTER": {
+    "COPYRIGHT": "© 2026 Yago Catalano Andújar",
+    "MADE_WITH": "Built with"
   },
-  "WORK.TITLE": "Work",
-  "WORK.DESCRIPTION": "These are some of the projects I have built:",
+  "WORK": {
+    "TITLE": "Projects",
+    "HEADING_1": "Featured",
+    "HEADING_2": "projects",
+    "DESCRIPTION": "A selection of projects I have built — from production apps to personal experiments."
+  },
   "PROJECTS": {
     "SUBTITLER": {
       "TITLE": "Subtitler: Live",
-      "DESCRIPTION": "This web application allows you to capture screen audio in real time and transcribe it using Amazon Transcribe. Developed with JavaScript and Amazon Transcribe."
+      "DESCRIPTION": "Web app that captures screen audio in real time and transcribes it using Amazon Transcribe. Final-year project built with JavaScript."
     },
     "WISHLIST": {
       "TITLE": "Wishlist",
-      "DESCRIPTION": "Responsive wishlist website with filters made using Angular and Bootstrap."
+      "DESCRIPTION": "Responsive wishlist with filters built with Angular and Bootstrap."
     },
     "MAZAOGYM": {
       "TITLE": "MazaoGym",
-      "DESCRIPTION": "Gym project completed for the end of one of the first-year DAW courses using PHP."
+      "DESCRIPTION": "Gym management project built for a first-year DAW course using PHP."
     },
     "DUNGEON": {
-      "TITLE": "Dungeon game in Java",
-      "DESCRIPTION": "Dungeon game programmed in Java using JavaFX. End-of-course programming project."
+      "TITLE": "Dungeon in Java",
+      "DESCRIPTION": "Dungeon game built in Java with JavaFX. End-of-year programming project."
     },
     "PORTFOLIO": {
       "TITLE": "CatanduYago.github.io",
-      "DESCRIPTION": "This is my Github pages repository where I deploy most of my apps."
+      "DESCRIPTION": "My GitHub Pages repository where I deploy most of my projects and apps."
     },
     "VKS": {
-  "TITLE": "Valkiria's Vikings",
-  "DESCRIPTION": "This website was designed and developed by me as part of a project for the esports team from Extremadura, Valkiria's Vikings. It has not yet been published due to reasons beyond development."
-}
+      "TITLE": "Valkiria's Vikings",
+      "DESCRIPTION": "Website fully designed and developed by me for the Extremadura esports team. Figma design + Angular 20. Pending publication."
+    }
   },
   "SKILLS": {
     "TITLE": "Skills",
-    "DESCRIPTION": "These are some of the skills I have acquired during my career:",
+    "HEADING_1": "Technical",
+    "HEADING_2": "stack",
+    "DESCRIPTION": "Technologies I work with regularly — across front-end, back-end and databases.",
     "ITEMS": {
-      "ORACLE_DATABASE": "Oracle database",
+      "ORACLE_DATABASE": "Oracle DB",
       "POSTGRESQL": "PostgreSQL",
       "MYSQL": "MySQL",
       "ANGULAR": "Angular",
@@ -93,14 +121,14 @@
       "SPRING_BOOT": "Spring Boot",
       "PHP": "PHP",
       "JAVA": "Java",
-      "JAVASCRIPT": "Java Script",
-      "HTML": "HTML",
-      "CSS": "CSS",
+      "JAVASCRIPT": "JavaScript",
+      "HTML": "HTML5",
+      "CSS": "CSS3",
       "GIT": "Git",
       "DOCKER": "Docker",
       "VAGRANT": "Vagrant",
       "FIGMA": "Figma",
-      "JSP": "JavaServer Pages"
+      "JSP": "JSP"
     }
   },
   "SOCIAL": {
@@ -110,17 +138,14 @@
   },
   "TESTIMONIALS": {
     "TITLE": "Testimonials",
-    "DESCRIPTION": "People that talk great about me:",
+    "HEADING_1": "What people",
+    "HEADING_2": "say about me",
+    "DESCRIPTION": "People who have worked or studied with me.",
     "ITEMS": {
       "BORJA": {
-        "TEXT": "\"An exceptional teammate, a web development student with great talent. Always attentive and with an incredible ability to grasp even the most complex concepts. His skill in solving technical problems is impressive, and his dedication makes him a key asset in any team. Intelligent, proactive, and with a positive attitude. Highly recommended!\"",
+        "TEXT": "An exceptional teammate with real talent for web development. Always attentive and with an incredible ability to grasp even the most complex concepts. His skill at solving technical problems is impressive, and his dedication makes him a key asset in any team. Smart, proactive, and with a positive attitude. Highly recommended!",
         "ROLE": "Classmate"
-      },
-      "ALBERT": {
-        "TEXT": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tincidunt risus a blandit tristique. Duis pretium eu libero ut lacinia. Phasellus eget rhoncus mi.\"",
-        "ROLE": "BBC CEO"
       }
     }
   }
 }
-
