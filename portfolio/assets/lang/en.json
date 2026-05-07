@@ -66,7 +66,15 @@
         "ROLE": "Web Developer & Designer",
         "TYPE": "Freelance · Independent",
         "DESCRIPTION": "End-to-end development of a website for an esports team from Extremadura. Full visual system design in Figma, solo development with Angular 20, server deployment setup, and a secondary page for AEXVES built with WIX. Responsible for all UX strategy and interactive experience decisions."
+      },
+      "SILICE": {
+        "PERIOD": "MAY 2026 — PRESENT",
+        "COMPANY": "Silice España",
+        "ROLE": "Web Developer",
+        "TYPE": "Full-time",
+        "DESCRIPTION": "Web development and maintenance in an on-site role in Mérida"
       }
+
     }
   },
   "FOOTER": {

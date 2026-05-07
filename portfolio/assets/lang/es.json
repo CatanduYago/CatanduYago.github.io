@@ -66,7 +66,14 @@
         "ROLE": "Desarrollador & Diseñador Web",
         "TYPE": "Freelance · Independiente",
         "DESCRIPTION": "Desarrollo completo de un sitio web para un equipo de e-sports de Extremadura. Diseño del sistema visual en Figma, desarrollo independiente con Angular 20, despliegue en servidor y desarrollo de una segunda página para AEXVES usando WIX. Ideación y definición de la experiencia de usuario e interactividad del sitio."
-      }
+      },
+    "SILICE": {
+      "PERIOD": "MAY 2026 — ACTUAL",
+      "COMPANY": "Silice España",
+      "ROLE": "Desarrollador Web",
+      "TYPE": "Tiempo completo",
+      "DESCRIPTION": "Desarrollo web y mantenimiento en modalidad presencial en Mérida"
+    }
     }
   },
   "FOOTER": {
