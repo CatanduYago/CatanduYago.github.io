@@ -224,6 +224,7 @@
         let isDragging = false;
         let dragOffsetX = 0, dragOffsetY = 0;
         let selectedToolId = null;
+        let lastValidRotation = 0;
 
         let lineWidth = 2;
         let lineColor = '#000000';
@@ -393,6 +394,93 @@
         }
         let activeEdge = null;
 
+        // ---------- Colisiones entre herramientas (SAT) ----------
+        // Polígono convexo de colisión en coordenadas globales
+        function getCollisionPolygon(tool) {
+            if (tool.type === 'protractor') {
+                const r = toolConfigs.protractor.radius;
+                const pts = [];
+                const N = 14;
+                for (let i = 0; i <= N; i++) {
+                    const a = Math.PI + (Math.PI * i / N); // semicírculo superior
+                    pts.push(tool.toGlobal(Math.cos(a)*r, Math.sin(a)*r));
+                }
+                return pts;
+            }
+            return tool.localVertices().map(v => tool.toGlobal(v[0], v[1]));
+        }
+
+        function projectPoly(poly, nx, ny) {
+            let min = Infinity, max = -Infinity;
+            for (const p of poly) {
+                const d = p[0]*nx + p[1]*ny;
+                if (d < min) min = d;
+                if (d > max) max = d;
+            }
+            return [min, max];
+        }
+
+        function polyCentroid(poly) {
+            let x = 0, y = 0;
+            for (const p of poly) { x += p[0]; y += p[1]; }
+            return { x: x/poly.length, y: y/poly.length };
+        }
+
+        // Devuelve null si no chocan, o {axis, overlap} = vector mínimo de separación
+        function polysCollide(polyA, polyB) {
+            let minOverlap = Infinity, smallestAxis = null;
+            const polys = [polyA, polyB];
+            for (let p = 0; p < 2; p++) {
+                const poly = polys[p];
+                for (let i = 0; i < poly.length; i++) {
+                    const a = poly[i], b = poly[(i+1) % poly.length];
+                    let nx = -(b[1]-a[1]), ny = (b[0]-a[0]);
+                    const len = Math.hypot(nx, ny);
+                    if (len === 0) continue;
+                    nx /= len; ny /= len;
+                    const [minA, maxA] = projectPoly(polyA, nx, ny);
+                    const [minB, maxB] = projectPoly(polyB, nx, ny);
+                    const overlap = Math.min(maxA, maxB) - Math.max(minA, minB);
+                    if (overlap <= 0) return null; // eje separador -> no chocan
+                    if (overlap < minOverlap) { minOverlap = overlap; smallestAxis = { x: nx, y: ny }; }
+                }
+            }
+            return { axis: smallestAxis, overlap: minOverlap };
+        }
+
+        // ¿La herramienta choca con alguna otra?
+        function toolHasCollision(tool) {
+            const polyA = getCollisionPolygon(tool);
+            for (const other of tools) {
+                if (other.id === tool.id) continue;
+                if (polysCollide(polyA, getCollisionPolygon(other))) return true;
+            }
+            return false;
+        }
+
+        // Empuja la herramienta hacia fuera para que toque pero no se superponga
+        function resolveCollisions(tool) {
+            for (let iter = 0; iter < 6; iter++) {
+                let moved = false;
+                const polyA = getCollisionPolygon(tool);
+                const cA = polyCentroid(polyA);
+                for (const other of tools) {
+                    if (other.id === tool.id) continue;
+                    const polyB = getCollisionPolygon(other);
+                    const res = polysCollide(polyA, polyB);
+                    if (res) {
+                        const cB = polyCentroid(polyB);
+                        let ax = res.axis.x, ay = res.axis.y;
+                        if ((cA.x - cB.x)*ax + (cA.y - cB.y)*ay < 0) { ax = -ax; ay = -ay; }
+                        tool.x += ax * (res.overlap + 0.5);
+                        tool.y += ay * (res.overlap + 0.5);
+                        moved = true;
+                    }
+                }
+                if (!moved) break;
+            }
+        }
+
         function init() {
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
@@ -492,6 +580,7 @@
                         selectedToolId = tools[i].id;
                         isDragging = true;
                         dragOffsetX = x - tools[i].x; dragOffsetY = y - tools[i].y;
+                        lastValidRotation = tools[i].rotation;
                         updateToolsList(); redraw(); return;
                     }
                 }
@@ -499,6 +588,7 @@
             } else if (['ruler','square','triangle','protractor'].includes(currentTool)) {
                 const tool = new DrawingTool(currentTool, x, y, toolIdCounter++);
                 tools.push(tool); selectedToolId = tool.id;
+                resolveCollisions(tool);
                 updateToolsList(); redraw();
             } else if (currentTool === 'pencil') {
                 isDrawing = true;
@@ -548,12 +638,19 @@
                 const tool = tools.find(t => t.id === selectedToolId);
                 if (tool) {
                     if (ctrlPressed) {
+                        const prevRot = tool.rotation;
                         tool.rotation = Math.atan2(y - tool.y, x - tool.x);
+                        if (toolHasCollision(tool)) {
+                            tool.rotation = lastValidRotation; // chocaría: no rotamos más
+                        } else {
+                            lastValidRotation = tool.rotation;
+                        }
                         let deg = Math.round(tool.rotation * 180 / Math.PI); if (deg < 0) deg += 360;
                         const ri = document.getElementById('rotationIndicator');
                         ri.textContent = `Ángulo: ${deg}°`; ri.style.display = 'block';
                     } else {
                         tool.x = x - dragOffsetX; tool.y = y - dragOffsetY;
+                        resolveCollisions(tool); // chocar y deslizar, no superponer
                         document.getElementById('rotationIndicator').style.display = 'none';
                     }
                     redraw();
