@@ -253,8 +253,17 @@
             radius: 0,
             startAngle: 0,
             endAngle: 0,
+            prevRaw: 0,          // último ángulo crudo (atan2)
+            sweep: 0,            // ángulo total barrido (acumulado, puede pasar de 2π)
             drawing: false
         };
+
+        // Normaliza un ángulo al rango (-π, π]
+        function normalizeAngle(a) {
+            while (a > Math.PI) a -= 2*Math.PI;
+            while (a <= -Math.PI) a += 2*Math.PI;
+            return a;
+        }
 
         const toolConfigs = {
             pencil: { name: 'Lápiz', icon: '✏️' },
@@ -554,7 +563,7 @@
             } else if (compass.phase === 'fixed' && !compass.drawing) {
                 el.textContent = `Centro fijado en (${Math.round(compass.cx)}, ${Math.round(compass.cy)}). Arrastra para trazar.`;
             } else if (compass.drawing) {
-                const sweep = Math.abs(compass.endAngle - compass.startAngle) * 180 / Math.PI;
+                const sweep = Math.abs(compass.sweep) * 180 / Math.PI;
                 el.textContent = `Radio: ${Math.round(compass.radius)} px · Arco: ${Math.round(sweep)}°`;
             }
         }
@@ -576,6 +585,8 @@
                     compass.drawing = true;
                     compass.radius = Math.hypot(x - compass.cx, y - compass.cy);
                     compass.startAngle = Math.atan2(y - compass.cy, x - compass.cx);
+                    compass.prevRaw = compass.startAngle;
+                    compass.sweep = 0;
                     compass.endAngle = compass.startAngle;
                     updateCompassReadout();
                     redraw();
@@ -624,8 +635,15 @@
 
             if (currentTool === 'compass') {
                 if (compass.drawing) {
-                    // El radio queda fijado por el punto inicial; vamos barriendo el ángulo
-                    compass.endAngle = Math.atan2(y - compass.cy, x - compass.cx);
+                    // El radio queda fijado por el punto inicial; acumulamos el barrido
+                    const raw = Math.atan2(y - compass.cy, x - compass.cx);
+                    let delta = normalizeAngle(raw - compass.prevRaw);
+                    compass.sweep += delta;
+                    // limitar a una vuelta completa como máximo
+                    if (compass.sweep > 2*Math.PI) compass.sweep = 2*Math.PI;
+                    if (compass.sweep < -2*Math.PI) compass.sweep = -2*Math.PI;
+                    compass.prevRaw = raw;
+                    compass.endAngle = compass.startAngle + compass.sweep;
                     updateCompassReadout();
                     redraw();
                     drawCompassPreview();
@@ -741,7 +759,7 @@
             ctx.strokeStyle = lineColor;
             ctx.lineWidth = lineWidth;
             ctx.beginPath();
-            const ccw = compass.endAngle < compass.startAngle;
+            const ccw = compass.sweep < 0;
             ctx.arc(compass.cx, compass.cy, compass.radius, compass.startAngle, compass.endAngle, ccw);
             ctx.stroke();
 
@@ -783,7 +801,7 @@
             strokeCtx.lineWidth = lineWidth;
             strokeCtx.lineCap = 'round';
             strokeCtx.beginPath();
-            const ccw = compass.endAngle < compass.startAngle;
+            const ccw = compass.sweep < 0;
             strokeCtx.arc(compass.cx, compass.cy, compass.radius, compass.startAngle, compass.endAngle, ccw);
             strokeCtx.stroke();
         }
