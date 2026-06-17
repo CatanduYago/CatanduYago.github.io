@@ -167,6 +167,12 @@
 
             <div class="divider"></div>
 
+            <div class="property-group" id="sizePanel" style="display:none;">
+                <label>Tamaño de la herramienta</label>
+                <input type="range" id="toolScale" min="30" max="350" value="100" step="5" oninput="setToolScale(this.value)">
+                <span style="font-size: 11px; color: #666;"><span id="toolScaleValue">100</span>% &nbsp;·&nbsp; usa + / − del teclado</span>
+            </div>
+
             <div class="property-group" id="compassInfo" style="display:none;">
                 <label>Compás</label>
                 <div style="font-size: 12px; color: #666; background:#fff3ec; padding:8px; border-radius:3px;" id="compassReadout">
@@ -265,20 +271,22 @@
         class DrawingTool {
             constructor(type, x, y, id) {
                 this.type = type; this.x = x; this.y = y; this.rotation = 0; this.id = id;
+                this.scale = 1;
             }
             localVertices() {
+                const k = this.scale;
                 if (this.type === 'ruler') {
-                    const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
+                    const w = toolConfigs.ruler.width*k, h = toolConfigs.ruler.height*k;
                     return [[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];
                 } else if (this.type === 'square') {
-                    const s = toolConfigs.square.size;
+                    const s = toolConfigs.square.size*k;
                     return [[-s/2, s/2],[s/2, s/2],[-s/2, -s/2]];
                 } else if (this.type === 'triangle') {
-                    const w = toolConfigs.triangle.size;
+                    const w = toolConfigs.triangle.size*k;
                     const h = w / Math.sqrt(3);
                     return [[-w/2, h/2],[w/2, h/2],[-w/2, -h/2]];
                 } else if (this.type === 'protractor') {
-                    const r = toolConfigs.protractor.radius;
+                    const r = toolConfigs.protractor.radius*k;
                     return [[-r, 0],[r, 0]];
                 }
                 return [];
@@ -300,7 +308,7 @@
                 const lx = dx*cos - dy*sin, ly = dx*sin + dy*cos;
                 const verts = this.localVertices();
                 if (this.type === 'protractor') {
-                    const r = toolConfigs.protractor.radius;
+                    const r = toolConfigs.protractor.radius*this.scale;
                     return (lx*lx + ly*ly <= r*r) && ly <= 0;
                 }
                 let inside = false;
@@ -321,7 +329,7 @@
                 ctx.lineWidth = 1.5;
                 const verts = this.localVertices();
                 if (this.type === 'protractor') {
-                    const r = toolConfigs.protractor.radius;
+                    const r = toolConfigs.protractor.radius*this.scale;
                     ctx.beginPath();
                     ctx.arc(0, 0, r, Math.PI, 2*Math.PI, false);
                     ctx.lineTo(-r, 0); ctx.closePath(); ctx.fill(); ctx.stroke();
@@ -340,7 +348,7 @@
                     for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0], verts[i][1]);
                     ctx.closePath(); ctx.fill(); ctx.stroke();
                     if (this.type === 'ruler') {
-                        const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
+                        const w = toolConfigs.ruler.width*this.scale, h = toolConfigs.ruler.height*this.scale;
                         for (let i = 0; i <= 20; i++) {
                             const x = -w/2 + (w/20)*i;
                             const len = (i % 5 === 0) ? 8 : 4;
@@ -398,7 +406,7 @@
         // Polígono convexo de colisión en coordenadas globales
         function getCollisionPolygon(tool) {
             if (tool.type === 'protractor') {
-                const r = toolConfigs.protractor.radius;
+                const r = toolConfigs.protractor.radius*tool.scale;
                 const pts = [];
                 const N = 14;
                 for (let i = 0; i <= N; i++) {
@@ -517,6 +525,7 @@
             document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
             canvas.style.cursor = (tool === 'select') ? 'move' : 'crosshair';
             document.getElementById('compassInfo').style.display = (tool === 'compass') ? 'flex' : 'none';
+            if (tool !== 'select') { showSizePanel(null); }
             if (tool !== 'compass') { compass.phase = 'idle'; compass.drawing = false; redraw(); }
             updateInstructions();
             updateCompassReadout();
@@ -581,14 +590,16 @@
                         isDragging = true;
                         dragOffsetX = x - tools[i].x; dragOffsetY = y - tools[i].y;
                         lastValidRotation = tools[i].rotation;
+                        showSizePanel(tools[i]);
                         updateToolsList(); redraw(); return;
                     }
                 }
-                selectedToolId = null; updateToolsList(); redraw();
+                selectedToolId = null; showSizePanel(null); updateToolsList(); redraw();
             } else if (['ruler','square','triangle','protractor'].includes(currentTool)) {
                 const tool = new DrawingTool(currentTool, x, y, toolIdCounter++);
                 tools.push(tool); selectedToolId = tool.id;
                 resolveCollisions(tool);
+                showSizePanel(tool);
                 updateToolsList(); redraw();
             } else if (currentTool === 'pencil') {
                 isDrawing = true;
@@ -790,6 +801,8 @@
             if (e.ctrlKey && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); undoAction(); }
             if (e.ctrlKey && (e.key === 'y' || e.key === 'Y')) { e.preventDefault(); redoAction(); }
             if (e.key === 'Escape' && currentTool === 'compass') { resetCompass(); }
+            if ((e.key === '+' || e.key === '=') && selectedToolId !== null) { e.preventDefault(); nudgeScale(10); }
+            if ((e.key === '-' || e.key === '_') && selectedToolId !== null) { e.preventDefault(); nudgeScale(-10); }
             if ((e.key === 'Delete' || e.key === 'Backspace') && selectedToolId !== null && currentTool === 'select') {
                 e.preventDefault(); deleteSelected();
             }
@@ -860,8 +873,41 @@
             if (selectedToolId !== null) {
                 const i = tools.findIndex(t => t.id === selectedToolId);
                 if (i >= 0) tools.splice(i, 1);
-                selectedToolId = null; updateToolsList(); redraw();
+                selectedToolId = null; showSizePanel(null); updateToolsList(); redraw();
             }
+        }
+
+        function showSizePanel(tool) {
+            const panel = document.getElementById('sizePanel');
+            if (tool) {
+                panel.style.display = 'flex';
+                const pct = Math.round(tool.scale * 100);
+                document.getElementById('toolScale').value = pct;
+                document.getElementById('toolScaleValue').textContent = pct;
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        function setToolScale(val) {
+            const tool = tools.find(t => t.id === selectedToolId);
+            if (!tool) return;
+            tool.scale = parseInt(val) / 100;
+            document.getElementById('toolScaleValue').textContent = val;
+            resolveCollisions(tool);
+            redraw();
+        }
+
+        function nudgeScale(delta) {
+            const tool = tools.find(t => t.id === selectedToolId);
+            if (!tool) return;
+            let pct = Math.round(tool.scale * 100) + delta;
+            pct = Math.max(30, Math.min(350, pct));
+            tool.scale = pct / 100;
+            document.getElementById('toolScale').value = pct;
+            document.getElementById('toolScaleValue').textContent = pct;
+            resolveCollisions(tool);
+            redraw();
         }
         function clearTools() {
             if (tools.length && confirm('¿Quitar todas las reglas/escuadras?')) {
