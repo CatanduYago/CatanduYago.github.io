@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujo Técnico Pro - Herramientas Profesionales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .zoom-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 4px;
+        }
+
+        .zoom-control button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 14px;
+            color: #1e3c72;
+        }
+
+        .zoom-control button:hover {
+            background: #e0e0e0;
+            border-radius: 3px;
+        }
+
+        .zoom-value {
+            min-width: 45px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 13px;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            gap: 10px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .toolbar {
+            width: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .toolbar-btn {
+            width: 100%;
+            height: 50px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .toolbar-btn:hover {
+            border-color: #1e3c72;
+            background: #f8f8f8;
+        }
+
+        .toolbar-btn.active {
+            background: #1e3c72;
+            color: white;
+            border-color: #1e3c72;
+        }
+
+        .toolbar-btn span {
+            position: absolute;
+            bottom: -22px;
+            font-size: 11px;
+            white-space: nowrap;
+            background: #333;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .toolbar-btn:hover span {
+            opacity: 1;
+        }
+
+        .properties-panel {
+            width: 220px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .property-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .property-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e3c72;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .property-group input[type="color"] {
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .property-group input[type="range"],
+        .property-group input[type="number"] {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .property-group select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #ddd;
+        }
+
+        .canvas-container {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            cursor: crosshair;
+            background: white;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 6px;
+        }
+
+        .button-group button {
+            flex: 1;
+            padding: 8px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .button-group button:hover {
+            background: #2a5298;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: normal;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .status-bar {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            max-width: 500px;
+        }
+
+        .info-text {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+            background: #f5f5f5;
+            padding: 8px;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e3c72;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2a5298;
+        }
+
+        .rotation-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📐 Dibujo Técnico Pro</h1>
+        <div class="header-controls">
+            <div class="zoom-control">
+                <button onclick="zoomOut()">−</button>
+                <div class="zoom-value" id="zoomValue">100%</div>
+                <button onclick="zoomIn()">+</button>
+                <button onclick="resetZoom()" style="font-size: 11px;">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="toolbar" id="toolbar">
+            <button class="toolbar-btn active" data-tool="pencil" onclick="selectTool('pencil')">
+                ✏️
+                <span>Lápiz</span>
+            </button>
+            <button class="toolbar-btn" data-tool="ruler" onclick="selectTool('ruler')">
+                📏
+                <span>Regla</span>
+            </button>
+            <button class="toolbar-btn" data-tool="square" onclick="selectTool('square')">
+                📐
+                <span>Escuadra</span>
+            </button>
+            <button class="toolbar-btn" data-tool="triangle" onclick="selectTool('triangle')">
+                🔺
+                <span>Cartabón</span>
+            </button>
+            <button class="toolbar-btn" data-tool="protractor" onclick="selectTool('protractor')">
+                📊
+                <span>Transportador</span>
+            </button>
+            <button class="toolbar-btn" data-tool="select" onclick="selectTool('select')">
+                👆
+                <span>Seleccionar</span>
+            </button>
+            <button class="toolbar-btn" data-tool="eraser" onclick="selectTool('eraser')">
+                🧹
+                <span>Borrador</span>
+            </button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+            <div class="status-bar" id="statusBar">Herramienta: Lápiz | CTRL+Z: Deshacer | Presiona SHIFT para forzar línea recta</div>
+            <div class="rotation-indicator" id="rotationIndicator" style="display: none;"></div>
+        </div>
+
+        <div class="properties-panel">
+            <div>
+                <h3 style="font-size: 14px; color: #1e3c72; margin-bottom: 8px;">Propiedades</h3>
+            </div>
+
+            <div class="property-group">
+                <label>Color de línea</label>
+                <input type="color" id="colorPicker" value="#000000" onchange="updateColor()">
+            </div>
+
+            <div class="property-group">
+                <label>Grosor</label>
+                <input type="range" id="lineWidth" min="0.5" max="15" value="2" step="0.5" onchange="updateLineWidth()">
+                <span style="font-size: 11px; color: #666;">
+                    <span id="lineWidthValue">2</span> px
+                </span>
+            </div>
+
+            <div class="property-group">
+                <label>Opacidad</label>
+                <input type="range" id="opacity" min="0" max="100" value="100" step="5" onchange="updateOpacity()">
+                <span style="font-size: 11px; color: #666;">
+                    <span id="opacityValue">100</span>%
+                </span>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="gridToggle" onchange="toggleGrid()">
+                <label for="gridToggle">Cuadrícula</label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="property-group">
+                <label>Herramientas en el lienzo</label>
+                <div id="toolsList" style="font-size: 12px; color: #666; background: #f5f5f5; padding: 8px; border-radius: 3px; max-height: 100px; overflow-y: auto;">
+                    <div style="color: #999;">Ninguna herramienta colocada</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="info-text" id="instructions">
+                Selecciona una herramienta de la izquierda. Haz clic en el lienzo para colocarla. Usa CTRL para rotar.
+            </div>
+
+            <div class="button-group">
+                <button onclick="undoAction()">↶ Deshacer</button>
+                <button onclick="redoAction()">↷ Rehacer</button>
+            </div>
+
+            <div class="button-group">
+                <button onclick="clearTools()" style="background: #ff6b6b;">🗑️ Limpiar herramientas</button>
+            </div>
+
+            <div class="button-group">
+                <button onclick="clearCanvas()" style="background: #c41e3a;">✕ Limpiar todo</button>
+            </div>
+
+            <div class="button-group">
+                <button onclick="downloadDrawing()" style="background: #28a745;">⬇️ Descargar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let currentTool = 'pencil';
+        let isDrawing = false;
+        let startX = 0;
+        let startY = 0;
+        let zoom = 1;
+        let showGrid = false;
+        let shiftPressed = false;
+        let ctrlPressed = false;
+        let isDragging = false;
+        let selectedToolId = null;
+        
+        let lineWidth = 2;
+        let lineColor = '#000000';
+        let opacity = 1;
+
+        // Historia
+        const history = [];
+        let historyStep = -1;
+
+        // Herramientas en el lienzo
+        const tools = [];
+        let toolIdCounter = 0;
+
+        // Configuración de herramientas
+        const toolConfigs = {
+            pencil: { name: 'Lápiz', icon: '✏️' },
+            ruler: { name: 'Regla', icon: '📏', width: 400, height: 40 },
+            square: { name: 'Escuadra 45-45-90', icon: '📐', width: 200, height: 200 },
+            triangle: { name: 'Cartabón 30-60-90', icon: '🔺', width: 250, height: 140 },
+            protractor: { name: 'Transportador', icon: '📊', width: 200, height: 100 },
+            select: { name: 'Seleccionar', icon: '👆' },
+            eraser: { name: 'Borrador', icon: '🧹' }
+        };
+
+        class DrawingTool {
+            constructor(type, x, y, id) {
+                this.type = type;
+                this.x = x;
+                this.y = y;
+                this.rotation = 0;
+                this.id = id;
+                this.width = toolConfigs[type].width || 100;
+                this.height = toolConfigs[type].height || 100;
+            }
+
+            isPointInside(px, py) {
+                const cos = Math.cos(-this.rotation);
+                const sin = Math.sin(-this.rotation);
+                const dx = px - this.x;
+                const dy = py - this.y;
+                const localX = dx * cos - dy * sin;
+                const localY = dx * sin + dy * cos;
+                return Math.abs(localX) <= this.width/2 && Math.abs(localY) <= this.height/2;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.strokeStyle = '#FF6B35';
+                ctx.fillStyle = 'rgba(255, 107, 53, 0.05)';
+                ctx.lineWidth = 2;
+
+                if (this.type === 'ruler') {
+                    ctx.fillRect(-this.width/2, -this.height/2, this.width, this.height);
+                    ctx.strokeRect(-this.width/2, -this.height/2, this.width, this.height);
+                    
+                    // Marcas
+                    for (let i = 0; i <= 10; i++) {
+                        const x = -this.width/2 + (this.width / 10) * i;
+                        ctx.beginPath();
+                        ctx.moveTo(x, -this.height/2);
+                        ctx.lineTo(x, -this.height/2 - 5);
+                        ctx.stroke();
+                    }
+                } else if (this.type === 'square') {
+                    ctx.fillRect(-this.width/2, -this.height/2, this.width, this.height);
+                    ctx.strokeRect(-this.width/2, -this.height/2, this.width, this.height);
+                } else if (this.type === 'triangle') {
+                    ctx.beginPath();
+                    ctx.moveTo(-this.width/2, this.height/2);
+                    ctx.lineTo(this.width/2, this.height/2);
+                    ctx.lineTo(-this.width/2, -this.height/2);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                } else if (this.type === 'protractor') {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.width/2, 0, Math.PI, false);
+                    ctx.lineTo(-this.width/2, 0);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                // Punto central
+                ctx.fillStyle = '#FF6B35';
+                ctx.beginPath();
+                ctx.arc(0, 0, 4, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+
+                // Indicador de selección
+                if (this.id === selectedToolId) {
+                    ctx.strokeStyle = '#0099FF';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.strokeRect(this.x - this.width/2 - 5, this.y - this.height/2 - 5, 
+                                   this.width + 10, this.height + 10);
+                    ctx.setLineDash([]);
+                }
+            }
+        }
+
+        function init() {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            canvas.addEventListener('mousedown', handleMouseDown);
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mouseup', handleMouseUp);
+            canvas.addEventListener('mouseout', handleMouseUp);
+            canvas.addEventListener('wheel', handleWheel, { passive: false });
+            window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('keyup', handleKeyUp);
+            
+            saveHistory();
+            redraw();
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            redraw();
+        }
+
+        function selectTool(tool) {
+            currentTool = tool;
+            document.querySelectorAll('.toolbar-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
+            updateStatusBar();
+            updateInstructions();
+        }
+
+        function updateStatusBar() {
+            const toolName = toolConfigs[currentTool]?.name || currentTool;
+            document.getElementById('statusBar').textContent = 
+                `Herramienta: ${toolName} | CTRL+Z: Deshacer | ${currentTool === 'select' ? 'CTRL: Rotar' : 'SHIFT: Línea recta'}`;
+        }
+
+        function updateInstructions() {
+            const instructionsDiv = document.getElementById('instructions');
+            let text = '';
+            
+            switch(currentTool) {
+                case 'pencil':
+                    text = 'Dibuja líneas libres. SHIFT para línea recta.';
+                    break;
+                case 'ruler':
+                case 'square':
+                case 'triangle':
+                case 'protractor':
+                    text = `Haz clic para colocar ${toolConfigs[currentTool].name.toLowerCase()}. CTRL para rotar.`;
+                    break;
+                case 'select':
+                    text = 'Selecciona una herramienta. CTRL+Arrastra para rotar.';
+                    break;
+                case 'eraser':
+                    text = 'Borra partes del dibujo.';
+                    break;
+            }
+            
+            instructionsDiv.textContent = text;
+        }
+
+        function handleMouseDown(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / zoom;
+            const y = (e.clientY - rect.top) / zoom;
+
+            if (currentTool === 'select') {
+                // Buscar herramienta para seleccionar
+                for (let tool of tools) {
+                    if (tool.isPointInside(x, y)) {
+                        selectedToolId = tool.id;
+                        if (ctrlPressed) {
+                            isDragging = true;
+                        } else {
+                            isDragging = true;
+                        }
+                        redraw();
+                        return;
+                    }
+                }
+                selectedToolId = null;
+                redraw();
+            } else if (['ruler', 'square', 'triangle', 'protractor'].includes(currentTool)) {
+                // Colocar herramienta
+                const tool = new DrawingTool(currentTool, x, y, toolIdCounter++);
+                tools.push(tool);
+                selectedToolId = tool.id;
+                updateToolsList();
+                redraw();
+                saveHistory();
+            } else if (currentTool === 'pencil') {
+                startX = x;
+                startY = y;
+                isDrawing = true;
+                ctx.globalAlpha = opacity;
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = lineWidth;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            } else if (currentTool === 'eraser') {
+                isDrawing = true;
+                ctx.clearRect(x - lineWidth, y - lineWidth, lineWidth * 2, lineWidth * 2);
+            }
+        }
+
+        function handleMouseMove(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / zoom;
+            const y = (e.clientY - rect.top) / zoom;
+
+            if (currentTool === 'select' && selectedToolId !== null && isDragging) {
+                const tool = tools.find(t => t.id === selectedToolId);
+                if (tool) {
+                    if (ctrlPressed) {
+                        // Rotar
+                        tool.rotation = Math.atan2(y - tool.y, x - tool.x);
+                        const angle = Math.round((tool.rotation * 180 / Math.PI) % 360);
+                        document.getElementById('rotationIndicator').textContent = `Ángulo: ${angle}°`;
+                        document.getElementById('rotationIndicator').style.display = 'block';
+                    } else {
+                        // Mover
+                        tool.x = x;
+                        tool.y = y;
+                        document.getElementById('rotationIndicator').style.display = 'none';
+                    }
+                    redraw();
+                }
+            } else if (currentTool === 'pencil' && isDrawing) {
+                let drawX = x;
+                let drawY = y;
+
+                if (shiftPressed) {
+                    // Forzar línea recta
+                    const dx = drawX - startX;
+                    const dy = drawY - startY;
+                    const angle = Math.atan2(dy, dx);
+                    const dist = Math.hypot(dx, dy);
+                    drawX = startX + Math.cos(angle) * dist;
+                    drawY = startY + Math.sin(angle) * dist;
+                    
+                    redraw();
+                    ctx.globalAlpha = opacity;
+                    ctx.strokeStyle = lineColor;
+                    ctx.lineWidth = lineWidth;
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(drawX, drawY);
+                    ctx.stroke();
+                } else {
+                    ctx.lineTo(drawX, drawY);
+                    ctx.stroke();
+                }
+            } else if (currentTool === 'eraser' && isDrawing) {
+                ctx.clearRect(x - lineWidth, y - lineWidth, lineWidth * 2, lineWidth * 2);
+            }
+        }
+
+        function handleMouseUp(e) {
+            if (currentTool === 'pencil' || currentTool === 'eraser') {
+                isDrawing = false;
+                ctx.globalAlpha = 1;
+                saveHistory();
+                redraw();
+            }
+            if (currentTool === 'select') {
+                isDragging = false;
+                document.getElementById('rotationIndicator').style.display = 'none';
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Shift') shiftPressed = true;
+            if (e.key === 'Control') ctrlPressed = true;
+            
+            if (e.ctrlKey && e.key === 'z') {
+                e.preventDefault();
+                undoAction();
+            }
+        }
+
+        function handleKeyUp(e) {
+            if (e.key === 'Shift') shiftPressed = false;
+            if (e.key === 'Control') ctrlPressed = false;
+        }
+
+        function redraw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (showGrid) {
+                drawGrid();
+            }
+
+            // Dibujar historia
+            if (history[historyStep]) {
+                const imageData = ctx.createImageData(canvas.width, canvas.height);
+                imageData.data.set(history[historyStep]);
+                ctx.putImageData(imageData, 0, 0);
+            }
+
+            // Dibujar herramientas
+            ctx.globalAlpha = 1;
+            tools.forEach(tool => tool.draw(ctx));
+        }
+
+        function drawGrid() {
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 0.5;
+            const gridSize = 20;
+
+            for (let x = 0; x < canvas.width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            for (let y = 0; y < canvas.height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        function updateColor() {
+            lineColor = document.getElementById('colorPicker').value;
+        }
+
+        function updateLineWidth() {
+            lineWidth = parseFloat(document.getElementById('lineWidth').value);
+            document.getElementById('lineWidthValue').textContent = lineWidth;
+        }
+
+        function updateOpacity() {
+            opacity = parseInt(document.getElementById('opacity').value) / 100;
+            document.getElementById('opacityValue').textContent = document.getElementById('opacity').value;
+        }
+
+        function toggleGrid() {
+            showGrid = document.getElementById('gridToggle').checked;
+            redraw();
+        }
+
+        function updateToolsList() {
+            const toolsList = document.getElementById('toolsList');
+            if (tools.length === 0) {
+                toolsList.innerHTML = '<div style="color: #999;">Ninguna herramienta colocada</div>';
+            } else {
+                toolsList.innerHTML = tools.map((t, i) => 
+                    `<div style="padding: 4px 0; border-bottom: 1px solid #ddd;">
+                        ${t.id === selectedToolId ? '✓ ' : '  '}${toolConfigs[t.type].icon} ${toolConfigs[t.type].name}
+                    </div>`
+                ).join('');
+            }
+        }
+
+        function saveHistory() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            historyStep++;
+            if (historyStep < history.length) {
+                history.length = historyStep;
+            }
+            history.push(imageData.data.slice());
+        }
+
+        function undoAction() {
+            if (historyStep > 0) {
+                historyStep--;
+                redraw();
+            }
+        }
+
+        function redoAction() {
+            if (historyStep < history.length - 1) {
+                historyStep++;
+                redraw();
+            }
+        }
+
+        function clearTools() {
+            if (confirm('¿Eliminar todas las herramientas?')) {
+                tools.length = 0;
+                selectedToolId = null;
+                updateToolsList();
+                redraw();
+                saveHistory();
+            }
+        }
+
+        function clearCanvas() {
+            if (confirm('¿Borrar todo el dibujo y herramientas?')) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                tools.length = 0;
+                selectedToolId = null;
+                updateToolsList();
+                saveHistory();
+                redraw();
+            }
+        }
+
+        function downloadDrawing() {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'dibujo-tecnico.png';
+            link.click();
+        }
+
+        function zoomIn() {
+            zoom = Math.min(zoom + 0.1, 3);
+            updateZoomDisplay();
+            redraw();
+        }
+
+        function zoomOut() {
+            zoom = Math.max(zoom - 0.1, 0.5);
+            updateZoomDisplay();
+            redraw();
+        }
+
+        function resetZoom() {
+            zoom = 1;
+            updateZoomDisplay();
+            redraw();
+        }
+
+        function updateZoomDisplay() {
+            document.getElementById('zoomValue').textContent = Math.round(zoom * 100) + '%';
+        }
+
+        function handleWheel(e) {
+            e.preventDefault();
+            if (e.ctrlKey) {
+                if (e.deltaY > 0) {
+                    zoomOut();
+                } else {
+                    zoomIn();
+                }
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
