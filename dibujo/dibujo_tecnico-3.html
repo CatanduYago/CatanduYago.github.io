@@ -122,6 +122,7 @@
             <button class="toolbar-btn" data-tool="ruler" onclick="selectTool('ruler')">📏<span>Regla</span></button>
             <button class="toolbar-btn" data-tool="square" onclick="selectTool('square')">📐<span>Escuadra</span></button>
             <button class="toolbar-btn" data-tool="triangle" onclick="selectTool('triangle')">🔺<span>Cartabón</span></button>
+            <button class="toolbar-btn" data-tool="compass" onclick="selectTool('compass')">⭕<span>Compás</span></button>
             <button class="toolbar-btn" data-tool="protractor" onclick="selectTool('protractor')">📊<span>Transportador</span></button>
             <button class="toolbar-btn" data-tool="select" onclick="selectTool('select')">👆<span>Mover/Rotar</span></button>
             <button class="toolbar-btn" data-tool="eraser" onclick="selectTool('eraser')">🧹<span>Borrador</span></button>
@@ -165,6 +166,14 @@
             </div>
 
             <div class="divider"></div>
+
+            <div class="property-group" id="compassInfo" style="display:none;">
+                <label>Compás</label>
+                <div style="font-size: 12px; color: #666; background:#fff3ec; padding:8px; border-radius:3px;" id="compassReadout">
+                    Pata sin fijar
+                </div>
+                <button onclick="resetCompass()" style="margin-top:4px; padding:6px; background:#FF6B35; color:white; border:none; border-radius:4px; cursor:pointer; font-size:12px;">Soltar pata fija</button>
+            </div>
 
             <div class="property-group">
                 <label>Herramientas en lienzo</label>
@@ -219,103 +228,89 @@
         let lineWidth = 2;
         let lineColor = '#000000';
 
-        // Capa de trazos permanentes (dibujados por el usuario)
+        // Capa de trazos permanentes
         let strokeCanvas = document.createElement('canvas');
         let strokeCtx = strokeCanvas.getContext('2d');
 
-        // Historia (snapshots de la capa de trazos)
         const history = [];
         let historyStep = -1;
 
         const tools = [];
         let toolIdCounter = 0;
 
+        // ---------- Estado del compás ----------
+        // Fases: 'idle' -> esperando fijar pata | 'fixed' -> pata fija, esperando dibujar arco
+        let compass = {
+            phase: 'idle',
+            cx: 0, cy: 0,        // centro (pata fija)
+            radius: 0,
+            startAngle: 0,
+            endAngle: 0,
+            drawing: false
+        };
+
         const toolConfigs = {
             pencil: { name: 'Lápiz', icon: '✏️' },
             ruler: { name: 'Regla', icon: '📏', width: 420, height: 44 },
             square: { name: 'Escuadra 45°', icon: '📐', size: 220 },
             triangle: { name: 'Cartabón 30/60°', icon: '🔺', size: 280 },
+            compass: { name: 'Compás', icon: '⭕' },
             protractor: { name: 'Transportador', icon: '📊', radius: 110 },
             select: { name: 'Mover/Rotar', icon: '👆' },
             eraser: { name: 'Borrador', icon: '🧹' }
         };
 
-        // ---------- Clase Herramienta ----------
+        // ---------- Clase Herramienta (reglas, escuadras...) ----------
         class DrawingTool {
             constructor(type, x, y, id) {
-                this.type = type;
-                this.x = x;
-                this.y = y;
-                this.rotation = 0;
-                this.id = id;
+                this.type = type; this.x = x; this.y = y; this.rotation = 0; this.id = id;
             }
-
-            // Devuelve los vértices en coordenadas LOCALES (sin rotar/trasladar)
             localVertices() {
                 if (this.type === 'ruler') {
                     const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
                     return [[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];
                 } else if (this.type === 'square') {
-                    // triángulo rectángulo isósceles 45-45-90
                     const s = toolConfigs.square.size;
                     return [[-s/2, s/2],[s/2, s/2],[-s/2, -s/2]];
                 } else if (this.type === 'triangle') {
-                    // cartabón 30-60-90
                     const w = toolConfigs.triangle.size;
-                    const h = w / Math.sqrt(3); // relación 30/60/90
+                    const h = w / Math.sqrt(3);
                     return [[-w/2, h/2],[w/2, h/2],[-w/2, -h/2]];
                 } else if (this.type === 'protractor') {
-                    // semicírculo: aproximamos con borde recto (diámetro)
                     const r = toolConfigs.protractor.radius;
                     return [[-r, 0],[r, 0]];
                 }
                 return [];
             }
-
-            // Transforma un punto local a global
             toGlobal(lx, ly) {
                 const cos = Math.cos(this.rotation), sin = Math.sin(this.rotation);
                 return [this.x + lx*cos - ly*sin, this.y + lx*sin + ly*cos];
             }
-
-            // Devuelve los segmentos de borde en coordenadas GLOBALES
             edges() {
                 const verts = this.localVertices().map(v => this.toGlobal(v[0], v[1]));
                 const segs = [];
-                if (this.type === 'protractor') {
-                    // sólo el diámetro
-                    segs.push([verts[0], verts[1]]);
-                    return segs;
-                }
-                for (let i = 0; i < verts.length; i++) {
-                    segs.push([verts[i], verts[(i+1) % verts.length]]);
-                }
+                if (this.type === 'protractor') { segs.push([verts[0], verts[1]]); return segs; }
+                for (let i = 0; i < verts.length; i++) segs.push([verts[i], verts[(i+1) % verts.length]]);
                 return segs;
             }
-
-            // Bounding box aproximado para detección de clic
             isPointInside(px, py) {
                 const cos = Math.cos(-this.rotation), sin = Math.sin(-this.rotation);
                 const dx = px - this.x, dy = py - this.y;
-                const lx = dx*cos - dy*sin;
-                const ly = dx*sin + dy*cos;
+                const lx = dx*cos - dy*sin, ly = dx*sin + dy*cos;
                 const verts = this.localVertices();
                 if (this.type === 'protractor') {
                     const r = toolConfigs.protractor.radius;
                     return (lx*lx + ly*ly <= r*r) && ly <= 0;
                 }
-                // test point-in-polygon
                 let inside = false;
                 for (let i = 0, j = verts.length-1; i < verts.length; j = i++) {
                     const xi = verts[i][0], yi = verts[i][1];
                     const xj = verts[j][0], yj = verts[j][1];
-                    const intersect = ((yi > ly) !== (yj > ly)) &&
-                        (lx < (xj-xi)*(ly-yi)/(yj-yi)+xi);
+                    const intersect = ((yi > ly) !== (yj > ly)) && (lx < (xj-xi)*(ly-yi)/(yj-yi)+xi);
                     if (intersect) inside = !inside;
                 }
                 return inside;
             }
-
             draw(ctx) {
                 ctx.save();
                 ctx.translate(this.x, this.y);
@@ -323,122 +318,80 @@
                 ctx.strokeStyle = '#FF6B35';
                 ctx.fillStyle = 'rgba(255,107,53,0.07)';
                 ctx.lineWidth = 1.5;
-
                 const verts = this.localVertices();
-
                 if (this.type === 'protractor') {
                     const r = toolConfigs.protractor.radius;
                     ctx.beginPath();
                     ctx.arc(0, 0, r, Math.PI, 2*Math.PI, false);
-                    ctx.lineTo(-r, 0);
-                    ctx.closePath();
-                    ctx.fill();
-                    ctx.stroke();
-                    // marcas de grados
-                    ctx.fillStyle = '#FF6B35';
-                    ctx.font = '9px Arial';
-                    ctx.textAlign = 'center';
+                    ctx.lineTo(-r, 0); ctx.closePath(); ctx.fill(); ctx.stroke();
+                    ctx.fillStyle = '#FF6B35'; ctx.font = '9px Arial'; ctx.textAlign = 'center';
                     for (let a = 0; a <= 180; a += 10) {
                         const rad = a * Math.PI / 180;
                         const x1 = -Math.cos(rad)*r, y1 = -Math.sin(rad)*r;
                         const len = (a % 30 === 0) ? 10 : 5;
                         const x2 = -Math.cos(rad)*(r-len), y2 = -Math.sin(rad)*(r-len);
                         ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
-                        if (a % 30 === 0) {
-                            ctx.fillText(a+'°', -Math.cos(rad)*(r-20), -Math.sin(rad)*(r-20)+3);
-                        }
+                        if (a % 30 === 0) ctx.fillText(a+'°', -Math.cos(rad)*(r-20), -Math.sin(rad)*(r-20)+3);
                     }
                 } else {
                     ctx.beginPath();
                     ctx.moveTo(verts[0][0], verts[0][1]);
                     for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0], verts[i][1]);
-                    ctx.closePath();
-                    ctx.fill();
-                    ctx.stroke();
-
-                    // marcas en la regla
+                    ctx.closePath(); ctx.fill(); ctx.stroke();
                     if (this.type === 'ruler') {
                         const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
                         for (let i = 0; i <= 20; i++) {
                             const x = -w/2 + (w/20)*i;
                             const len = (i % 5 === 0) ? 8 : 4;
-                            ctx.beginPath();
-                            ctx.moveTo(x, -h/2);
-                            ctx.lineTo(x, -h/2 + len);
-                            ctx.stroke();
+                            ctx.beginPath(); ctx.moveTo(x, -h/2); ctx.lineTo(x, -h/2 + len); ctx.stroke();
                         }
                     }
-                    // etiquetas de ángulo en escuadra/cartabón
                     if (this.type === 'square' || this.type === 'triangle') {
-                        ctx.fillStyle = '#FF6B35';
-                        ctx.font = 'bold 11px Arial';
-                        ctx.textAlign = 'center';
-                        const label = this.type === 'square' ? '45°' : '30/60°';
-                        ctx.fillText(label, 0, 0);
+                        ctx.fillStyle = '#FF6B35'; ctx.font = 'bold 11px Arial'; ctx.textAlign = 'center';
+                        ctx.fillText(this.type === 'square' ? '45°' : '30/60°', 0, 0);
                     }
                 }
-
-                // punto central (pivote)
                 ctx.fillStyle = '#FF6B35';
-                ctx.beginPath();
-                ctx.arc(0, 0, 4, 0, Math.PI*2);
-                ctx.fill();
+                ctx.beginPath(); ctx.arc(0, 0, 4, 0, Math.PI*2); ctx.fill();
                 ctx.restore();
-
-                // selección
                 if (this.id === selectedToolId) {
                     const gverts = verts.map(v => this.toGlobal(v[0], v[1]));
-                    ctx.strokeStyle = '#0099FF';
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([6,4]);
-                    ctx.beginPath();
-                    ctx.moveTo(gverts[0][0], gverts[0][1]);
+                    ctx.strokeStyle = '#0099FF'; ctx.lineWidth = 2; ctx.setLineDash([6,4]);
+                    ctx.beginPath(); ctx.moveTo(gverts[0][0], gverts[0][1]);
                     for (let i = 1; i < gverts.length; i++) ctx.lineTo(gverts[i][0], gverts[i][1]);
                     if (this.type !== 'protractor') ctx.closePath();
-                    ctx.stroke();
-                    ctx.setLineDash([]);
+                    ctx.stroke(); ctx.setLineDash([]);
                 }
             }
         }
 
-        // ---------- Geometría: proyección y snapping ----------
-        // Proyecta el punto P sobre el segmento AB, devuelve {x, y, dist, t}
+        // ---------- Geometría ----------
         function projectPointOnSegment(px, py, ax, ay, bx, by) {
-            const abx = bx - ax, aby = by - ay;
-            const apx = px - ax, apy = py - ay;
+            const abx = bx-ax, aby = by-ay, apx = px-ax, apy = py-ay;
             const abLen2 = abx*abx + aby*aby;
-            let t = abLen2 === 0 ? 0 : (apx*abx + apy*aby) / abLen2;
+            let t = abLen2 === 0 ? 0 : (apx*abx + apy*aby)/abLen2;
             t = Math.max(0, Math.min(1, t));
-            const cx = ax + abx*t, cy = ay + aby*t;
-            const dist = Math.hypot(px - cx, py - cy);
-            return { x: cx, y: cy, dist, t, abx, aby };
+            const cx = ax+abx*t, cy = ay+aby*t;
+            return { x: cx, y: cy, dist: Math.hypot(px-cx, py-cy), t };
         }
-
-        // Encuentra el borde más cercano a un punto dentro de snapDistance
         function findNearestEdge(px, py) {
             let best = null;
             for (const tool of tools) {
                 for (const [a, b] of tool.edges()) {
                     const proj = projectPointOnSegment(px, py, a[0], a[1], b[0], b[1]);
-                    if (proj.dist <= snapDistance && (!best || proj.dist < best.proj.dist)) {
+                    if (proj.dist <= snapDistance && (!best || proj.dist < best.proj.dist))
                         best = { tool, a, b, proj };
-                    }
                 }
             }
             return best;
         }
-
-        // Dado un punto y un borde, devuelve el punto proyectado SOBRE la recta infinita del borde
         function projectOntoLine(px, py, ax, ay, bx, by) {
-            const abx = bx - ax, aby = by - ay;
-            const apx = px - ax, apy = py - ay;
+            const abx = bx-ax, aby = by-ay, apx = px-ax, apy = py-ay;
             const abLen2 = abx*abx + aby*aby;
-            const t = abLen2 === 0 ? 0 : (apx*abx + apy*aby) / abLen2;
-            return { x: ax + abx*t, y: ay + aby*t };
+            const t = abLen2 === 0 ? 0 : (apx*abx + apy*aby)/abLen2;
+            return { x: ax+abx*t, y: ay+aby*t };
         }
-
-        // ---------- Estado de dibujo con snap ----------
-        let activeEdge = null; // borde al que está "pegado" el trazo actual
+        let activeEdge = null;
 
         function init() {
             resizeCanvas();
@@ -453,30 +406,21 @@
             saveHistory();
             redraw();
         }
-
         function resizeCanvas() {
-            const container = canvas.parentElement;
-            canvas.width = container.clientWidth;
-            canvas.height = container.clientHeight;
-            strokeCanvas.width = canvas.width;
-            strokeCanvas.height = canvas.height;
-            // restaurar historia tras resize
+            const c = canvas.parentElement;
+            canvas.width = c.clientWidth; canvas.height = c.clientHeight;
+            strokeCanvas.width = canvas.width; strokeCanvas.height = canvas.height;
             if (history[historyStep]) {
                 const img = strokeCtx.createImageData(strokeCanvas.width, strokeCanvas.height);
                 if (history[historyStep].length === img.data.length) {
-                    img.data.set(history[historyStep]);
-                    strokeCtx.putImageData(img, 0, 0);
+                    img.data.set(history[historyStep]); strokeCtx.putImageData(img, 0, 0);
                 }
             }
             redraw();
         }
-
         function getMousePos(e) {
             const rect = canvas.getBoundingClientRect();
-            return {
-                x: (e.clientX - rect.left) / zoom,
-                y: (e.clientY - rect.top) / zoom
-            };
+            return { x: (e.clientX-rect.left)/zoom, y: (e.clientY-rect.top)/zoom };
         }
 
         function selectTool(tool) {
@@ -484,7 +428,10 @@
             document.querySelectorAll('.toolbar-btn').forEach(b => b.classList.remove('active'));
             document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
             canvas.style.cursor = (tool === 'select') ? 'move' : 'crosshair';
+            document.getElementById('compassInfo').style.display = (tool === 'compass') ? 'flex' : 'none';
+            if (tool !== 'compass') { compass.phase = 'idle'; compass.drawing = false; redraw(); }
             updateInstructions();
+            updateCompassReadout();
         }
 
         function updateInstructions() {
@@ -494,6 +441,7 @@
                 ruler: 'Haz clic para colocar la regla. Luego usa Mover/Rotar para ajustarla.',
                 square: 'Haz clic para colocar la escuadra (45°). Luego ajústala con Mover/Rotar.',
                 triangle: 'Haz clic para colocar el cartabón (30/60°). Luego ajústalo con Mover/Rotar.',
+                compass: '1) Clic para fijar la pata (centro). 2) Arrastra en círculo para trazar el arco/círculo.',
                 protractor: 'Haz clic para colocar el transportador. Mide ángulos sobre el diámetro.',
                 select: 'Arrastra para mover una herramienta. CTRL + arrastra para rotarla.',
                 eraser: 'Arrastra para borrar tus trazos (no borra las reglas).'
@@ -501,34 +449,59 @@
             div.textContent = map[currentTool] || '';
         }
 
+        function updateCompassReadout() {
+            const el = document.getElementById('compassReadout');
+            if (!el) return;
+            if (compass.phase === 'idle') {
+                el.textContent = 'Pata sin fijar — haz clic para fijar el centro';
+            } else if (compass.phase === 'fixed' && !compass.drawing) {
+                el.textContent = `Centro fijado en (${Math.round(compass.cx)}, ${Math.round(compass.cy)}). Arrastra para trazar.`;
+            } else if (compass.drawing) {
+                const sweep = Math.abs(compass.endAngle - compass.startAngle) * 180 / Math.PI;
+                el.textContent = `Radio: ${Math.round(compass.radius)} px · Arco: ${Math.round(sweep)}°`;
+            }
+        }
+
+        // ---------- Eventos de ratón ----------
         function handleMouseDown(e) {
             const { x, y } = getMousePos(e);
             startX = x; startY = y; curX = x; curY = y;
+
+            if (currentTool === 'compass') {
+                if (compass.phase === 'idle') {
+                    // fijar la pata (centro)
+                    compass.cx = x; compass.cy = y;
+                    compass.phase = 'fixed';
+                    updateCompassReadout();
+                    redraw();
+                } else if (compass.phase === 'fixed') {
+                    // empezar a trazar: radio y ángulo inicial según el punto donde se presiona
+                    compass.drawing = true;
+                    compass.radius = Math.hypot(x - compass.cx, y - compass.cy);
+                    compass.startAngle = Math.atan2(y - compass.cy, x - compass.cx);
+                    compass.endAngle = compass.startAngle;
+                    updateCompassReadout();
+                    redraw();
+                }
+                return;
+            }
 
             if (currentTool === 'select') {
                 for (let i = tools.length - 1; i >= 0; i--) {
                     if (tools[i].isPointInside(x, y)) {
                         selectedToolId = tools[i].id;
                         isDragging = true;
-                        dragOffsetX = x - tools[i].x;
-                        dragOffsetY = y - tools[i].y;
-                        updateToolsList();
-                        redraw();
-                        return;
+                        dragOffsetX = x - tools[i].x; dragOffsetY = y - tools[i].y;
+                        updateToolsList(); redraw(); return;
                     }
                 }
-                selectedToolId = null;
-                updateToolsList();
-                redraw();
+                selectedToolId = null; updateToolsList(); redraw();
             } else if (['ruler','square','triangle','protractor'].includes(currentTool)) {
                 const tool = new DrawingTool(currentTool, x, y, toolIdCounter++);
-                tools.push(tool);
-                selectedToolId = tool.id;
-                updateToolsList();
-                redraw();
+                tools.push(tool); selectedToolId = tool.id;
+                updateToolsList(); redraw();
             } else if (currentTool === 'pencil') {
                 isDrawing = true;
-                // ¿Hay un borde cercano al punto de inicio? -> nos pegamos a él
                 activeEdge = snapEnabled ? findNearestEdge(x, y) : null;
                 if (activeEdge) {
                     const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
@@ -548,19 +521,39 @@
             const { x, y } = getMousePos(e);
             curX = x; curY = y;
 
+            if (currentTool === 'compass') {
+                if (compass.drawing) {
+                    // El radio queda fijado por el punto inicial; vamos barriendo el ángulo
+                    compass.endAngle = Math.atan2(y - compass.cy, x - compass.cx);
+                    updateCompassReadout();
+                    redraw();
+                    drawCompassPreview();
+                } else if (compass.phase === 'fixed') {
+                    // mostrar radio tentativo siguiendo el cursor
+                    redraw();
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(255,107,53,0.5)';
+                    ctx.setLineDash([4,4]); ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(compass.cx, compass.cy);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    ctx.restore();
+                }
+                return;
+            }
+
             if (currentTool === 'select' && selectedToolId !== null && isDragging) {
                 const tool = tools.find(t => t.id === selectedToolId);
                 if (tool) {
                     if (ctrlPressed) {
                         tool.rotation = Math.atan2(y - tool.y, x - tool.x);
-                        let deg = Math.round(tool.rotation * 180 / Math.PI);
-                        if (deg < 0) deg += 360;
+                        let deg = Math.round(tool.rotation * 180 / Math.PI); if (deg < 0) deg += 360;
                         const ri = document.getElementById('rotationIndicator');
-                        ri.textContent = `Ángulo: ${deg}°`;
-                        ri.style.display = 'block';
+                        ri.textContent = `Ángulo: ${deg}°`; ri.style.display = 'block';
                     } else {
-                        tool.x = x - dragOffsetX;
-                        tool.y = y - dragOffsetY;
+                        tool.x = x - dragOffsetX; tool.y = y - dragOffsetY;
                         document.getElementById('rotationIndicator').style.display = 'none';
                     }
                     redraw();
@@ -568,78 +561,56 @@
             } else if (currentTool === 'pencil' && isDrawing) {
                 let ex = x, ey = y;
                 if (activeEdge) {
-                    // Pegar el punto final a la misma recta del borde
                     const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
                     ex = p.x; ey = p.y;
-                } else if (shiftPressed) {
-                    // línea recta libre desde el inicio
-                    ex = x; ey = y;
                 }
                 redraw();
-                // preview del trazo actual
-                ctx.save();
-                ctx.strokeStyle = lineColor;
-                ctx.lineWidth = lineWidth;
-                ctx.lineCap = 'round';
-                ctx.beginPath();
                 if (activeEdge || shiftPressed) {
-                    ctx.moveTo(startX, startY);
-                    ctx.lineTo(ex, ey);
-                } else {
-                    // dibujo libre: lo pintamos directamente en la capa permanente
-                    strokeCtx.strokeStyle = lineColor;
-                    strokeCtx.lineWidth = lineWidth;
-                    strokeCtx.lineCap = 'round';
-                    strokeCtx.lineJoin = 'round';
-                    strokeCtx.beginPath();
-                    strokeCtx.moveTo(startX, startY);
-                    strokeCtx.lineTo(ex, ey);
-                    strokeCtx.stroke();
-                    startX = ex; startY = ey;
+                    ctx.save();
+                    ctx.strokeStyle = lineColor; ctx.lineWidth = lineWidth; ctx.lineCap = 'round';
+                    ctx.beginPath(); ctx.moveTo(startX, startY); ctx.lineTo(ex, ey); ctx.stroke();
                     ctx.restore();
-                    redraw();
-                    return;
+                } else {
+                    strokeCtx.strokeStyle = lineColor; strokeCtx.lineWidth = lineWidth;
+                    strokeCtx.lineCap = 'round'; strokeCtx.lineJoin = 'round';
+                    strokeCtx.beginPath(); strokeCtx.moveTo(startX, startY); strokeCtx.lineTo(ex, ey); strokeCtx.stroke();
+                    startX = ex; startY = ey; redraw();
                 }
-                ctx.stroke();
-                ctx.restore();
             } else if (currentTool === 'eraser' && isDrawing) {
                 strokeCtx.clearRect(x - lineWidth*2, y - lineWidth*2, lineWidth*4, lineWidth*4);
                 redraw();
-            } else if (currentTool === 'pencil' && !isDrawing) {
-                // feedback de imán al pasar el ratón
-                if (snapEnabled) {
-                    const near = findNearestEdge(x, y);
-                    document.getElementById('snapBadge').style.display = near ? 'block' : 'none';
-                }
+            } else if (currentTool === 'pencil' && !isDrawing && snapEnabled) {
+                const near = findNearestEdge(x, y);
+                document.getElementById('snapBadge').style.display = near ? 'block' : 'none';
             }
         }
 
         function handleMouseUp(e) {
+            if (currentTool === 'compass' && compass.drawing) {
+                // consolidar el arco en la capa permanente
+                commitCompassArc();
+                compass.drawing = false;
+                updateCompassReadout();
+                saveHistory();
+                redraw();
+                return;
+            }
             if (currentTool === 'pencil' && isDrawing) {
                 const { x, y } = getMousePos(e);
                 if (activeEdge || shiftPressed) {
-                    // consolidar la línea recta en la capa permanente
                     let ex = x, ey = y;
                     if (activeEdge) {
                         const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
                         ex = p.x; ey = p.y;
                     }
-                    strokeCtx.strokeStyle = lineColor;
-                    strokeCtx.lineWidth = lineWidth;
-                    strokeCtx.lineCap = 'round';
-                    strokeCtx.beginPath();
-                    strokeCtx.moveTo(startX, startY);
-                    strokeCtx.lineTo(ex, ey);
-                    strokeCtx.stroke();
+                    strokeCtx.strokeStyle = lineColor; strokeCtx.lineWidth = lineWidth; strokeCtx.lineCap = 'round';
+                    strokeCtx.beginPath(); strokeCtx.moveTo(startX, startY); strokeCtx.lineTo(ex, ey); strokeCtx.stroke();
                 }
-                isDrawing = false;
-                activeEdge = null;
+                isDrawing = false; activeEdge = null;
                 document.getElementById('snapBadge').style.display = 'none';
-                saveHistory();
-                redraw();
+                saveHistory(); redraw();
             } else if (currentTool === 'eraser' && isDrawing) {
-                isDrawing = false;
-                saveHistory();
+                isDrawing = false; saveHistory();
             }
             if (currentTool === 'select') {
                 isDragging = false;
@@ -647,16 +618,85 @@
             }
         }
 
+        // ---------- Dibujo del compás ----------
+        function normalizedSweep() {
+            // determina el sentido y la magnitud del barrido (de start a end por el camino recorrido)
+            let delta = compass.endAngle - compass.startAngle;
+            // mantener delta en el rango recorrido real evitando saltos: usamos atan2 acumulado simple
+            return delta;
+        }
+
+        function drawCompassPreview() {
+            // visual del compás (centro, brazo, arco que se va trazando)
+            ctx.save();
+            // arco trazado
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            const ccw = compass.endAngle < compass.startAngle;
+            ctx.arc(compass.cx, compass.cy, compass.radius, compass.startAngle, compass.endAngle, ccw);
+            ctx.stroke();
+
+            // brazo del compás (línea del centro al punto actual)
+            ctx.strokeStyle = 'rgba(255,107,53,0.7)';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([4,3]);
+            ctx.beginPath();
+            ctx.moveTo(compass.cx, compass.cy);
+            ctx.lineTo(compass.cx + Math.cos(compass.endAngle)*compass.radius,
+                       compass.cy + Math.sin(compass.endAngle)*compass.radius);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // centro (pata fija)
+            drawCompassPivot();
+            ctx.restore();
+        }
+
+        function drawCompassPivot() {
+            ctx.save();
+            ctx.fillStyle = '#FF6B35';
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(compass.cx, compass.cy, 6, 0, Math.PI*2);
+            ctx.fill(); ctx.stroke();
+            // cruz central
+            ctx.strokeStyle = '#FF6B35'; ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(compass.cx - 10, compass.cy); ctx.lineTo(compass.cx + 10, compass.cy);
+            ctx.moveTo(compass.cx, compass.cy - 10); ctx.lineTo(compass.cx, compass.cy + 10);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function commitCompassArc() {
+            strokeCtx.strokeStyle = lineColor;
+            strokeCtx.lineWidth = lineWidth;
+            strokeCtx.lineCap = 'round';
+            strokeCtx.beginPath();
+            const ccw = compass.endAngle < compass.startAngle;
+            strokeCtx.arc(compass.cx, compass.cy, compass.radius, compass.startAngle, compass.endAngle, ccw);
+            strokeCtx.stroke();
+        }
+
+        function resetCompass() {
+            compass.phase = 'idle';
+            compass.drawing = false;
+            updateCompassReadout();
+            redraw();
+        }
+
         function handleKeyDown(e) {
             if (e.key === 'Shift') shiftPressed = true;
             if (e.key === 'Control') ctrlPressed = true;
             if (e.ctrlKey && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); undoAction(); }
             if (e.ctrlKey && (e.key === 'y' || e.key === 'Y')) { e.preventDefault(); redoAction(); }
-            if ((e.key === 'Delete' || e.key === 'Backspace') && selectedToolId !== null) {
+            if (e.key === 'Escape' && currentTool === 'compass') { resetCompass(); }
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selectedToolId !== null && currentTool === 'select') {
                 e.preventDefault(); deleteSelected();
             }
         }
-
         function handleKeyUp(e) {
             if (e.key === 'Shift') shiftPressed = false;
             if (e.key === 'Control') ctrlPressed = false;
@@ -666,22 +706,18 @@
         function redraw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (showGrid) drawGrid();
-            // capa de trazos del usuario
             ctx.drawImage(strokeCanvas, 0, 0);
-            // herramientas encima
             tools.forEach(t => t.draw(ctx));
+            // mostrar el pivote del compás si está fijado
+            if (currentTool === 'compass' && compass.phase === 'fixed') {
+                drawCompassPivot();
+            }
         }
-
         function drawGrid() {
-            ctx.strokeStyle = '#e8e8e8';
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = '#e8e8e8'; ctx.lineWidth = 0.5;
             const g = 20;
-            for (let x = 0; x < canvas.width; x += g) {
-                ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke();
-            }
-            for (let y = 0; y < canvas.height; y += g) {
-                ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();
-            }
+            for (let x = 0; x < canvas.width; x += g) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); }
+            for (let y = 0; y < canvas.height; y += g) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); }
         }
 
         // ---------- Controles ----------
@@ -699,30 +735,24 @@
 
         function updateToolsList() {
             const list = document.getElementById('toolsList');
-            if (tools.length === 0) {
-                list.innerHTML = '<div style="color:#999;">Ninguna colocada</div>';
-            } else {
-                list.innerHTML = tools.map(t =>
-                    `<div style="padding:4px 0;border-bottom:1px solid #ddd;">
-                        ${t.id === selectedToolId ? '✓ ' : ''}${toolConfigs[t.type].icon} ${toolConfigs[t.type].name}
-                    </div>`).join('');
-            }
+            if (tools.length === 0) list.innerHTML = '<div style="color:#999;">Ninguna colocada</div>';
+            else list.innerHTML = tools.map(t =>
+                `<div style="padding:4px 0;border-bottom:1px solid #ddd;">
+                    ${t.id === selectedToolId ? '✓ ' : ''}${toolConfigs[t.type].icon} ${toolConfigs[t.type].name}
+                </div>`).join('');
         }
 
-        // ---------- Historia (sólo capa de trazos) ----------
         function saveHistory() {
             const img = strokeCtx.getImageData(0, 0, strokeCanvas.width, strokeCanvas.height);
             historyStep++;
             if (historyStep < history.length) history.length = historyStep;
             history.push(img.data.slice());
-            // limitar memoria
             if (history.length > 50) { history.shift(); historyStep--; }
         }
         function restoreHistory() {
             if (history[historyStep]) {
                 const img = strokeCtx.createImageData(strokeCanvas.width, strokeCanvas.height);
-                img.data.set(history[historyStep]);
-                strokeCtx.putImageData(img, 0, 0);
+                img.data.set(history[historyStep]); strokeCtx.putImageData(img, 0, 0);
             }
             redraw();
         }
@@ -733,9 +763,7 @@
             if (selectedToolId !== null) {
                 const i = tools.findIndex(t => t.id === selectedToolId);
                 if (i >= 0) tools.splice(i, 1);
-                selectedToolId = null;
-                updateToolsList();
-                redraw();
+                selectedToolId = null; updateToolsList(); redraw();
             }
         }
         function clearTools() {
@@ -746,22 +774,18 @@
         function clearCanvas() {
             if (confirm('¿Borrar todo el dibujo y las herramientas?')) {
                 strokeCtx.clearRect(0, 0, strokeCanvas.width, strokeCanvas.height);
-                tools.length = 0; selectedToolId = null;
+                tools.length = 0; selectedToolId = null; resetCompass();
                 updateToolsList(); saveHistory(); redraw();
             }
         }
         function downloadDrawing() {
-            // exportar dibujo SIN las herramientas (sólo trazos + cuadrícula opcional)
             const out = document.createElement('canvas');
             out.width = canvas.width; out.height = canvas.height;
             const octx = out.getContext('2d');
-            octx.fillStyle = 'white';
-            octx.fillRect(0, 0, out.width, out.height);
+            octx.fillStyle = 'white'; octx.fillRect(0, 0, out.width, out.height);
             octx.drawImage(strokeCanvas, 0, 0);
             const link = document.createElement('a');
-            link.href = out.toDataURL('image/png');
-            link.download = 'dibujo-tecnico.png';
-            link.click();
+            link.href = out.toDataURL('image/png'); link.download = 'dibujo-tecnico.png'; link.click();
         }
 
         function zoomIn() { zoom = Math.min(zoom + 0.1, 3); updateZoomDisplay(); }
@@ -772,9 +796,7 @@
             canvas.style.transformOrigin = 'top left';
             canvas.style.transform = `scale(${zoom})`;
         }
-        function handleWheel(e) {
-            if (e.ctrlKey) { e.preventDefault(); e.deltaY > 0 ? zoomOut() : zoomIn(); }
-        }
+        function handleWheel(e) { if (e.ctrlKey) { e.preventDefault(); e.deltaY > 0 ? zoomOut() : zoomIn(); } }
 
         init();
     </script>
