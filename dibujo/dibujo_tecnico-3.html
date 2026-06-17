@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dibujo Técnico Pro - Herramientas Profesionales</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 100vh; display: flex; flex-direction: column; color: #333;
+        }
+        .header {
+            background: rgba(255, 255, 255, 0.95); padding: 12px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .header h1 { font-size: 24px; color: #1e3c72; font-weight: 600; }
+        .header-controls { display: flex; gap: 12px; align-items: center; }
+        .zoom-control {
+            display: flex; align-items: center; gap: 8px;
+            background: #f0f0f0; padding: 6px 12px; border-radius: 4px;
+        }
+        .zoom-control button {
+            background: none; border: none; cursor: pointer;
+            padding: 4px 8px; font-size: 14px; color: #1e3c72;
+        }
+        .zoom-control button:hover { background: #e0e0e0; border-radius: 3px; }
+        .zoom-value { min-width: 45px; text-align: center; font-weight: 500; font-size: 13px; }
+        .main-container { display: flex; flex: 1; gap: 10px; padding: 10px; overflow: hidden; }
+        .toolbar {
+            width: 70px; background: rgba(255,255,255,0.95); border-radius: 8px;
+            padding: 10px; display: flex; flex-direction: column; gap: 6px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow-y: auto;
+        }
+        .toolbar-btn {
+            width: 100%; height: 50px; border: 2px solid #ddd; border-radius: 6px;
+            background: white; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; font-size: 22px; transition: all 0.2s; position: relative;
+        }
+        .toolbar-btn:hover { border-color: #1e3c72; background: #f8f8f8; }
+        .toolbar-btn.active { background: #1e3c72; color: white; border-color: #1e3c72; }
+        .toolbar-btn span {
+            position: absolute; bottom: -22px; font-size: 11px; white-space: nowrap;
+            background: #333; color: white; padding: 3px 6px; border-radius: 3px;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10;
+        }
+        .toolbar-btn:hover span { opacity: 1; }
+        .properties-panel {
+            width: 230px; background: rgba(255,255,255,0.95); border-radius: 8px;
+            padding: 15px; display: flex; flex-direction: column; gap: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow-y: auto;
+        }
+        .property-group { display: flex; flex-direction: column; gap: 6px; }
+        .property-group label {
+            font-size: 12px; font-weight: 600; color: #1e3c72;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .property-group input[type="color"] {
+            width: 100%; height: 40px; border: none; border-radius: 4px; cursor: pointer;
+        }
+        .property-group input[type="range"] {
+            width: 100%; padding: 6px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;
+        }
+        .divider { height: 1px; background: #ddd; }
+        .canvas-container {
+            flex: 1; background: white; border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1); position: relative; overflow: hidden;
+        }
+        canvas { display: block; background: white; }
+        .button-group { display: flex; gap: 6px; }
+        .button-group button {
+            flex: 1; padding: 8px; background: #1e3c72; color: white; border: none;
+            border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500; transition: background 0.2s;
+        }
+        .button-group button:hover { background: #2a5298; }
+        .checkbox-group { display: flex; align-items: center; gap: 8px; }
+        .checkbox-group input[type="checkbox"] { cursor: pointer; }
+        .checkbox-group label {
+            margin: 0; cursor: pointer; font-size: 12px; font-weight: normal;
+            text-transform: none; letter-spacing: normal;
+        }
+        .status-bar {
+            position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7);
+            color: white; padding: 6px 10px; border-radius: 4px; font-size: 11px; max-width: 600px;
+        }
+        .info-text {
+            font-size: 11px; color: #666; line-height: 1.4;
+            background: #f5f5f5; padding: 8px; border-radius: 3px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: #1e3c72; border-radius: 3px; }
+        .rotation-indicator {
+            position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7);
+            color: white; padding: 6px 10px; border-radius: 4px; font-size: 11px;
+        }
+        .snap-badge {
+            position: absolute; top: 10px; left: 10px; background: #FF6B35;
+            color: white; padding: 6px 10px; border-radius: 4px; font-size: 11px;
+            display: none; font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📐 Dibujo Técnico Pro</h1>
+        <div class="header-controls">
+            <div class="zoom-control">
+                <button onclick="zoomOut()">−</button>
+                <div class="zoom-value" id="zoomValue">100%</div>
+                <button onclick="zoomIn()">+</button>
+                <button onclick="resetZoom()" style="font-size: 11px;">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="toolbar" id="toolbar">
+            <button class="toolbar-btn active" data-tool="pencil" onclick="selectTool('pencil')">✏️<span>Lápiz</span></button>
+            <button class="toolbar-btn" data-tool="ruler" onclick="selectTool('ruler')">📏<span>Regla</span></button>
+            <button class="toolbar-btn" data-tool="square" onclick="selectTool('square')">📐<span>Escuadra</span></button>
+            <button class="toolbar-btn" data-tool="triangle" onclick="selectTool('triangle')">🔺<span>Cartabón</span></button>
+            <button class="toolbar-btn" data-tool="protractor" onclick="selectTool('protractor')">📊<span>Transportador</span></button>
+            <button class="toolbar-btn" data-tool="select" onclick="selectTool('select')">👆<span>Mover/Rotar</span></button>
+            <button class="toolbar-btn" data-tool="eraser" onclick="selectTool('eraser')">🧹<span>Borrador</span></button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="canvas"></canvas>
+            <div class="status-bar" id="statusBar">Coloca una regla o escuadra, luego dibuja con el lápiz cerca del borde para que la línea se pegue</div>
+            <div class="rotation-indicator" id="rotationIndicator" style="display: none;"></div>
+            <div class="snap-badge" id="snapBadge">🧲 Pegado al borde</div>
+        </div>
+
+        <div class="properties-panel">
+            <h3 style="font-size: 14px; color: #1e3c72; margin-bottom: 8px;">Propiedades</h3>
+
+            <div class="property-group">
+                <label>Color de línea</label>
+                <input type="color" id="colorPicker" value="#000000" onchange="updateColor()">
+            </div>
+
+            <div class="property-group">
+                <label>Grosor</label>
+                <input type="range" id="lineWidth" min="0.5" max="15" value="2" step="0.5" onchange="updateLineWidth()">
+                <span style="font-size: 11px; color: #666;"><span id="lineWidthValue">2</span> px</span>
+            </div>
+
+            <div class="property-group">
+                <label>Distancia de imán</label>
+                <input type="range" id="snapDist" min="5" max="40" value="18" step="1" onchange="updateSnapDist()">
+                <span style="font-size: 11px; color: #666;"><span id="snapDistValue">18</span> px</span>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="snapToggle" checked onchange="toggleSnap()">
+                <label for="snapToggle">Imán a bordes (snap)</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="gridToggle" onchange="toggleGrid()">
+                <label for="gridToggle">Cuadrícula</label>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="property-group">
+                <label>Herramientas en lienzo</label>
+                <div id="toolsList" style="font-size: 12px; color: #666; background: #f5f5f5; padding: 8px; border-radius: 3px; max-height: 100px; overflow-y: auto;">
+                    <div style="color: #999;">Ninguna colocada</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="info-text" id="instructions">
+                Coloca una herramienta y dibuja cerca de su borde: la línea se pegará automáticamente.
+            </div>
+
+            <div class="button-group">
+                <button onclick="undoAction()">↶ Deshacer</button>
+                <button onclick="redoAction()">↷ Rehacer</button>
+            </div>
+            <div class="button-group">
+                <button onclick="deleteSelected()" style="background: #ff9500;">⌫ Borrar selección</button>
+            </div>
+            <div class="button-group">
+                <button onclick="clearTools()" style="background: #ff6b6b;">🗑️ Quitar reglas</button>
+            </div>
+            <div class="button-group">
+                <button onclick="clearCanvas()" style="background: #c41e3a;">✕ Limpiar todo</button>
+            </div>
+            <div class="button-group">
+                <button onclick="downloadDrawing()" style="background: #28a745;">⬇️ Descargar PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let currentTool = 'pencil';
+        let isDrawing = false;
+        let startX = 0, startY = 0;
+        let curX = 0, curY = 0;
+        let zoom = 1;
+        let showGrid = false;
+        let snapEnabled = true;
+        let snapDistance = 18;
+        let shiftPressed = false;
+        let ctrlPressed = false;
+        let isDragging = false;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let selectedToolId = null;
+
+        let lineWidth = 2;
+        let lineColor = '#000000';
+
+        // Capa de trazos permanentes (dibujados por el usuario)
+        let strokeCanvas = document.createElement('canvas');
+        let strokeCtx = strokeCanvas.getContext('2d');
+
+        // Historia (snapshots de la capa de trazos)
+        const history = [];
+        let historyStep = -1;
+
+        const tools = [];
+        let toolIdCounter = 0;
+
+        const toolConfigs = {
+            pencil: { name: 'Lápiz', icon: '✏️' },
+            ruler: { name: 'Regla', icon: '📏', width: 420, height: 44 },
+            square: { name: 'Escuadra 45°', icon: '📐', size: 220 },
+            triangle: { name: 'Cartabón 30/60°', icon: '🔺', size: 280 },
+            protractor: { name: 'Transportador', icon: '📊', radius: 110 },
+            select: { name: 'Mover/Rotar', icon: '👆' },
+            eraser: { name: 'Borrador', icon: '🧹' }
+        };
+
+        // ---------- Clase Herramienta ----------
+        class DrawingTool {
+            constructor(type, x, y, id) {
+                this.type = type;
+                this.x = x;
+                this.y = y;
+                this.rotation = 0;
+                this.id = id;
+            }
+
+            // Devuelve los vértices en coordenadas LOCALES (sin rotar/trasladar)
+            localVertices() {
+                if (this.type === 'ruler') {
+                    const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
+                    return [[-w/2,-h/2],[w/2,-h/2],[w/2,h/2],[-w/2,h/2]];
+                } else if (this.type === 'square') {
+                    // triángulo rectángulo isósceles 45-45-90
+                    const s = toolConfigs.square.size;
+                    return [[-s/2, s/2],[s/2, s/2],[-s/2, -s/2]];
+                } else if (this.type === 'triangle') {
+                    // cartabón 30-60-90
+                    const w = toolConfigs.triangle.size;
+                    const h = w / Math.sqrt(3); // relación 30/60/90
+                    return [[-w/2, h/2],[w/2, h/2],[-w/2, -h/2]];
+                } else if (this.type === 'protractor') {
+                    // semicírculo: aproximamos con borde recto (diámetro)
+                    const r = toolConfigs.protractor.radius;
+                    return [[-r, 0],[r, 0]];
+                }
+                return [];
+            }
+
+            // Transforma un punto local a global
+            toGlobal(lx, ly) {
+                const cos = Math.cos(this.rotation), sin = Math.sin(this.rotation);
+                return [this.x + lx*cos - ly*sin, this.y + lx*sin + ly*cos];
+            }
+
+            // Devuelve los segmentos de borde en coordenadas GLOBALES
+            edges() {
+                const verts = this.localVertices().map(v => this.toGlobal(v[0], v[1]));
+                const segs = [];
+                if (this.type === 'protractor') {
+                    // sólo el diámetro
+                    segs.push([verts[0], verts[1]]);
+                    return segs;
+                }
+                for (let i = 0; i < verts.length; i++) {
+                    segs.push([verts[i], verts[(i+1) % verts.length]]);
+                }
+                return segs;
+            }
+
+            // Bounding box aproximado para detección de clic
+            isPointInside(px, py) {
+                const cos = Math.cos(-this.rotation), sin = Math.sin(-this.rotation);
+                const dx = px - this.x, dy = py - this.y;
+                const lx = dx*cos - dy*sin;
+                const ly = dx*sin + dy*cos;
+                const verts = this.localVertices();
+                if (this.type === 'protractor') {
+                    const r = toolConfigs.protractor.radius;
+                    return (lx*lx + ly*ly <= r*r) && ly <= 0;
+                }
+                // test point-in-polygon
+                let inside = false;
+                for (let i = 0, j = verts.length-1; i < verts.length; j = i++) {
+                    const xi = verts[i][0], yi = verts[i][1];
+                    const xj = verts[j][0], yj = verts[j][1];
+                    const intersect = ((yi > ly) !== (yj > ly)) &&
+                        (lx < (xj-xi)*(ly-yi)/(yj-yi)+xi);
+                    if (intersect) inside = !inside;
+                }
+                return inside;
+            }
+
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.strokeStyle = '#FF6B35';
+                ctx.fillStyle = 'rgba(255,107,53,0.07)';
+                ctx.lineWidth = 1.5;
+
+                const verts = this.localVertices();
+
+                if (this.type === 'protractor') {
+                    const r = toolConfigs.protractor.radius;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, r, Math.PI, 2*Math.PI, false);
+                    ctx.lineTo(-r, 0);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+                    // marcas de grados
+                    ctx.fillStyle = '#FF6B35';
+                    ctx.font = '9px Arial';
+                    ctx.textAlign = 'center';
+                    for (let a = 0; a <= 180; a += 10) {
+                        const rad = a * Math.PI / 180;
+                        const x1 = -Math.cos(rad)*r, y1 = -Math.sin(rad)*r;
+                        const len = (a % 30 === 0) ? 10 : 5;
+                        const x2 = -Math.cos(rad)*(r-len), y2 = -Math.sin(rad)*(r-len);
+                        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+                        if (a % 30 === 0) {
+                            ctx.fillText(a+'°', -Math.cos(rad)*(r-20), -Math.sin(rad)*(r-20)+3);
+                        }
+                    }
+                } else {
+                    ctx.beginPath();
+                    ctx.moveTo(verts[0][0], verts[0][1]);
+                    for (let i = 1; i < verts.length; i++) ctx.lineTo(verts[i][0], verts[i][1]);
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.stroke();
+
+                    // marcas en la regla
+                    if (this.type === 'ruler') {
+                        const w = toolConfigs.ruler.width, h = toolConfigs.ruler.height;
+                        for (let i = 0; i <= 20; i++) {
+                            const x = -w/2 + (w/20)*i;
+                            const len = (i % 5 === 0) ? 8 : 4;
+                            ctx.beginPath();
+                            ctx.moveTo(x, -h/2);
+                            ctx.lineTo(x, -h/2 + len);
+                            ctx.stroke();
+                        }
+                    }
+                    // etiquetas de ángulo en escuadra/cartabón
+                    if (this.type === 'square' || this.type === 'triangle') {
+                        ctx.fillStyle = '#FF6B35';
+                        ctx.font = 'bold 11px Arial';
+                        ctx.textAlign = 'center';
+                        const label = this.type === 'square' ? '45°' : '30/60°';
+                        ctx.fillText(label, 0, 0);
+                    }
+                }
+
+                // punto central (pivote)
+                ctx.fillStyle = '#FF6B35';
+                ctx.beginPath();
+                ctx.arc(0, 0, 4, 0, Math.PI*2);
+                ctx.fill();
+                ctx.restore();
+
+                // selección
+                if (this.id === selectedToolId) {
+                    const gverts = verts.map(v => this.toGlobal(v[0], v[1]));
+                    ctx.strokeStyle = '#0099FF';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([6,4]);
+                    ctx.beginPath();
+                    ctx.moveTo(gverts[0][0], gverts[0][1]);
+                    for (let i = 1; i < gverts.length; i++) ctx.lineTo(gverts[i][0], gverts[i][1]);
+                    if (this.type !== 'protractor') ctx.closePath();
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+        }
+
+        // ---------- Geometría: proyección y snapping ----------
+        // Proyecta el punto P sobre el segmento AB, devuelve {x, y, dist, t}
+        function projectPointOnSegment(px, py, ax, ay, bx, by) {
+            const abx = bx - ax, aby = by - ay;
+            const apx = px - ax, apy = py - ay;
+            const abLen2 = abx*abx + aby*aby;
+            let t = abLen2 === 0 ? 0 : (apx*abx + apy*aby) / abLen2;
+            t = Math.max(0, Math.min(1, t));
+            const cx = ax + abx*t, cy = ay + aby*t;
+            const dist = Math.hypot(px - cx, py - cy);
+            return { x: cx, y: cy, dist, t, abx, aby };
+        }
+
+        // Encuentra el borde más cercano a un punto dentro de snapDistance
+        function findNearestEdge(px, py) {
+            let best = null;
+            for (const tool of tools) {
+                for (const [a, b] of tool.edges()) {
+                    const proj = projectPointOnSegment(px, py, a[0], a[1], b[0], b[1]);
+                    if (proj.dist <= snapDistance && (!best || proj.dist < best.proj.dist)) {
+                        best = { tool, a, b, proj };
+                    }
+                }
+            }
+            return best;
+        }
+
+        // Dado un punto y un borde, devuelve el punto proyectado SOBRE la recta infinita del borde
+        function projectOntoLine(px, py, ax, ay, bx, by) {
+            const abx = bx - ax, aby = by - ay;
+            const apx = px - ax, apy = py - ay;
+            const abLen2 = abx*abx + aby*aby;
+            const t = abLen2 === 0 ? 0 : (apx*abx + apy*aby) / abLen2;
+            return { x: ax + abx*t, y: ay + aby*t };
+        }
+
+        // ---------- Estado de dibujo con snap ----------
+        let activeEdge = null; // borde al que está "pegado" el trazo actual
+
+        function init() {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            canvas.addEventListener('mousedown', handleMouseDown);
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mouseup', handleMouseUp);
+            canvas.addEventListener('mouseout', handleMouseUp);
+            canvas.addEventListener('wheel', handleWheel, { passive: false });
+            window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('keyup', handleKeyUp);
+            saveHistory();
+            redraw();
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            strokeCanvas.width = canvas.width;
+            strokeCanvas.height = canvas.height;
+            // restaurar historia tras resize
+            if (history[historyStep]) {
+                const img = strokeCtx.createImageData(strokeCanvas.width, strokeCanvas.height);
+                if (history[historyStep].length === img.data.length) {
+                    img.data.set(history[historyStep]);
+                    strokeCtx.putImageData(img, 0, 0);
+                }
+            }
+            redraw();
+        }
+
+        function getMousePos(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - rect.left) / zoom,
+                y: (e.clientY - rect.top) / zoom
+            };
+        }
+
+        function selectTool(tool) {
+            currentTool = tool;
+            document.querySelectorAll('.toolbar-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-tool="${tool}"]`).classList.add('active');
+            canvas.style.cursor = (tool === 'select') ? 'move' : 'crosshair';
+            updateInstructions();
+        }
+
+        function updateInstructions() {
+            const div = document.getElementById('instructions');
+            const map = {
+                pencil: 'Dibuja cerca del borde de una regla/escuadra y la línea se pega sola. SHIFT = recta libre.',
+                ruler: 'Haz clic para colocar la regla. Luego usa Mover/Rotar para ajustarla.',
+                square: 'Haz clic para colocar la escuadra (45°). Luego ajústala con Mover/Rotar.',
+                triangle: 'Haz clic para colocar el cartabón (30/60°). Luego ajústalo con Mover/Rotar.',
+                protractor: 'Haz clic para colocar el transportador. Mide ángulos sobre el diámetro.',
+                select: 'Arrastra para mover una herramienta. CTRL + arrastra para rotarla.',
+                eraser: 'Arrastra para borrar tus trazos (no borra las reglas).'
+            };
+            div.textContent = map[currentTool] || '';
+        }
+
+        function handleMouseDown(e) {
+            const { x, y } = getMousePos(e);
+            startX = x; startY = y; curX = x; curY = y;
+
+            if (currentTool === 'select') {
+                for (let i = tools.length - 1; i >= 0; i--) {
+                    if (tools[i].isPointInside(x, y)) {
+                        selectedToolId = tools[i].id;
+                        isDragging = true;
+                        dragOffsetX = x - tools[i].x;
+                        dragOffsetY = y - tools[i].y;
+                        updateToolsList();
+                        redraw();
+                        return;
+                    }
+                }
+                selectedToolId = null;
+                updateToolsList();
+                redraw();
+            } else if (['ruler','square','triangle','protractor'].includes(currentTool)) {
+                const tool = new DrawingTool(currentTool, x, y, toolIdCounter++);
+                tools.push(tool);
+                selectedToolId = tool.id;
+                updateToolsList();
+                redraw();
+            } else if (currentTool === 'pencil') {
+                isDrawing = true;
+                // ¿Hay un borde cercano al punto de inicio? -> nos pegamos a él
+                activeEdge = snapEnabled ? findNearestEdge(x, y) : null;
+                if (activeEdge) {
+                    const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
+                    startX = p.x; startY = p.y;
+                    document.getElementById('snapBadge').style.display = 'block';
+                } else {
+                    document.getElementById('snapBadge').style.display = 'none';
+                }
+            } else if (currentTool === 'eraser') {
+                isDrawing = true;
+                strokeCtx.clearRect(x - lineWidth*2, y - lineWidth*2, lineWidth*4, lineWidth*4);
+                redraw();
+            }
+        }
+
+        function handleMouseMove(e) {
+            const { x, y } = getMousePos(e);
+            curX = x; curY = y;
+
+            if (currentTool === 'select' && selectedToolId !== null && isDragging) {
+                const tool = tools.find(t => t.id === selectedToolId);
+                if (tool) {
+                    if (ctrlPressed) {
+                        tool.rotation = Math.atan2(y - tool.y, x - tool.x);
+                        let deg = Math.round(tool.rotation * 180 / Math.PI);
+                        if (deg < 0) deg += 360;
+                        const ri = document.getElementById('rotationIndicator');
+                        ri.textContent = `Ángulo: ${deg}°`;
+                        ri.style.display = 'block';
+                    } else {
+                        tool.x = x - dragOffsetX;
+                        tool.y = y - dragOffsetY;
+                        document.getElementById('rotationIndicator').style.display = 'none';
+                    }
+                    redraw();
+                }
+            } else if (currentTool === 'pencil' && isDrawing) {
+                let ex = x, ey = y;
+                if (activeEdge) {
+                    // Pegar el punto final a la misma recta del borde
+                    const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
+                    ex = p.x; ey = p.y;
+                } else if (shiftPressed) {
+                    // línea recta libre desde el inicio
+                    ex = x; ey = y;
+                }
+                redraw();
+                // preview del trazo actual
+                ctx.save();
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = lineWidth;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                if (activeEdge || shiftPressed) {
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(ex, ey);
+                } else {
+                    // dibujo libre: lo pintamos directamente en la capa permanente
+                    strokeCtx.strokeStyle = lineColor;
+                    strokeCtx.lineWidth = lineWidth;
+                    strokeCtx.lineCap = 'round';
+                    strokeCtx.lineJoin = 'round';
+                    strokeCtx.beginPath();
+                    strokeCtx.moveTo(startX, startY);
+                    strokeCtx.lineTo(ex, ey);
+                    strokeCtx.stroke();
+                    startX = ex; startY = ey;
+                    ctx.restore();
+                    redraw();
+                    return;
+                }
+                ctx.stroke();
+                ctx.restore();
+            } else if (currentTool === 'eraser' && isDrawing) {
+                strokeCtx.clearRect(x - lineWidth*2, y - lineWidth*2, lineWidth*4, lineWidth*4);
+                redraw();
+            } else if (currentTool === 'pencil' && !isDrawing) {
+                // feedback de imán al pasar el ratón
+                if (snapEnabled) {
+                    const near = findNearestEdge(x, y);
+                    document.getElementById('snapBadge').style.display = near ? 'block' : 'none';
+                }
+            }
+        }
+
+        function handleMouseUp(e) {
+            if (currentTool === 'pencil' && isDrawing) {
+                const { x, y } = getMousePos(e);
+                if (activeEdge || shiftPressed) {
+                    // consolidar la línea recta en la capa permanente
+                    let ex = x, ey = y;
+                    if (activeEdge) {
+                        const p = projectOntoLine(x, y, activeEdge.a[0], activeEdge.a[1], activeEdge.b[0], activeEdge.b[1]);
+                        ex = p.x; ey = p.y;
+                    }
+                    strokeCtx.strokeStyle = lineColor;
+                    strokeCtx.lineWidth = lineWidth;
+                    strokeCtx.lineCap = 'round';
+                    strokeCtx.beginPath();
+                    strokeCtx.moveTo(startX, startY);
+                    strokeCtx.lineTo(ex, ey);
+                    strokeCtx.stroke();
+                }
+                isDrawing = false;
+                activeEdge = null;
+                document.getElementById('snapBadge').style.display = 'none';
+                saveHistory();
+                redraw();
+            } else if (currentTool === 'eraser' && isDrawing) {
+                isDrawing = false;
+                saveHistory();
+            }
+            if (currentTool === 'select') {
+                isDragging = false;
+                document.getElementById('rotationIndicator').style.display = 'none';
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'Shift') shiftPressed = true;
+            if (e.key === 'Control') ctrlPressed = true;
+            if (e.ctrlKey && (e.key === 'z' || e.key === 'Z')) { e.preventDefault(); undoAction(); }
+            if (e.ctrlKey && (e.key === 'y' || e.key === 'Y')) { e.preventDefault(); redoAction(); }
+            if ((e.key === 'Delete' || e.key === 'Backspace') && selectedToolId !== null) {
+                e.preventDefault(); deleteSelected();
+            }
+        }
+
+        function handleKeyUp(e) {
+            if (e.key === 'Shift') shiftPressed = false;
+            if (e.key === 'Control') ctrlPressed = false;
+        }
+
+        // ---------- Render ----------
+        function redraw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (showGrid) drawGrid();
+            // capa de trazos del usuario
+            ctx.drawImage(strokeCanvas, 0, 0);
+            // herramientas encima
+            tools.forEach(t => t.draw(ctx));
+        }
+
+        function drawGrid() {
+            ctx.strokeStyle = '#e8e8e8';
+            ctx.lineWidth = 0.5;
+            const g = 20;
+            for (let x = 0; x < canvas.width; x += g) {
+                ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke();
+            }
+            for (let y = 0; y < canvas.height; y += g) {
+                ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();
+            }
+        }
+
+        // ---------- Controles ----------
+        function updateColor() { lineColor = document.getElementById('colorPicker').value; }
+        function updateLineWidth() {
+            lineWidth = parseFloat(document.getElementById('lineWidth').value);
+            document.getElementById('lineWidthValue').textContent = lineWidth;
+        }
+        function updateSnapDist() {
+            snapDistance = parseInt(document.getElementById('snapDist').value);
+            document.getElementById('snapDistValue').textContent = snapDistance;
+        }
+        function toggleSnap() { snapEnabled = document.getElementById('snapToggle').checked; }
+        function toggleGrid() { showGrid = document.getElementById('gridToggle').checked; redraw(); }
+
+        function updateToolsList() {
+            const list = document.getElementById('toolsList');
+            if (tools.length === 0) {
+                list.innerHTML = '<div style="color:#999;">Ninguna colocada</div>';
+            } else {
+                list.innerHTML = tools.map(t =>
+                    `<div style="padding:4px 0;border-bottom:1px solid #ddd;">
+                        ${t.id === selectedToolId ? '✓ ' : ''}${toolConfigs[t.type].icon} ${toolConfigs[t.type].name}
+                    </div>`).join('');
+            }
+        }
+
+        // ---------- Historia (sólo capa de trazos) ----------
+        function saveHistory() {
+            const img = strokeCtx.getImageData(0, 0, strokeCanvas.width, strokeCanvas.height);
+            historyStep++;
+            if (historyStep < history.length) history.length = historyStep;
+            history.push(img.data.slice());
+            // limitar memoria
+            if (history.length > 50) { history.shift(); historyStep--; }
+        }
+        function restoreHistory() {
+            if (history[historyStep]) {
+                const img = strokeCtx.createImageData(strokeCanvas.width, strokeCanvas.height);
+                img.data.set(history[historyStep]);
+                strokeCtx.putImageData(img, 0, 0);
+            }
+            redraw();
+        }
+        function undoAction() { if (historyStep > 0) { historyStep--; restoreHistory(); } }
+        function redoAction() { if (historyStep < history.length - 1) { historyStep++; restoreHistory(); } }
+
+        function deleteSelected() {
+            if (selectedToolId !== null) {
+                const i = tools.findIndex(t => t.id === selectedToolId);
+                if (i >= 0) tools.splice(i, 1);
+                selectedToolId = null;
+                updateToolsList();
+                redraw();
+            }
+        }
+        function clearTools() {
+            if (tools.length && confirm('¿Quitar todas las reglas/escuadras?')) {
+                tools.length = 0; selectedToolId = null; updateToolsList(); redraw();
+            }
+        }
+        function clearCanvas() {
+            if (confirm('¿Borrar todo el dibujo y las herramientas?')) {
+                strokeCtx.clearRect(0, 0, strokeCanvas.width, strokeCanvas.height);
+                tools.length = 0; selectedToolId = null;
+                updateToolsList(); saveHistory(); redraw();
+            }
+        }
+        function downloadDrawing() {
+            // exportar dibujo SIN las herramientas (sólo trazos + cuadrícula opcional)
+            const out = document.createElement('canvas');
+            out.width = canvas.width; out.height = canvas.height;
+            const octx = out.getContext('2d');
+            octx.fillStyle = 'white';
+            octx.fillRect(0, 0, out.width, out.height);
+            octx.drawImage(strokeCanvas, 0, 0);
+            const link = document.createElement('a');
+            link.href = out.toDataURL('image/png');
+            link.download = 'dibujo-tecnico.png';
+            link.click();
+        }
+
+        function zoomIn() { zoom = Math.min(zoom + 0.1, 3); updateZoomDisplay(); }
+        function zoomOut() { zoom = Math.max(zoom - 0.1, 0.5); updateZoomDisplay(); }
+        function resetZoom() { zoom = 1; updateZoomDisplay(); }
+        function updateZoomDisplay() {
+            document.getElementById('zoomValue').textContent = Math.round(zoom*100) + '%';
+            canvas.style.transformOrigin = 'top left';
+            canvas.style.transform = `scale(${zoom})`;
+        }
+        function handleWheel(e) {
+            if (e.ctrlKey) { e.preventDefault(); e.deltaY > 0 ? zoomOut() : zoomIn(); }
+        }
+
+        init();
+    </script>
+</body>
+</html>
