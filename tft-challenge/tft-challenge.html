@@ -281,7 +281,9 @@ const SOURCES = {
   items: { label: 'Mobalytics, objetos combinados del Set 18 (consultado el 23/10/2026)', url: 'https://mobalytics.gg/tft/items/combined' },
   eclipse: { label: 'League of Legends Wiki, TFT: Eclipse', url: 'https://wiki.leagueoflegends.com/en-us/TFT:Eclipse' },
   origins: { label: 'Total Apex Entertainment, orígenes del Set 18 (Avatar y Apex Predator)', url: 'https://www.yardbarker.com/entertainment/articles/teamfight_tactics_set_18_enchanted_wilds_all_origins/s1_17456_44206995' },
-  luxVariants: { label: 'Mobalytics, variantes de Lux por origen', url: 'https://mobalytics.gg/tft/items/combined' }
+  luxVariants: { label: 'Mobalytics, variantes de Lux por origen', url: 'https://mobalytics.gg/tft/items/combined' },
+  data: { label: 'TFTraits, habilidades y rasgos del Set 18 extraídos de los archivos del juego', url: 'https://tftraits.com/set18/' },
+  patch183: { label: 'Riot Games, notas oficiales del parche 18.3 de TFT', url: 'https://teamfighttactics.leagueoflegends.com/en-us/news/game-updates/teamfight-tactics-patch-18-3/' }
 };
 const L = { A: 0, B: 1, C: 2, D: 3 };
 function q(id, category, question, options, letter, explanation, sources) {
@@ -289,262 +291,262 @@ function q(id, category, question, options, letter, explanation, sources) {
 }
 
 const EXAM_ITEMS = {
-  id: 'objetos', numeral: 'I', accent: 'gold',
-  title: 'Arsenal', subtitle: 'Objetos e interacciones',
-  description: 'Valores exactos, umbrales y cálculos de objetos combinados. Saber la estadística no basta: hay que saber aplicarla en combate.',
-  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 20,
+  id: 'interacciones', numeral: 'I', accent: 'gold',
+  title: 'Interacciones', subtitle: 'Campeones, objetos y sinergias',
+  description: 'Cómo reacciona cada habilidad a un objeto concreto, qué pasa cuando dos campeones se cruzan y qué potenciadores alfa cambian una partida.',
+  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 25,
   randomize: { questions: false, options: false },
   questions: [
-    q('obj-01', 'objeto', 'Una vez por combate, ¿cuándo se activa el escudo de Sanguinaria (Bloodthirster) y qué valor tiene?', [
-      'Al 40 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.',
-      'Al 60 % de vida: escudo del 40 % de la vida máxima que se deteriora rápidamente en 4 s.',
-      'Al 50 % de vida: escudo del 25 % de la vida máxima que dura hasta 4 s.',
-      'Al 50 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.'
-    ], 'D', 'Sanguinaria se activa una vez por combate al 50 % de vida y otorga un escudo del 30 % de la vida máxima que dura hasta 5 s. La opción del 60 % con escudo del 40 % que se deteriora en 4 s describe a Sterak’s Gage, el objeto con el que más se confunde.', ['items']),
-    q('obj-02', 'objeto', 'Tu portador de Sable-pistola hextech (Hextech Gunblade) inflige 1500 de daño en un combate. ¿Cuánta curación genera el efecto del objeto y a quién se dirige?', [
-      '225, repartidos entre los dos aliados con menos vida.',
-      '300, al aliado con menor porcentaje de vida.',
-      '300, al aliado con menos vida en valor absoluto.',
-      '375, al aliado con menor porcentaje de vida.'
-    ], 'B', 'El efecto cura al aliado con menor porcentaje de vida un 20 % del daño infligido: 1500 × 0,20 = 300. El criterio es el porcentaje, no la vida absoluta: un tanque de 4000 al 50 % tiene prioridad sobre un carry de 1000 al 60 %.', ['items']),
-    q('obj-03', 'objeto', 'Un enemigo situado a 2 hexágonos de tu portador de Chispa iónica (Ionic Spark) lanza una habilidad que gasta 80 de maná. ¿Qué ocurre?', [
-      'Recibe 120 de daño mágico antes de mitigación y está afectado por un 30 % de Shred (reducción de resistencia mágica).',
-      'Recibe 160 de daño mágico; el Shred no le afecta porque el aura solo alcanza 1 hexágono.',
-      'Recibe 120 de daño verdadero y está afectado por un 30 % de Sunder (reducción de armadura).',
-      'Recibe 80 de daño mágico y está afectado por un 25 % de Shred.'
-    ], 'A', 'Chispa iónica aplica un 30 % de Shred a los enemigos en un radio de 2 hexágonos y, cuando lanzan una habilidad, les inflige daño mágico igual al 150 % del maná gastado: 80 × 1,5 = 120 antes de mitigación. Sunder reduce armadura, no resistencia mágica.', ['items']),
-    q('obj-04', 'objeto', '¿Qué combinación describe exactamente el efecto del Chaleco de zarzas (Bramble Vest) en el Set 18?', [
-      '+8 % de vida máxima; 5 % menos de daño de todas las fuentes; 100 de daño mágico a los enemigos adyacentes al recibir un ataque (enfriamiento de 2 s).',
-      '+6 % de vida máxima; 5 % menos de daño de ataques; 100 de daño mágico a los enemigos en 2 hexágonos al recibir un ataque (enfriamiento de 1 s).',
-      '+6 % de vida máxima; 5 % menos de daño de ataques; 100 de daño mágico a los enemigos adyacentes al recibir un ataque (enfriamiento de 2 s).',
-      '+6 % de vida máxima; 10 % menos de daño de ataques; 150 de daño mágico a los enemigos adyacentes cada 3 s.'
-    ], 'C', 'Otorga +6 % de vida máxima y reduce un 5 % el daño recibido de ataques (no el de habilidades). Al recibir un ataque inflige 100 de daño mágico a todos los enemigos adyacentes, con un enfriamiento de 2 s.', ['items']),
-    q('obj-05', 'objeto', 'Tres enemigos tienen como objetivo a tu portador de Placa pétrea de gárgola (Gargoyle Stoneplate). ¿Cuántas resistencias adicionales obtiene por el efecto del objeto?', [
-      '+30 de armadura y +30 de resistencia mágica.',
-      '+15 de armadura y +15 de resistencia mágica.',
-      '+45 de armadura y +30 de resistencia mágica.',
-      '+30 de armadura y ninguna resistencia mágica.'
-    ], 'A', 'Otorga 10 de armadura y 10 de resistencia mágica por cada enemigo que tenga al portador como objetivo. Con tres enemigos: +30 de cada una.', ['items']),
-    q('obj-06', 'objeto', 'Un campeón con 2000 de vida máxima lleva Filo de la noche (Edge of Night). Sin otras curaciones ni heridas, ¿en qué momento se activa el objeto y cuánto cura?', [
-      'Al 40 % de vida (800); cura 300.',
-      'Al 60 % de vida (1200); cura 120.',
-      'Al 40 % de vida (800); cura 180.',
-      'Al 50 % de vida (1000); cura 200.'
-    ], 'C', 'Se activa al 40 % de vida: con 2000 de vida máxima, a 800. Le faltan 1200 y cura el 15 % de la vida que falta, es decir, 180. Además vuelve al portador inalcanzable brevemente y elimina efectos negativos. 300 sería el 15 % de la vida máxima, un error de base frecuente.', ['items']),
-    q('obj-07', 'objeto', 'Un lanzador de la retaguardia (rol que no es ni tanque ni luchador) equipa Yelmo adaptable (Adaptive Helm). ¿Qué recibe por el efecto del objeto?', [
-      '15 % de maná adicional de todas las fuentes y +30 de armadura y resistencia mágica.',
-      'Solo un 10 % de daño de ataque y de poder de habilidad.',
-      '10 % de maná adicional de todas las fuentes y un 10 % de daño de ataque y de poder de habilidad.',
-      '15 % de maná adicional de todas las fuentes y un 10 % de daño de ataque y de poder de habilidad.'
-    ], 'D', 'Todo portador obtiene un 15 % de maná adicional de todas las fuentes. La bonificación por rol cambia: tanques y luchadores reciben 30 de armadura y de resistencia mágica; el resto de roles, un 10 % de daño de ataque y de poder de habilidad.', ['items']),
-    q('obj-08', 'objeto', 'Con Bastón del arcángel (Archangel’s Staff), ¿cuánto poder de habilidad ha acumulado el portador gracias al objeto tras dos activaciones, y cuándo se produce la segunda?', [
-      '30 %, a los 8 s de combate.',
-      '40 %, a los 10 s de combate.',
-      '50 %, a los 10 s de combate.',
-      '20 %, a los 10 s de combate, porque el efecto no se acumula.'
-    ], 'B', 'Otorga un 20 % de poder de habilidad cada 5 s de combate y el efecto se acumula. La segunda activación llega a los 10 s y el total es del 40 %.', ['items']),
-    q('obj-09', 'objeto', 'En el parche 18.5, ¿qué porcentaje adicional de daño de ataque y de poder de habilidad de todas las fuentes otorgan la Mejora azul (Blue Buff) normal y su versión radiante?', [
-      'Normal: 10 %. Radiante: 25 %.',
-      'Normal: 10 %. Radiante: 30 %.',
-      'Normal: 15 %. Radiante: 25 %.',
-      'Normal: 20 %. Radiante: 40 %.'
-    ], 'A', 'La Mejora azul normal otorga un 10 % adicional de daño de ataque y de poder de habilidad de todas las fuentes. En el 18.5, la versión radiante bajó su bonificación base de AD/PH del 30 % al 25 %, así que el 30 % es el valor anterior al parche.', ['items', 'patch']),
-    q('obj-10', 'objeto', 'Un portador de Garra del dragón (Dragon’s Claw) tiene 3000 de vida máxima. ¿Cuánto cura cada pulso del efecto y cada cuánto se produce?', [
-      '75 de vida cada segundo.',
-      '60 de vida cada 2 s.',
-      '75 de vida cada 2 s.',
-      '180 de vida cada 5 s.'
-    ], 'C', 'Cura un 2,5 % de la vida máxima cada 2 s: 3000 × 0,025 = 75 por pulso. Regenerar un porcentaje de la vida que falta cada segundo es el efecto del Rostro espiritual, no de la Garra del dragón.', ['items']),
-    q('obj-11', 'objeto', '¿Qué amplificación de daño adicional otorga el Asesino de gigantes (Giant Slayer) en el Set 18 y contra qué objetivos?', [
-      '10 % contra objetivos con rol de tanque.',
-      '15 % contra objetivos con rol de tanque.',
-      '15 % contra objetivos con más de 1750 de vida máxima.',
-      '25 % contra objetivos con más de 1600 de vida máxima.'
-    ], 'B', 'En el Set 18 otorga un 15 % de amplificación de daño adicional contra objetivos con rol de tanque. Los umbrales por vida máxima pertenecen a versiones antiguas del objeto y ya no se aplican.', ['items']),
-    q('obj-12', 'objeto', 'Tras 6 segundos de combate, ¿cuánta velocidad de ataque acumulada ha obtenido un portador de Hoja de furia de Guinsoo (Guinsoo’s Rageblade) gracias a su efecto?', [
-      '30 %',
-      '36 %',
-      '18 %',
-      '42 %'
-    ], 'D', 'La Hoja de furia otorga un 7 % de velocidad de ataque acumulativa cada segundo: 7 × 6 = 42 %. El 18 % correspondería al ritmo del Fajín de mercurio (3 % por segundo).', ['items']),
-    q('obj-13', 'objeto', 'Un portador de Mano de la justicia (Hand of Justice) baja del 50 % de vida. ¿Qué valores del objeto tiene activos en ese momento?', [
-      '18 % de daño de ataque y de poder de habilidad, y 30 % de omnivampirismo.',
-      '36 % de daño de ataque y de poder de habilidad, y 15 % de omnivampirismo.',
-      '36 % de daño de ataque y de poder de habilidad, y 30 % de omnivampirismo.',
-      '18 % de daño de ataque y de poder de habilidad, y 15 % de omnivampirismo.'
-    ], 'A', 'Los valores base son 18 % de AD y PH y 15 % de omnivampirismo. Por encima del 50 % de vida se duplican el AD y el PH (36 %); por debajo del 50 % se duplica el omnivampirismo (30 %) y el AD/PH vuelve al 18 %.', ['items']),
-    q('obj-14', 'objeto', '¿Qué distingue el efecto de Últimas palabras (Last Whisper) del de Bastón del vacío (Void Staff)?', [
-      'Nada: ambos aplican un 30 % de reducción durante 3 s y no se acumulan.',
-      'Últimas palabras aplica un 30 % de Sunder durante 5 s; Bastón del vacío, un 30 % de Shred durante 3 s.',
-      'Últimas palabras aplica un 30 % de Sunder (armadura) durante 3 s; Bastón del vacío, un 30 % de Shred (resistencia mágica) durante 5 s. Ninguno se acumula.',
-      'Últimas palabras aplica un 20 % de Sunder acumulable durante 5 s; Bastón del vacío, un 30 % de Shred durante 5 s.'
-    ], 'C', 'Últimas palabras aplica un 30 % de Sunder (reducción de armadura) durante 3 s con ataques y habilidades. Bastón del vacío aplica un 30 % de Shred (reducción de resistencia mágica) durante 5 s. Ninguno de los dos efectos se acumula.', ['items']),
-    q('obj-15', 'objeto', 'El Morellonomicón (Morellonomicon) aplica 1 % de quemadura y 33 % de heridas durante 10 s. ¿Qué otro objeto aplica exactamente los mismos porcentajes, pero solo durante 5 s?', [
-      'Capa de fuego solar (Sunfire Cape)',
-      'Ninguno: todos los objetos con quemadura y heridas duran 10 s.',
-      'Bastón del vacío (Void Staff)',
-      'Mejora roja (Red Buff)'
-    ], 'D', 'La Mejora roja aplica 1 % de quemadura y 33 % de heridas durante 5 s. La Capa de fuego solar usa los mismos porcentajes que el Morellonomicón y también dura 10 s (cada 2 s, a un enemigo a 2 hexágonos). El Bastón del vacío no aplica quemadura ni heridas.', ['items']),
-    q('obj-16', 'objeto', 'Un portador de Promesa del protector (Protector’s Vow) cae al 40 % de vida durante el combate. ¿Cuánto maná ha recibido del objeto en total y qué escudo obtiene?', [
-      '20 de maná; escudo del 25 % de la vida máxima.',
-      '35 de maná (20 al inicio y 15 al 40 %); escudo del 20 % de la vida máxima.',
-      '35 de maná; escudo del 30 % de la vida máxima.',
-      '15 de maná; escudo del 20 % de la vida máxima.'
-    ], 'B', 'Al inicio del combate otorga 20 de maná. Al llegar al 40 % de vida concede 15 de maná más y un escudo equivalente al 20 % de la vida máxima, así que el total de maná es 35.', ['items']),
-    q('obj-17', 'objeto', '¿Cuál es la combinación correcta de duración de la inmunidad al control de masas y de acumulación de velocidad de ataque del Fajín de mercurio (Quicksilver)?', [
-      '15 s de inmunidad y 3 % de velocidad de ataque por segundo.',
-      '18 s de inmunidad y 5 % de velocidad de ataque acumulativa por segundo.',
-      '18 s de inmunidad y 3 % de velocidad de ataque acumulativa por segundo.',
-      '20 s de inmunidad y 2 % de velocidad de ataque por segundo.'
-    ], 'C', 'Al inicio del combate otorga inmunidad al control de masas durante 18 s y un 3 % de velocidad de ataque acumulativa cada segundo.', ['items']),
-    q('obj-18', 'objeto', 'Un portador de Rostro espiritual (Spirit Visage) con 3000 de vida máxima está a 1000 de vida. ¿Cuánto regenera por segundo gracias al objeto?', [
-      '40',
-      '60',
-      '30',
-      '20'
-    ], 'A', 'Regenera un 2 % de la vida que falta cada segundo. A 1000 de 3000 le faltan 2000: 2000 × 0,02 = 40 por segundo. 60 sería el 2 % de la vida máxima.', ['items']),
-    q('obj-19', 'objeto', '¿A qué porcentaje de vida se activa el escudo de Sterak’s Gage y cómo se comporta?', [
-      'Al 50 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.',
-      'Al 40 % de vida: escudo del 40 % de la vida máxima que dura 5 s.',
-      'Al 60 % de vida: escudo del 25 % de la vida máxima que dura 4 s.',
-      'Al 60 % de vida: escudo del 40 % de la vida máxima que se deteriora rápidamente en 4 s.'
-    ], 'D', 'Al 60 % de vida otorga un escudo del 40 % de la vida máxima que se deteriora rápidamente durante 4 s. El 50 % con escudo del 30 % hasta 5 s es el efecto de Sanguinaria.', ['items']),
-    q('obj-20', 'objeto', 'Determinación titánica (Titan’s Resolve) llega al máximo de acumulaciones. ¿Qué tiene activo el portador gracias al objeto?', [
-      '50 % de daño de ataque y de poder de habilidad, 15 % de amplificación de daño y un escudo del 20 % de la vida máxima.',
-      '50 % de daño de ataque y de poder de habilidad (25 × 2 %), 10 % de amplificación de daño y el estado imparable.',
-      '60 % de daño de ataque y de poder de habilidad (30 × 2 %), 10 % de amplificación de daño y el estado inalcanzable.',
-      '50 % de daño de ataque y de poder de habilidad y 10 % de amplificación de daño, sin ningún estado especial.'
-    ], 'B', 'Cada acumulación otorga un 2 % de AD y PH al atacar o recibir daño, hasta 25 acumulaciones (50 % en total). Con el máximo, obtiene además un 10 % de amplificación de daño y se vuelve imparable.', ['items'])
+    q('int-01', 'campeón', 'Kha’Zix 2★ (parche 18.5) salta sobre un objetivo que no tiene aliados adyacentes. ¿Qué daño base inflige y qué obtiene además?', [
+      '345 de PH; no obtiene nada adicional.',
+      '410 de PH y 10 de maná.',
+      '390 de PH y reinicia la habilidad si el objetivo muere.',
+      '390 de PH y 10 de maná.'
+    ], 'D', 'Contra un objetivo aislado inflige 280/390/590 de PH tras el 18.5 (antes, 285/410/605) y gana 10 de maná. 345 es el daño contra un objetivo no aislado a 2★.', ['patch', 'data']),
+    q('int-02', 'mecánica', 'Kha’Zix es tu único Rival y elimina a un Rengar enemigo. ¿Cuántos derribos suma y qué pasaría si colocaras también tu propio Rengar en el tablero?', [
+      'Suma 1 derribo; con Rengar en tu tablero, ambos acumularían derribos por separado.',
+      'Suma 3 derribos; con Rengar también en tu tablero, el rasgo Rival dejaría de estar activo.',
+      'Suma 3 derribos; con Rengar en tu tablero, solo contaría el que lleve más objetos.',
+      'Suma 2 derribos; con Rengar en tu tablero, el rasgo se aplicaría a los dos.'
+    ], 'B', 'Rival solo está activo mientras despliegas un único Rival y se aplica al más fuerte. Derribar a otro Rival otorga 3 derribos en lugar de 1.', ['data']),
+    q('int-03', 'objeto', 'Murkwolf con su potenciador gris (Grey Buff) equipa Filo infinito (Infinity Edge). ¿Qué le aporta el efecto de Precisión del objeto?', [
+      'Como ya tiene Precisión por el potenciador gris, la Precisión adicional le da +10 % de daño crítico.',
+      'Nada: la Precisión no se acumula y el efecto se pierde.',
+      'Duplica su probabilidad de crítico, hasta un máximo del 75 %.',
+      'Permite que sus ataques básicos sean críticos, algo que antes no podían hacer.'
+    ], 'A', 'El potenciador gris ya otorga Precisión y del 25 % al 75 % de probabilidad de crítico según la vida perdida. Cada Precisión adicional (Filo infinito, Guantelete enjoyado, Executioner) se convierte en +10 % de daño crítico.', ['data', 'items']),
+    q('int-04', 'objeto', '¿Qué ocurre si Ivern equipa Guantelete enjoyado (Jeweled Gauntlet)?', [
+      'Nada especial: los escudos nunca pueden ser críticos.',
+      'Sus escudos se convierten en daño mágico al expirar.',
+      'Los escudos de su habilidad pueden ser críticos, porque su pasiva permite que hagan crítico con Precisión.',
+      'Solo pueden ser críticos los escudos que reciben aliados que ya tengan Precisión.'
+    ], 'C', 'La pasiva de Ivern indica que los escudos de su habilidad pueden ser críticos con Precisión. El Guantelete enjoyado otorga Precisión, así que sus escudos de 185/350 de PH pueden ser críticos.', ['data', 'items']),
+    q('int-05', 'campeón', 'Kennen empieza a cargar su habilidad con 3 enemigos quemándose (por Inferno, Mejora roja, Morellonomicón o Capa de fuego solar). ¿Qué gana?', [
+      '45 % de poder de habilidad.',
+      '30 % de poder de habilidad.',
+      '15 % de poder de habilidad, sin importar cuántos enemigos ardan.',
+      'Nada: solo cuentan las quemaduras del rasgo Inferno.'
+    ], 'A', 'Al cargar, Kennen gana un 15 % de poder de habilidad por cada enemigo en llamas, sea cual sea el origen de la quemadura: 3 × 15 % = 45 %. Por eso los objetos con quemadura le sientan tan bien.', ['data']),
+    q('int-06', 'objeto', '¿Por qué la Placa pétrea de gárgola (Gargoyle Stoneplate) escala tan bien en Rammus?', [
+      'Porque Rammus convierte la armadura en vida máxima al lanzar su habilidad.',
+      'Porque su escudo crece con el número de enemigos y la Placa lo duplica.',
+      'Porque su provocación obliga a los enemigos a atacarle (+10 de armadura y RM por cada uno) y el daño al romperse su escudo escala con su armadura y su RM.',
+      'Porque la Placa reduce el enfriamiento de su provocación.'
+    ], 'C', 'Rammus provoca a los enemigos, y la Placa otorga 10 de armadura y 10 de RM por cada enemigo que le apunta. Al romperse su escudo inflige daño que escala con el 50/75/120 % de su armadura más el 50/75/120 % de su RM.', ['data', 'items']),
+    q('int-07', 'objeto', 'Sett lleva Promesa del protector (Protector’s Vow). Al bajar del 40 % de vida por primera vez en el combate, ¿cuánto maná recibe de golpe entre su pasiva y el objeto?', [
+      '15',
+      '100',
+      '135',
+      '115'
+    ], 'D', 'La pasiva de Sett otorga 100 de maná la primera vez que baja del 40 % de vida, y la Promesa del protector da 15 de maná más un escudo del 20 % al llegar al 40 %. Total: 115, aparte de los 20 que la Promesa da al inicio del combate.', ['data', 'items']),
+    q('int-08', 'campeón', 'Taric está emparejado con tu carry. ¿Qué activa el escudo de su pasiva y qué hacen ambos tras su habilidad en el 18.5?', [
+      'Se activa cada vez que Taric baja del 50 %; ambos infligen 100/150 de PH adicional en su siguiente ataque.',
+      'Se activa la primera vez que Taric o su aliado emparejado baja del 50 %; ambos infligen 130/200 de PH de daño mágico adicional en sus 2 siguientes ataques.',
+      'Se activa solo cuando el aliado emparejado baja del 50 %; ambos infligen 130/200 de PH en sus 3 siguientes ataques.',
+      'Se activa al inicio del combate; solo Taric inflige 130/200 de PH en sus 2 siguientes ataques.'
+    ], 'B', 'La primera vez que Taric o su pareja bajan del 50 %, ambos liberan energía que escuda a los aliados a 3 hexágonos. Tras su habilidad, Taric y su pareja infligen daño mágico adicional en sus 2 siguientes ataques: 100/150 de PH antes del 18.5 y 130/200 ahora.', ['patch', 'data']),
+    q('int-09', 'campeón', '¿Qué cambió en Mama Beak en el parche 18.5?', [
+      'Su bloqueo de maná termina cuando las Tiny Beaks empiezan a desaparecer (unos 1 s menos) y el daño de sus ataques de habilidad baja de 22/33/52 a 20/30/50 % de AD.',
+      'Se eliminó su bloqueo de maná y el daño de sus ataques de habilidad sube.',
+      'Su bloqueo de maná dura 1 s más y el daño baja de 22/33/52 a 20/30/50 % de AD.',
+      'Solo baja el daño; el bloqueo de maná no cambia.'
+    ], 'A', 'Riot corrigió un error: el bloqueo de maná ahora termina cuando las Tiny Beaks empiezan a desaparecer, no cuando terminan de hacerlo, lo que reduce el bloqueo en ~1 s. Como compensación, el daño bajó de 22/33/52 a 20/30/50 % de AD. En conjunto es una ligera mejora.', ['patch']),
+    q('int-10', 'campeón', 'Tras el 18.5 y su actualización del 22 de octubre, ¿cómo quedan la curación de la marca alfa y la penetración de armadura de Brambleback?', [
+      'Curación de la marca alfa del 5 %; ignora un 25 % + 25 % de PH de armadura.',
+      'Curación del 4 %; ignora un 20 % + 25 % de PH de armadura.',
+      'Curación del 4 % (la mejora se revirtió); ignora un 25 % + 25 % de PH de armadura (la mejora se mantuvo).',
+      'Curación del 5 %; ignora un 20 % + 25 % de PH de armadura.'
+    ], 'C', 'El 18.5 subió la curación de la marca alfa del 4 % al 5 % y la penetración de armadura del 20 % al 25 % (+25 % de PH). En la actualización del 22 de octubre se revirtió la curación al 4 %, pero se mantuvo la penetración.', ['patch']),
+    q('int-11', 'campeón', 'Ashe y Draven lanzan su habilidad y no golpean a ningún enemigo. ¿Cuánto maná recuperan?', [
+      'Ambos, el 50 % del maná gastado.',
+      'Ashe, el 70 %; Draven, el 50 %.',
+      'Ashe, el 50 %; Draven, el 70 %.',
+      'Ninguno recupera maná.'
+    ], 'B', 'Si la flecha de Ashe no golpea a nadie, recupera el 70 % del maná gastado. Si las hachas de Draven no golpean a nadie, recupera el 50 %.', ['data']),
+    q('int-12', 'campeón', 'Sentinel es tu Riftbeast alfa con el potenciador azul. ¿Qué aporta cada uno de sus lanzamientos a tu equipo y a los enemigos golpeados por la fisura?', [
+      'Aliados: +2 de maná al instante. Enemigos: aturdidos durante 1 s.',
+      'Aliados: +10 de maná. Enemigos: Mana Reave de 2.',
+      'Aliados: +2 de regeneración de maná. Enemigos: 30 % de Shred.',
+      'Aliados: +2 de regeneración de maná. Enemigos: Mana Reave de 10, que aumenta el coste de su siguiente habilidad.'
+    ], 'D', 'Con el potenciador azul, cada lanzamiento de Sentinel otorga a los aliados 2 de regeneración de maná. La fisura levanta brevemente a los enemigos golpeados y les aplica Mana Reave de 10.', ['data']),
+    q('int-13', 'campeón', '¿Con qué estadística escala el daño del golpe de Leona y qué hace su pasiva?', [
+      'Escala con su armadura; empieza el combate con armadura y RM adicionales que decaen en 12 s.',
+      'Escala con su vida máxima; empieza el combate con un escudo que decae en 12 s.',
+      'Escala con su poder de habilidad; gana armadura cada vez que recibe un golpe.',
+      'Escala con su armadura y su RM; su pasiva refleja daño a los atacantes.'
+    ], 'A', 'Su golpe inflige el 150/270/405 % de su armadura como daño mágico y aturde 1,5 s. Su pasiva le da 60/80/100 de PH de armadura y RM adicionales al inicio, que decaen durante 12 s. Por eso sus objetos de armadura también aumentan su daño.', ['data']),
+    q('int-14', 'campeón', 'Muere tu Krug con el potenciador de pizarra (Slate Buff). ¿Qué sucede?', [
+      'Revive con el 50 % de su vida máxima.',
+      'Se divide en dos Kruglettes que no provocan, y los aliados ganan un 8 % de armadura.',
+      'Se divide en dos Kruglettes que provocan; al morir, Krug y los Kruglettes escudan a los aliados con un 8 % de la vida máxima.',
+      'Se divide en tres Kruglettes y escuda a los aliados con un 15 % de la vida máxima.'
+    ], 'C', 'Al morir, Krug se divide en dos Kruglettes que provocan inmediatamente. Con el potenciador de pizarra, tanto Krug como los Kruglettes escudan a los aliados con un 8 % de la vida máxima al morir.', ['data']),
+    q('int-15', 'campeón', '¿Qué hace el potenciador verde de Scuttlecrab y cómo ataca normalmente?', [
+      'Los aliados que bajan del 50 % reciben un escudo del 15 %; ataca de forma normal.',
+      'Los aliados que bajan del 30 % recuperan un 15 %; sus ataques se sustituyen por un baile.',
+      'Los aliados que bajan del 50 % recuperan un 15 %; ataca a distancia.',
+      'Los aliados que bajan del 50 % recuperan un 15 % de su vida máxima; sus ataques se sustituyen por un baile que daña a todos los enemigos adyacentes.'
+    ], 'D', 'El potenciador verde hace que los aliados recuperen un 15 % de la vida máxima al bajar del 50 %. La pasiva de Scuttlecrab sustituye sus ataques por un baile que inflige el 50/75/112,5 % de AD a todos los enemigos adyacentes.', ['data']),
+    q('int-16', 'campeón', 'La carga explosiva de Tristana está sobre un enemigo que muere antes de explotar. ¿Qué pasa y cuánto daño suma cada ataque durante el lanzamiento tras el 18.5?', [
+      'La carga desaparece; 12/18/28 % de AD por ataque.',
+      'La carga pasa al nuevo objetivo de Tristana; 12/18/28 % de AD por cada ataque durante el lanzamiento.',
+      'La carga explota en el acto; 10/15/25 % de AD por ataque.',
+      'La carga pasa al nuevo objetivo; 10/15/25 % de AD por ataque.'
+    ], 'B', 'Si el enemigo con la carga muere, esta pasa al nuevo objetivo de Tristana. El daño adicional por cada ataque durante el lanzamiento subió de 10/15/25 a 12/18/28 % de AD en el 18.5, junto con la bajada de maná de 0/60 a 0/50.', ['patch', 'data']),
+    q('int-17', 'campeón', '¿Por debajo de qué porcentaje de vida ejecutan el potenciador de Elder Dragon y el Emblema de Executioner?', [
+      'Ambos, por debajo del 12 %.',
+      'Elder Dragon, del 8 %; el emblema, del 12 %.',
+      'Elder Dragon, del 12 %; el emblema, del 8 %.',
+      'Elder Dragon, del 15 %; el emblema, del 10 %.'
+    ], 'C', 'El potenciador de Elder Dragon ejecuta al dañar a un enemigo por debajo del 12 % de vida. El Emblema de Executioner ejecuta por debajo del 8 % de la vida máxima.', ['data', 'items']),
+    q('int-18', 'rasgo', 'Juegas Lux con el origen Fae. Cuando lanza su habilidad, ¿quién recibe maná gracias a su pasiva?', [
+      'Todos los aliados que comparten un rasgo con Lux; aquí, los Fae.',
+      'Solo el aliado con más maná máximo.',
+      'Todos los aliados, sin importar su rasgo.',
+      'Solo la propia Lux.'
+    ], 'A', 'La pasiva de Lux da maná, escalado con su PH, a todos los aliados que comparten un rasgo con ella cada vez que lanza su habilidad. Además, su origen elegido cuenta doble para las bonificaciones de rasgo.', ['data']),
+    q('int-19', 'rasgo', '¿Cuándo gana vida máxima permanente Maokai gracias a su rasgo Old Growth?', [
+      'Cada vez que bloquea 650 de daño.',
+      'Cada vez que ganas un combate contra un jugador.',
+      'Cuando muere un aliado a 3 hexágonos o menos.',
+      'Cuando muere un enemigo a 3 hexágonos o menos: tu Old Growth más fuerte gana 30 de vida máxima permanente.'
+    ], 'D', 'Old Growth otorga 30 de vida máxima permanente a tu Maokai más fuerte cada vez que muere un enemigo a 3 hexágonos o menos. Los 650 de daño bloqueado activan otra cosa: el lanzamiento de un retoño de su pasiva.', ['data']),
+    q('int-20', 'rasgo', '¿Qué aplica el daño de Kog’Maw gracias a su rasgo único Caustic?', [
+      '30 % de Shred durante 4 s.',
+      '30 % de Shred y 30 % de Sunder durante 4 s.',
+      '20 % de Shred y 20 % de Sunder durante 3 s.',
+      '30 % de Sunder durante 3 s.'
+    ], 'B', 'Caustic hace que el daño de Kog’Maw aplique a la vez un 30 % de Shred (resistencia mágica) y un 30 % de Sunder (armadura) durante 4 s.', ['data'])
   ]
 };
 
 const EXAM_PATCH = {
-  id: 'parche-18-5', numeral: 'II', accent: 'violet',
-  title: 'Parche 18.5', subtitle: 'Balance, rasgos y fuegos fatuos',
-  description: 'Cambios exactos del 18.5 y de su actualización del 22 de octubre, rasgos ocultos y particularidades del Set 18.',
-  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 20,
+  id: 'economia-18-5', numeral: 'II', accent: 'violet',
+  title: 'Economía 18.5', subtitle: 'Aumentos, oro, experiencia y fuegos fatuos',
+  description: 'Oro, tiradas, XP y recompensas: los cambios del 18.5 a aumentos y fuegos fatuos, y los rasgos y campeones que generan economía.',
+  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 25,
   randomize: { questions: false, options: false },
   questions: [
-    q('p185-01', 'campeón', 'Tras el parche 18.5, ¿cuánto daño inflige la habilidad de Kha’Zix contra un objetivo NO aislado (1/2/3 estrellas) y cuánto contra un objetivo aislado a 3 estrellas?', [
-      'No aislado: 255/360/515 de PH. Aislado a 3★: 605 de PH.',
-      'No aislado: 250/360/515 de PH. Aislado a 3★: 590 de PH.',
-      'No aislado: 250/345/500 de PH. Aislado a 3★: 590 de PH.',
-      'No aislado: 250/345/500 de PH. Aislado a 3★: 605 de PH.'
-    ], 'C', 'El 18.5 bajó el daño no aislado de 255/360/515 a 250/345/500 de PH y el aislado de 285/410/605 a 280/390/590 de PH. Las opciones con 515 o 605 mezclan valores anteriores al parche.', ['patch']),
-    q('p185-02', 'campeón', '¿Qué cambió exactamente en la habilidad de Soraka en el parche 18.5?', [
-      'Daño inicial de la estrella: 225/335 → 235/355 de PH. Daño adicional: 100/150 → 110/165 de PH.',
-      'Daño inicial: 225/335 → 235/355 de PH. Daño adicional sin cambios.',
-      'Daño inicial sin cambios. Daño adicional: 100/150 → 110/165 de PH.',
-      'Daño inicial: 225/335 → 250/375 de PH. Daño adicional: 100/150 → 110/165 de PH.'
-    ], 'A', 'Riot mejoró los dos componentes para convertirla en carry principal de PH viable: daño inicial de 225/335 a 235/355 de PH y daño adicional de 100/150 a 110/165 de PH.', ['patch']),
-    q('p185-03', 'campeón', '¿Qué cambios recibió Sentinel en el parche 18.5?', [
-      'Aturdimiento: 1 → 0,75 s. Escudo sin cambios.',
-      'Aturdimiento: 1 → 0,5 s. Escudo: 375/475 → 350/450 de PH.',
-      'Aturdimiento: 0,75 → 0,5 s. Escudo: 350/450 → 400/500 de PH.',
-      'Aturdimiento: 1 → 0,5 s. Escudo: 350/450 → 375/475 de PH.'
-    ], 'D', 'El aturdimiento bajó de 1 s a 0,5 s y el escudo subió de 350/450 a 375/475 de PH. Riot lo presenta como una debilitación ligera, salvo si se le equipa mucho poder de habilidad.', ['patch']),
-    q('p185-04', 'campeón', '¿Qué dos cambios recibió Tristana en el parche 18.5?', [
-      'Maná: 0/60 → 10/50. Daño por ataque de la habilidad: 10/15/25 → 12/18/28 de AD.',
-      'Maná: 0/60 → 0/50. Daño por ataque de la habilidad: 10/15/25 → 12/18/28 de AD.',
-      'Maná: 0/60 → 0/50. Daño por ataque de la habilidad sin cambios.',
-      'Maná: 0/50 → 0/60. Daño por ataque de la habilidad: 12/18/28 → 10/15/25 de AD.'
-    ], 'B', 'Tristana pasó de 0/60 a 0/50 de maná y su daño por ataque de la habilidad subió de 10/15/25 a 12/18/28 de AD. Riot lo describe como una mejora considerable.', ['patch']),
-    q('p185-05', 'campeón', '¿Qué cambios recibieron las dos formas de Maestro Yi en el parche 18.5?', [
-      'Forma de AD: daño de ataque inicial 60 → 62. Forma de PH: 125/190/285 → 135/200/320 de PH.',
-      'Forma de AD: daño de ataque inicial 58 → 63. Forma de PH sin cambios.',
-      'Forma de AD: daño de ataque inicial 60 → 63. Forma de PH: 125/190/285 → 135/200/320 de PH.',
-      'Forma de AD: daño de ataque inicial 60 → 63. Forma de PH: 125/190/285 → 135/205/300 de PH.'
-    ], 'C', 'La forma de AD subió su daño de ataque inicial de 60 a 63, y la forma de PH, el daño de habilidad de 125/190/285 a 135/200/320 de PH.', ['patch']),
-    q('p185-06', 'rasgo', '¿Qué cambió en la curación del rasgo Flora Fatalis en el parche 18.5?', [
-      'La curación basada en la vida máxima pasó del 8 % al 7 %.',
-      'La curación basada en la vida máxima pasó del 7 % al 8 %.',
-      'La curación basada en la vida máxima pasó del 8 % al 6 %.',
-      'La curación basada en la vida máxima pasó del 10 % al 7 %.'
-    ], 'A', 'La curación basada en la vida máxima bajó del 8 % al 7 % para frenar a los supertanques de las composiciones de Rammus y Azir. En compensación, el aumento Consuming Flora subió su efectividad adicional del 50 % al 70 %.', ['patch']),
-    q('p185-07', 'rasgo', '¿Cuáles son los nuevos valores de velocidad de ataque por ataque de Rapidfire tras el parche 18.5?', [
-      '3/5/8/12 %',
-      '3/6/8/10 %',
-      '4/5/7/10 %',
-      '3/5/7/10 %'
-    ], 'D', 'Rapidfire pasó de 3/5/8/12 % a 3/5/7/10 % de velocidad de ataque por ataque: solo se debilitaron los dos niveles superiores. Riot lo justifica porque el rasgo despega con un solo emblema.', ['patch']),
-    q('p185-08', 'rasgo', 'En Elderwood (9), ¿cuánta vida adicional recibe la invocación tras el ajuste del parche 18.5?', [
-      '100 %',
-      '125 %',
-      '115 %',
-      '140 %'
-    ], 'B', 'La vida adicional de la invocación en Elderwood (9) bajó del 140 % al 125 %. Riot señaló que, con emblemas y campeones de dos estrellas, era casi una victoria automática.', ['patch']),
-    q('p185-09', 'rasgo', '¿Qué combinación de cambios afectó a Riftbeast en el parche 18.5?', [
-      'Riftbeast (7): AD/PH 6 % → 5 %. Aumento Omega Riftbeast: vida y velocidad de ataque adicionales 10 % → 8 %.',
-      'Riftbeast (7): AD/PH 6 % → 5 %. Aumento Omega Riftbeast sin cambios.',
-      'Riftbeast (7): AD/PH 8 % → 6 %. Aumento Omega Riftbeast: vida adicional 10 % → 8 %.',
-      'Riftbeast (7): AD/PH 6 % → 4 %. Aumento Omega Riftbeast: velocidad de ataque 10 % → 8 %.'
-    ], 'A', 'Riftbeast (7) bajó su bonificación de AD/PH del 6 % al 5 %. Además, el aumento Omega Riftbeast redujo tanto la vida adicional como la velocidad de ataque adicional del 10 % al 8 %.', ['patch']),
-    q('p185-10', 'rasgo', '¿Qué dos valores de Blackthorn se modificaron en el parche 18.5?', [
-      'Bonificación potenciada de (6): 60 % → 50 %. Sacrificio de PH base: 12 % de amplificación + 3 de regeneración de maná → 10 % + 2.',
-      'Bonificación potenciada de (6): 50 % → 60 %. Sacrificio de PH base: 10 % de amplificación + 2 de regeneración de maná → 12 % + 2.',
-      'Bonificación potenciada de (6): 60 % → 50 %. Sacrificio de PH base: 12 % de amplificación + 2 de regeneración de maná → 10 % + 2.',
-      'Bonificación potenciada de (6) sin cambios. Sacrificio de PH base: 12 % de amplificación + 2 de regeneración de maná → 8 % + 2.'
-    ], 'C', 'La bonificación potenciada de Blackthorn (6) bajó del 60 % al 50 %, y el sacrificio de PH base pasó de 12 % de amplificación de daño y 2 de regeneración de maná a 10 % y 2. La regeneración de maná no cambió.', ['patch']),
-    q('p185-11', 'rasgo', '¿Qué cambió en el nivel de 4 unidades de Fae y en su progresión de pixies dorados en el parche 18.5?', [
-      'Curación de Fae (4): 4 % → 6 %. El umbral del 4.º pixie no cambia.',
-      'Curación de Fae (4): 4 % → 5 %. Umbral del 4.º pixie: 30 000 → 20 000.',
-      'Fae (4) otorga ahora un 5 % de omnivampirismo. Los umbrales no cambian.',
-      'Curación de Fae (4): 4 % → 5 %. Umbral del 4.º pixie: 30 000 → 25 000.'
-    ], 'D', 'La curación de Fae (2/4) pasó de 2,5/4 % a 3/5 %. Además se suavizaron los umbrales de los pixies dorados: el 4.º de 30 000 a 25 000, el 5.º de 70 000 a 60 000 y el 6.º de 110 000 a 100 000.', ['patch']),
-    q('p185-12', 'objeto', '¿Qué objetos radiantes se debilitaron en el parche 18.5 y cómo?', [
-      'Mejora azul radiante: AD/PH base 30 % → 25 %, y su bonificación para roles que no son tanque ni luchador 40 → 35.',
-      'Mejora azul radiante: AD/PH base 30 % → 25 %. Yelmo adaptable radiante: regeneración de maná 7 → 6 y bonificación para roles que no son tanque ni luchador 40 → 35.',
-      'Solo el Yelmo adaptable radiante: regeneración de maná 7 → 6.',
-      'Mejora azul radiante: AD/PH base 30 % → 20 %. Yelmo adaptable radiante: bonificación para roles que no son tanque ni luchador 40 → 45.'
-    ], 'B', 'Se debilitaron dos radiantes. La Mejora azul radiante bajó su AD/PH base del 30 % al 25 %. El Yelmo adaptable radiante bajó su regeneración de maná de 7 a 6 y su bonificación para roles que no son tanque ni luchador de 40 a 35. La primera opción atribuye a la Mejora azul un cambio que pertenece al Yelmo.', ['patch']),
-    q('p185-13', 'balance', '¿Cómo cambió el fuego fatuo Hand of Baron en el parche 18.5?', [
-      'Coste 6 → 4 de oro. Vida 33/55 → 22/33. Resto de estadísticas 3/5 % → 2/3 %. Probabilidad de crítico 10/15 % → 6/8 %.',
-      'Coste 4 → 6 de oro. Estadísticas sin cambios.',
-      'Coste 6 → 3 de oro. Vida 33/55 → 22/33. Probabilidad de crítico sin cambios.',
-      'Coste 6 → 4 de oro. Estadísticas sin cambios.'
-    ], 'A', 'Riot lo consideraba demasiado poderoso: bajó su coste de 6 a 4 de oro, pero recortó todas sus estadísticas. Vida de 33/55 a 22/33; resistencias, AD, PH, velocidad de ataque, omnivampirismo, durabilidad y amplificación de 3/5 % a 2/3 %; y crítico de 10/15 % a 6/8 %.', ['patch']),
-    q('p185-14', 'balance', '¿Qué describe correctamente lo ocurrido con el fuego fatuo Abandon Ship en el parche 18.5?', [
-      'Su coste pasó de 2 a 0 de oro.',
-      'Su coste pasó de 0 a 2 de oro, y su mejora Blossom pasó a costar 4.',
-      'Su coste pasó de 0 a 2 de oro, y en la actualización del 22 de octubre se corrigió su mejora Blossom para que cueste 2 de oro.',
-      'Se eliminó del sistema de fuegos fatuos.'
-    ], 'C', 'Con un coste de 0 era demasiado fácil de forzar, así que pasó a costar 2 de oro. En la actualización del 22 de octubre se corrigió además su mejora Blossom para que cueste correctamente 2 de oro.', ['patch']),
-    q('p185-15', 'mecánica', '¿Qué cambió en los fuegos fatuos que filtran según el número de campeones con objetos equipados?', [
-      'Ahora solo cuentan los campeones que están en el tablero.',
-      'Ahora también cuentan los campeones del banquillo.',
-      'Ahora cuentan los objetos que tiene el jugador, no los campeones.',
-      'Ahora solo cuentan los campeones de 3 estrellas.'
-    ], 'B', 'Los fuegos fatuos que filtran por número de campeones con objetos ahora también incluyen los del banquillo. Riot quería reducir la optimización de tablero y banquillo como prueba de conocimiento y de APM.', ['patch']),
-    q('p185-16', 'mecánica', '¿Cómo comprueban la composición los fuegos fatuos que filtran por roles específicos tras el parche 18.5?', [
-      'Revisan el tablero actual en el momento de la compra.',
-      'Revisan exclusivamente los campeones del banquillo.',
-      'Revisan la composición con la que empezó la partida.',
-      'Usan una instantánea del último combate en lugar del tablero actual.'
-    ], 'D', 'Los fuegos fatuos que filtran por rol toman una instantánea del último combate en lugar de mirar el tablero actual, para que reorganizar unidades antes de comprar deje de ser óptimo.', ['patch']),
-    q('p185-17', 'rasgo', '¿Qué debes desplegar para activar el rasgo oculto Eclipse?', [
-      '3 campeones Solar y 3 campeones Lunar en el tablero.',
-      '3 campeones Solar y 2 campeones Lunar en el tablero.',
-      '2 campeones Solar y 2 campeones Lunar en el tablero.',
-      '3 campeones Solar y 3 Lunar, contando también los del banquillo.'
-    ], 'A', 'Eclipse es un rasgo oculto que se activa con 3 campeones Solar y 3 campeones Lunar colocados en el tablero durante la partida. Los campeones del banquillo no cuentan.', ['eclipse']),
-    q('p185-18', 'rasgo', '¿Cuál es la peculiaridad del rasgo Avatar de Lux en el Set 18?', [
-      'Puede representar uno de seis orígenes, y el origen elegido cuenta dos veces para las bonificaciones.',
-      'Puede representar uno de nueve orígenes, el origen cuenta una sola vez y ocupa dos espacios de equipo.',
-      'Puede representar uno de nueve orígenes, el origen elegido cuenta dos veces para las bonificaciones, y tener un Avatar en el tablero o el banquillo transforma los demás Avatares de tu tienda en ese mismo rasgo.',
-      'Puede representar cualquier clase, pero nunca un origen, y cambia de rasgo cada ronda.'
-    ], 'C', 'Lux puede ser Blackthorn, Blossom, Coven, Elderwood, Fae, Inferno, Lunar, Primal o Solar: nueve orígenes. El rasgo elegido cuenta dos veces para las bonificaciones, y tener un Avatar en el tablero o el banquillo convierte a los demás Avatares de tu tienda en ese rasgo.', ['origins', 'luxVariants']),
-    q('p185-19', 'rasgo', '¿Qué particularidad tiene Elder Dragon en el recuento de unidades y en el rasgo Riftbeast?', [
-      'Ocupa un espacio de equipo y suma 1 al recuento de Riftbeast.',
-      'Ocupa dos espacios de equipo y suma 2 al recuento de Riftbeast, gracias a su rasgo único Apex Predator.',
-      'Ocupa dos espacios de equipo, pero no contribuye a Riftbeast.',
-      'Ocupa tres espacios de equipo y suma 2 al recuento de Riftbeast.'
-    ], 'B', 'Su rasgo único, Apex Predator, hace que Elder Dragon ocupe dos espacios de equipo y otorgue +2 al rasgo Riftbeast.', ['origins']),
-    q('p185-20', 'rasgo', 'Con el parche 18.5 en vigor, ¿qué hace exactamente el rasgo oculto Eclipse?', [
-      'A los 10 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3,5 s.',
-      'Al inicio del combate, elimina una sola vez al enemigo con más vida.',
-      'A los 8 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3 s.',
-      'A los 8 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3,5 s.'
-    ], 'D', 'Tras 8 s de combate, Eclipse elimina al enemigo con menos vida y repite el efecto cada 3,5 s. Los 10 s eran el valor anterior: el parche 18.4 adelantó la primera ejecución a los 8 s.', ['eclipse'])
+    q('eco-01', 'balance', '¿Qué hace Investment Strategy II y cómo cambió en el 18.5?', [
+      'Tus campeones ganan 9 de vida permanente por cada interés; +2 de interés máximo; oro inicial 10 → 6.',
+      'Tus campeones ganan 12 de vida permanente por cada interés; el interés máximo no cambia; oro inicial 10 → 6.',
+      'Tus campeones ganan 12 de vida permanente por cada interés; +2 de interés máximo; oro inicial 10 → 6.',
+      'Tus campeones ganan 12 de vida permanente por cada interés; +2 de interés máximo; oro inicial 6 → 3.'
+    ], 'C', 'Investment Strategy II otorga 12 de vida máxima permanente por cada interés y sube en 2 el interés máximo. En el 18.5 su oro inicial bajó de 10 a 6. La versión I (9 de vida por interés) bajó de 6 a 3.', ['patch', 'data']),
+    q('eco-02', 'balance', '¿Cómo quedó la familia de aumentos Pandora’s Items II en el 18.5?', [
+      'II da 1 de oro (antes 4); II+ aparece en 3-2 y da 4; II++ aparece en 4-2 y da 6; se excluyen entre sí.',
+      'II da 4 de oro; II+ da 6; II++ da 8; pueden salir juntos.',
+      'II da 1 de oro; II+ aparece en 4-2 y da 4; II++ aparece en 3-2 y da 6.',
+      'Se eliminó II y se sustituyó por II+ y II++.'
+    ], 'A', 'Pandora’s Items II bajó su oro de 4 a 1 y llegaron dos variantes: II+ (en la ronda 3-2, 4 de oro) y II++ (en la 4-2, 6 de oro). Los aumentos Pandora’s Items se excluyen entre sí.', ['patch']),
+    q('eco-03', 'balance', '¿Qué cambió en Expected Unexpectedness en el 18.5?', [
+      'Oro de la fase 3: 18 → 15; fase 4: 20 → 18; campeones de 5 de coste: 3 → 2, sin compensación.',
+      'Oro de la fase 3: 15 → 18; fase 4: 18 → 20; campeones de 5 de coste: 2 → 3.',
+      'Oro de la fase 3: 18 → 15; fase 4 sin cambios; campeones de 5 de coste: 3 → 2, más 3 de oro.',
+      'Oro de la fase 3: 18 → 15; fase 4: 20 → 18; campeones de 5 de coste: 3 → 2, y esa recompensa ahora también da 3 de oro.'
+    ], 'D', 'Riot recortó las tres recompensas: 18 → 15 de oro en la fase 3, 20 → 18 en la fase 4 y 3 → 2 campeones de 5 de coste en la fase 4. Esa última recompensa ahora también otorga 3 de oro.', ['patch']),
+    q('eco-04', 'balance', '¿Cómo cambió el fuego fatuo Hand of Baron en el parche 18.5?', [
+      'Coste 4 → 6 de oro; estadísticas sin cambios.',
+      'Coste 6 → 4 de oro. Vida 33/55 → 22/33. Resto de estadísticas 3/5 % → 2/3 %. Crítico 10/15 % → 6/8 %.',
+      'Coste 6 → 3 de oro. Vida 33/55 → 22/33. Crítico sin cambios.',
+      'Coste 6 → 4 de oro; estadísticas sin cambios.'
+    ], 'B', 'Riot lo consideraba demasiado poderoso: el coste bajó de 6 a 4 de oro, pero perdió un tercio de cada estadística. Vida 33/55 → 22/33; resistencias, AD, PH, velocidad de ataque, omnivampirismo, durabilidad y amplificación 3/5 % → 2/3 %; crítico 10/15 % → 6/8 %.', ['patch']),
+    q('eco-05', 'balance', '¿Qué hace el fuego fatuo Abandon Ship y cuánto cuesta tras el 18.5?', [
+      'Vende tu banquillo y te da 4 de oro y 6 tiradas; su coste pasa de 0 a 2.',
+      'Vende tu tablero y tu banquillo y te da 6 de oro y 8 tiradas; su coste pasa de 2 a 0.',
+      'Vende tu tablero y tu banquillo y te da 6 de oro y 8 tiradas; su coste pasa de 0 a 2, y su mejora Blossom se corrigió para costar 2.',
+      'Vende tu tablero y te da 8 de oro y 6 tiradas; su coste pasa de 0 a 3.'
+    ], 'C', 'Abandon Ship vende tablero y banquillo a cambio de 6 de oro y 8 tiradas. A 0 de oro era demasiado fácil de forzar, así que pasó a costar 2. En la actualización del 22 de octubre se corrigió que su mejora Blossom costara 2.', ['patch', 'data']),
+    q('eco-06', 'mecánica', 'Tras el 18.5, ¿cómo comprueban tu equipo los fuegos fatuos que filtran por campeones con objetos y los que filtran por rol?', [
+      'Por objetos: también cuentan los campeones del banquillo. Por rol: usan una instantánea del último combate.',
+      'Por objetos: solo el tablero. Por rol: el tablero actual.',
+      'Por objetos: también el banquillo. Por rol: el tablero actual.',
+      'Por objetos: solo el tablero. Por rol: el último combate.'
+    ], 'A', 'Los que filtran por número de campeones con objetos ahora incluyen el banquillo, y los que filtran por rol toman una instantánea del último combate. Riot quería que optimizar tablero y banquillo para filtrar fuegos fatuos dejara de ser obligatorio.', ['patch']),
+    q('eco-07', 'rasgo', 'Tienes Blossom (7) activo y el aumento Wisp Rebate. ¿Cuánto oro recuperas al comprar un fuego fatuo?', [
+      '2',
+      '4',
+      '8',
+      '6'
+    ], 'D', 'Blossom (7) da 4 de oro tras comprar un fuego fatuo y Wisp Rebate da 2 de oro por cada compra: 6 en total. Con Blossom (9) podrías además comprar 2 fuegos fatuos por ronda.', ['data']),
+    q('eco-08', 'balance', '¿Cuánto oro da Beggar’s Wisp (versión base / mejorada) tras el 18.5?', [
+      '3/5 → 2/4',
+      '3/5 → 2/3',
+      '2/3 → 3/5',
+      '4/6 → 3/5'
+    ], 'B', 'Beggar’s Wisp aparece cuando el bosque no encuentra un fuego fatuo para ti. En el 18.5 su oro bajó de 3/5 a 2/3.', ['patch', 'data']),
+    q('eco-09', 'campeón', 'Teemo 3★ puede forrajear una seta extra. ¿Con qué probabilidad por lanzamiento y qué da cada color?', [
+      '15 %; roja: 1 tirada; verde: 1 de vida de estratega; amarilla: 2 de XP.',
+      '15 %; roja: 2 de XP; verde: 1 tirada; amarilla: 1 de vida de estratega.',
+      '12 %; roja: 1 tirada; verde: 1 de vida de estratega; amarilla: 2 de XP.',
+      '10 %; roja: 1 de oro; verde: 2 de vida de estratega; amarilla: 4 de XP.'
+    ], 'A', 'Cada lanzamiento tiene un 10/12/15 % de probabilidad de forrajear una seta: roja, 1 tirada; verde, 1 de vida de estratega; amarilla, 2 de XP. El 12 % es la probabilidad a 2★.', ['data']),
+    q('eco-10', 'rasgo', 'Con Coven (5), ¿cuánta esencia ganas por eliminación y por derrota, y a partir de cuánta puedes canjearla?', [
+      '2 por eliminación y 28 por derrota; desde 40.',
+      '3 por eliminación y 35 por derrota; desde 60.',
+      '3 por eliminación y 35 por derrota; desde 40.',
+      '10 por eliminación y 60 por derrota; desde 40.'
+    ], 'C', 'Coven (3/4/5/7) da 2/2/3/10 de esencia por eliminación y 22/28/35/60 por derrota de jugador. Desde 40 de esencia eliges entre canjearla o seguir acumulando.', ['data']),
+    q('eco-11', 'rasgo', '¿Cómo funcionan los pixies dorados de Fae y qué cambió en el 18.5?', [
+      'Empiezan tras el 5.º pixie; el umbral del 4.º pixie dorado baja de 30 000 a 25 000.',
+      'También aparecen con Fae (2); los umbrales no cambian.',
+      'Con Fae (4), empiezan tras 7 pixies; el umbral del 4.º baja de 30 000 a 20 000.',
+      'Con Fae (4), tras atraer 7 pixies empiezan los dorados, que dan oro; los umbrales del 4.º, 5.º y 6.º bajan a 25 000, 60 000 y 100 000.'
+    ], 'D', 'Solo con Fae (4): tras atraer 7 pixies empiezas a atraer pixies dorados que otorgan oro. El 18.5 suavizó los umbrales del 4.º (30 000 → 25 000), 5.º (70 000 → 60 000) y 6.º (110 000 → 100 000).', ['patch', 'data']),
+    q('eco-12', 'balance', '¿Qué cambió en el aumento Cooking Pot en el 18.5?', [
+      'Vida por emblema 60 → 70, sin exclusiones.',
+      'Vida por emblema 60 → 70; excluido de Coronation, Spreading Roots+ y The Trait Tree+; ahora también da vida con emblemas no fabricables.',
+      'Vida por emblema 70 → 60; excluido de Coronation.',
+      'Vida por emblema 60 → 70; excluido de U.R.F.'
+    ], 'B', 'La vida permanente por Sartén o Espátula subió de 60 a 70. Se excluyó de Coronation, Spreading Roots+ y The Trait Tree+, y se corrigió que no diera vida si el portador llevaba emblemas no fabricables.', ['patch']),
+    q('eco-13', 'balance', '¿Qué da el aumento Build-A-Bud tras el 18.5?', [
+      'Un campeón aleatorio de 1 de coste a 3★ y 9 de oro (antes 6).',
+      'Un campeón aleatorio de 2 de coste a 2★ y 9 de oro.',
+      'Un campeón aleatorio de 1 de coste a 3★ y 6 de oro (antes 9).',
+      'Un campeón de 1 de coste a tu elección a 3★ y 9 de oro.'
+    ], 'A', 'Build-A-Bud otorga un campeón aleatorio de 1 de coste a 3★ y, desde el 18.5, 9 de oro en lugar de 6.', ['patch', 'data']),
+    q('eco-14', 'balance', 'Dark Ritual convierte la esencia de Coven en PH para tus Coven en lugar de botín. ¿Cómo cambió en el 18.5?', [
+      'Los niveles iniciales suben de 5/10/28/45/85 a 7/12/33/50/100.',
+      'Bajan todos los niveles, incluidos los altos (175/300/400 → 150/250/350).',
+      'Los niveles iniciales bajan de 7/12/33/50/100 a 5/10/28/45/85; los altos (175/300/400) no cambian.',
+      'No cambió: se desactivó temporalmente.'
+    ], 'C', 'Riot frenó la estrategia de Elise supertanque recortando solo los primeros niveles: 7/12/33/50/100 → 5/10/28/45/85 de PH. Los niveles 175/300/400 se mantienen.', ['patch']),
+    q('eco-15', 'campeón', 'Ornn almacena como poder de forja el daño que bloquea. ¿Qué bonificación tiene a 3★ y en qué umbral da su segundo yunque de artefacto?', [
+      '+100 % a 3★; segundo artefacto a 155 000.',
+      '+85 % a 3★; segundo artefacto a 140 000.',
+      '+85 % a 3★; segundo artefacto a 155 000.',
+      '+100 % a 3★; segundo artefacto a 140 000.'
+    ], 'B', 'En el 18.3 su bonificación a 3★ bajó del 100 % al 85 % y el umbral del segundo yunque de artefacto pasó de 155 000 a 140 000 de poder de forja. Ni el 18.4 ni el 18.5 lo tocaron.', ['patch183', 'data']),
+    q('eco-16', 'campeón', 'Tras un combate de jugadores, ¿con qué probabilidad copia LeBlanc a un aliado de tu tablero?', [
+      '10/15/40 % según estrellas, +2 % por derribo.',
+      '10/15/30 % fijo, sin bonificación por derribos.',
+      '15/25/40 % según estrellas, +4 % por derribo.',
+      '10/15/30 % según estrellas, +4 % por cada derribo.'
+    ], 'D', 'Tu LeBlanc más fuerte tiene un 10/15/30 % de probabilidad de crear una copia de un aliado, +4 % por derribo. El 40 % a 3★ se redujo al 30 % en el 18.2.', ['data']),
+    q('eco-17', 'rasgo', '¿Qué hace Inferno en la tienda tras cada combate?', [
+      '(3): se enciende 1 casilla sin campeón Inferno y sale un campeón de un nivel de coste superior; (5): 2 casillas; (7): 4 casillas.',
+      '(3): 1 casilla; (5): 3 casillas; (7): 5 casillas.',
+      '(3): se enciende 1 casilla cualquiera y sale un campeón dos niveles superior; (5): 2; (7): 3.',
+      '(3): 2 casillas; (5): 3 casillas; (7): 4 casillas.'
+    ], 'A', 'Inferno (3) enciende 1 casilla de la tienda que no tenga un campeón Inferno, y en ella sale un campeón de un nivel de coste superior. Inferno (5) enciende 2 casillas e Inferno (7), 4.', ['data']),
+    q('eco-18', 'rasgo', '¿Qué desbloquea Solar con 8 campeones únicos de 3★?', [
+      'Con 5, cada 4 s un 3★ asciende a 4★.',
+      'Convierte el 40 % de su daño mágico adicional en daño verdadero.',
+      'Cada 4 s de combate, un campeón de 3★ asciende a 4★.',
+      'Todos tus 3★ empiezan el combate como 4★.'
+    ], 'C', 'Solar (3) gana bonificaciones por cada campeón único de 3★: con 1, más escudo y daño; con 3, velocidad de ataque y resistencias; con 5, convierte el 40 % del daño mágico adicional en verdadero; con 8, cada 4 s de combate un 3★ asciende a 4★.', ['data']),
+    q('eco-19', 'balance', '¿Qué hace el aumento Item Extraction y qué cambió en el 18.5?', [
+      'Cada vez que sacrificas un campeón obtienes un componente; da Azir, Veigar y Rek’Sai.',
+      'Las 3 primeras veces que sacrificas un campeón en el hexágono Blackthorn obtienes una copia de un componente aleatorio que llevaba; desde el 18.5 da Azir y Rek’Sai, pero ya no Veigar.',
+      'Las 3 primeras veces obtienes un componente; ahora da Veigar, pero ya no Azir.',
+      'Las 4 primeras veces obtienes un componente; ahora no da ningún campeón.'
+    ], 'B', 'Item Extraction copia un componente aleatorio del campeón sacrificado en el hexágono Blackthorn, las 3 primeras veces (eran 4 antes del 18.3). En el 18.5 dejó de dar Veigar; sigue dando Azir y Rek’Sai.', ['patch', 'patch183']),
+    q('eco-20', 'rasgo', '¿Qué beneficios de economía y de tamaño de equipo ofrece Riftbeast en sus niveles 5 y 10?', [
+      '(5): cada 2 combates aparece una tienda de Riftbeasts; (10): +1 de tamaño máximo.',
+      '(5): cada 3 combates aparece una tienda de Riftbeasts; (10): +1 de tamaño máximo.',
+      '(5): cada combate aparece una tienda de Riftbeasts; (10): +2 de tamaño máximo.',
+      '(5): cada 3 combates tu siguiente tienda se llena de Riftbeasts; (10): +2 de tamaño máximo del equipo.'
+    ], 'D', 'Riftbeast (5) llena tu siguiente tienda de Riftbeasts cada 3 combates. Riftbeast (10) da +2 al tamaño máximo del equipo. Elder Dragon ocupa 2 espacios y cuenta como 2 Riftbeasts.', ['data'])
   ]
 };
 
@@ -847,13 +849,13 @@ function renderHome() {
         '<span class="chip chip-extreme">' + icon('target') + 'EXTREMA</span>' +
         '<span class="chip">' + icon('layers') + 'Set 18, Enchanted Wilds</span>' +
         '<span class="chip">' + icon('hex') + 'Parche 18.5</span>' +
-        '<span class="chip">' + icon('list') + '2 exámenes, 20 preguntas cada uno</span>' +
+        '<span class="chip">' + icon('list') + '2 exámenes de 20 preguntas</span>' +
       '</div>' +
       '<p class="brief">Responde 20 preguntas avanzadas sobre TFT. Cada pregunta tiene cuatro opciones y solo una respuesta correcta. Al terminar, descubrirás tu nota, los errores cometidos y tu nivel de conocimiento.</p>' +
       '<div class="btn-row"><button class="btn" type="button" data-action="rules">' + icon('book') + 'CONSULTAR REGLAS</button></div>' +
     '</section>' +
     '<section aria-label="Exámenes disponibles"><div class="exams">' + EXAMS.map(examCard).join('') + '</div></section>' +
-    '<p class="footnote">Preguntas verificadas el 23 de octubre de 2026 con las notas oficiales del parche 18.5 (incluida la actualización del 22 de octubre) y con bases de datos del Set 18. TFT Challenge es un proyecto de fans sin relación con Riot Games; las clasificaciones son orientativas y no son rangos oficiales. <a href="#pruebas">Ver pruebas de puntuación y navegación</a>.</p>';
+    '<p class="footnote">Preguntas verificadas el 23 de octubre de 2026 con las notas oficiales de los parches 18.3 y 18.5 (incluida la actualización del 22 de octubre) y con datos de habilidades extraídos de los archivos del juego. TFT Challenge es un proyecto de fans sin relación con Riot Games; las clasificaciones son orientativas y no son rangos oficiales. <a href="#pruebas">Ver pruebas de puntuación y navegación</a>.</p>';
   document.title = 'TFT Challenge';
 }
 
