@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TFT Challenge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#060914; --navy:#0B1330; --panel:#101A3A; --panel-2:#15214A; --line:#26335F; --line-strong:#3B4C86;
+  --text:#E9EDF8; --muted:#A6B1CE; --faint:#7884A8;
+  --gold:#E3B95E; --violet:#A285FF; --electric:#4BB6FF;
+  --ok:#43DB93; --bad:#FF7484; --skip:#9099B6;
+  --accent:var(--gold);
+  --font-display:"Chakra Petch","Rajdhani","Segoe UI",system-ui,sans-serif;
+  --font-body:"Barlow","Segoe UI",system-ui,-apple-system,sans-serif;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px;
+  --r-sm:6px; --r-md:10px; --r-lg:14px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ color-scheme:dark; } }
+:root[data-theme="dark"]{ color-scheme:dark; }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); }
+*,*::before,*::after{ box-sizing:inherit; }
+body{
+  margin:0; min-height:100vh; background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:1.0625rem; line-height:1.55;
+  background-image:
+    radial-gradient(1100px 500px at 85% -10%, rgba(75,182,255,.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(162,133,255,.10), transparent 60%);
+  background-attachment:fixed;
+  -webkit-text-size-adjust:100%;
+}
+body[data-accent="violet"]{ --accent:var(--violet); }
+body[data-accent="gold"]{ --accent:var(--gold); }
+img,svg{ max-width:100%; }
+a{ color:var(--electric); }
+a:hover{ color:#8fd2ff; }
+:focus-visible{ outline:2px solid var(--electric); outline-offset:3px; border-radius:4px; }
+.sr{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.shell{ max-width:980px; margin:0 auto; padding:0 clamp(16px,4vw,32px); }
+main{ padding:var(--s6) 0 var(--s8); }
+h1,h2,h3{ font-family:var(--font-display); line-height:1.15; margin:0; }
+p{ margin:0; }
+
+/* Top bar */
+.topbar{ border-bottom:1px solid var(--line); background:rgba(6,9,20,.7); }
+.topbar .shell{ display:flex; align-items:center; justify-content:space-between; gap:var(--s4); min-height:56px; }
+.brand{ white-space:nowrap; display:flex; align-items:center; gap:var(--s2); font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:var(--text); text-decoration:none; background:none; border:0; padding:0; cursor:pointer; }
+.brand svg{ width:22px; height:22px; color:var(--gold); }
+.topbar small{ color:var(--faint); font-size:.85rem; }
+
+/* Buttons */
+.btn{
+  --btn-bg:transparent; --btn-fg:var(--text); --btn-bd:var(--line-strong);
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--s2);
+  min-height:48px; padding:0 var(--s5); border-radius:var(--r-sm);
+  border:1px solid var(--btn-bd); background:var(--btn-bg); color:var(--btn-fg);
+  font-family:var(--font-display); font-weight:600; font-size:.95rem; letter-spacing:.06em;
+  cursor:pointer; text-decoration:none; transition:background .15s, border-color .15s, color .15s, transform .15s var(--ease);
+}
+.btn svg{ width:18px; height:18px; flex:none; }
+.btn:hover{ border-color:var(--accent); }
+.btn:active{ transform:translateY(1px); }
+.btn[disabled]{ opacity:.4; cursor:not-allowed; }
+.btn[disabled]:hover{ border-color:var(--btn-bd); }
+.btn-primary{ --btn-bg:var(--accent); --btn-fg:#140F05; --btn-bd:var(--accent); }
+.btn-primary:hover{ filter:brightness(1.08); }
+.btn-quiet{ --btn-bd:transparent; color:var(--muted); padding:0 var(--s3); min-height:40px; font-size:.85rem; }
+.btn-quiet:hover{ color:var(--text); border-color:var(--line); }
+.btn-row{ display:flex; flex-wrap:wrap; gap:var(--s3); }
+
+/* Home */
+.hero{ padding:var(--s6) 0 var(--s6); }
+.hero h1{ font-size:clamp(2.7rem,8vw,4.8rem); font-weight:700; letter-spacing:-.01em; }
+.hero h1 .tft{ color:var(--gold); }
+.hero h1:focus{ outline:none; }
+.tagline{ font-family:var(--font-body); font-style:italic; color:var(--muted); font-size:clamp(1.05rem,2.4vw,1.3rem); margin-top:var(--s2); }
+.chips{ display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s5); }
+.chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border:1px solid var(--line-strong); border-radius:999px; font-size:.88rem; color:var(--muted); background:rgba(16,26,58,.6); }
+.chip svg{ width:15px; height:15px; }
+.chip-extreme{ border-color:var(--gold); color:var(--gold); font-family:var(--font-display); font-weight:700; letter-spacing:.08em; }
+.brief{ max-width:62ch; margin-top:var(--s5); color:var(--text); }
+.brief + .btn-row{ margin-top:var(--s4); }
+
+.exams{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr)); gap:var(--s5); margin-top:var(--s4); }
+.exam-card{
+  --card-accent:var(--gold);
+  position:relative; display:flex; flex-direction:column; gap:var(--s4);
+  padding:var(--s5); border:1px solid var(--line); border-radius:var(--r-lg);
+  background:linear-gradient(180deg, rgba(21,33,74,.9), rgba(13,21,48,.9));
+  box-shadow:0 18px 40px -24px rgba(0,0,0,.8);
+  transition:border-color .2s, transform .2s var(--ease);
+}
+.exam-card[data-accent="violet"]{ --card-accent:var(--violet); }
+.exam-card::before{ content:""; position:absolute; inset:0 0 auto; height:3px; border-radius:var(--r-lg) var(--r-lg) 0 0; background:var(--card-accent); }
+.exam-card:hover{ border-color:color-mix(in srgb, var(--card-accent) 60%, var(--line)); transform:translateY(-2px); }
+.exam-head{ display:flex; gap:var(--s4); align-items:center; }
+.hexmark{ width:58px; height:64px; flex:none; display:grid; place-items:center; font-family:var(--font-display); font-weight:700; font-size:1.35rem; color:#120d04; background:var(--card-accent); clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.exam-card h2{ font-size:1.5rem; }
+.exam-card .kicker{ color:var(--card-accent); font-family:var(--font-display); font-weight:600; font-size:.95rem; }
+.exam-card p.desc{ color:var(--muted); }
+.facts{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s2) var(--s4); margin:0; padding:var(--s4) 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.facts div{ display:flex; flex-direction:column; }
+.facts dt{ color:var(--faint); font-size:.82rem; }
+.facts dd{ margin:0; font-weight:600; }
+.status{ display:flex; align-items:center; gap:var(--s2); color:var(--muted); font-size:.95rem; }
+.status svg{ width:18px; height:18px; color:var(--card-accent); }
+.exam-card .btn-primary{ --btn-bg:var(--card-accent); --btn-bd:var(--card-accent); }
+.exam-card .btn-row{ margin-top:auto; }
+.footnote{ margin-top:var(--s7); color:var(--faint); font-size:.9rem; max-width:70ch; }
+.footnote a{ color:var(--muted); }
+
+/* Quiz */
+.quiz-head{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--s3) var(--s4); }
+.quiz-title{ display:flex; flex-direction:column; gap:2px; }
+.quiz-title .exam-name{ font-family:var(--font-display); font-weight:600; color:var(--accent); font-size:.95rem; }
+.quiz-title h1{ font-size:clamp(1.4rem,3.6vw,1.9rem); }
+.meta-row{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2); }
+.meta-row .chip{ font-variant-numeric:tabular-nums; }
+.progress{ margin-top:var(--s5); }
+.bar{ height:6px; border-radius:99px; background:var(--panel-2); overflow:hidden; }
+.bar > span{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--accent),var(--electric)); transition:width .35s var(--ease); }
+.hextrack{ display:flex; flex-wrap:wrap; gap:6px; margin-top:var(--s4); list-style:none; padding:0; }
+.hexbtn{ width:38px; height:42px; padding:0; border:0; background:transparent; cursor:pointer; position:relative; border-radius:4px; }
+.hexbtn .hx{ position:absolute; inset:0; clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); background:var(--line-strong); }
+.hexbtn .hx::after{ content:""; position:absolute; inset:2px; clip-path:inherit; background:var(--navy); }
+.hexbtn .n{ position:relative; z-index:1; font-family:var(--font-display); font-weight:600; font-size:.85rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+.hexbtn.done .hx{ background:var(--accent); }
+.hexbtn.done .hx::after{ background:color-mix(in srgb, var(--accent) 22%, var(--navy)); }
+.hexbtn.done .n{ color:var(--text); }
+.hexbtn.current .hx{ background:var(--electric); }
+.hexbtn.current .hx::after{ inset:3px; }
+.hexbtn.current .n{ color:var(--electric); }
+.hexbtn:hover .hx{ filter:brightness(1.25); }
+
+.qcard{ margin-top:var(--s5); padding:clamp(20px,4vw,36px); border:1px solid var(--line); border-radius:var(--r-lg); background:linear-gradient(180deg, rgba(21,33,74,.85), rgba(12,19,46,.9)); }
+.qcard.enter{ animation:enter .32s var(--ease); }
+@keyframes enter{ from{ opacity:0; transform:translateX(14px); } to{ opacity:1; transform:none; } }
+.qcat{ display:inline-flex; align-items:center; gap:6px; color:var(--faint); font-size:.88rem; }
+.qcat svg{ width:15px; height:15px; color:var(--accent); }
+.qtext{ font-family:var(--font-body); font-weight:600; font-size:clamp(1.15rem,2.6vw,1.4rem); line-height:1.4; margin-top:var(--s3); max-width:68ch; }
+.qtext:focus{ outline:none; }
+.qtext:focus-visible{ outline:2px solid var(--electric); outline-offset:6px; }
+fieldset{ border:0; margin:var(--s5) 0 0; padding:0; min-width:0; }
+.opts{ display:grid; gap:var(--s3); }
+.opt{
+  display:flex; align-items:flex-start; gap:var(--s4); padding:var(--s4); min-height:60px;
+  border:1px solid var(--line); border-radius:var(--r-md); background:rgba(6,9,20,.45);
+  cursor:pointer; transition:border-color .15s, background .15s;
+}
+.opt:hover{ border-color:var(--line-strong); background:rgba(21,33,74,.6); }
+.opt:has(input:focus-visible){ outline:2px solid var(--electric); outline-offset:2px; }
+.opt .letter{ flex:none; width:34px; height:38px; display:grid; place-items:center; font-family:var(--font-display); font-weight:700; color:var(--muted); background:var(--panel-2); clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+.opt .otext{ padding-top:6px; color:var(--muted); }
+.opt.is-selected{ border-color:var(--accent); background:color-mix(in srgb, var(--accent) 10%, rgba(6,9,20,.6)); }
+.opt.is-selected .letter{ background:var(--accent); color:#140f05; }
+.opt.is-selected .otext{ color:var(--text); }
+.kbd-hint{ margin-top:var(--s4); color:var(--faint); font-size:.85rem; }
+kbd{ font-family:var(--font-display); font-size:.8rem; border:1px solid var(--line-strong); border-bottom-width:2px; border-radius:4px; padding:0 5px; color:var(--muted); }
+.qnav{ display:flex; justify-content:space-between; gap:var(--s3); margin-top:var(--s5); }
+.qnav .btn{ min-width:140px; }
+
+/* Results */
+.result-top{ display:grid; grid-template-columns:auto 1fr; gap:var(--s6); align-items:center; margin-top:var(--s5); padding:clamp(20px,4vw,36px); border:1px solid var(--line); border-radius:var(--r-lg); background:linear-gradient(180deg, rgba(21,33,74,.85), rgba(12,19,46,.9)); }
+.ring{ width:180px; height:180px; position:relative; }
+.ring svg{ width:100%; height:100%; transform:rotate(-90deg); }
+.ring .track{ stroke:var(--panel-2); }
+.ring .val{ stroke:var(--accent); transition:stroke-dashoffset 1s var(--ease); }
+.ring .center{ position:absolute; inset:0; display:grid; place-content:center; text-align:center; }
+.ring .pct{ font-family:var(--font-display); font-weight:700; font-size:2.1rem; }
+.ring .pct-l{ color:var(--faint); font-size:.85rem; }
+.done-label{ font-family:var(--font-display); font-weight:700; letter-spacing:.08em; color:var(--accent); }
+.grade{ font-family:var(--font-display); font-weight:700; font-size:clamp(3.4rem,10vw,5.4rem); line-height:1; margin-top:var(--s2); font-variant-numeric:tabular-nums; }
+.grade small{ font-size:.4em; color:var(--faint); font-weight:600; }
+.rank{ font-size:1.25rem; font-weight:600; margin-top:var(--s2); }
+.rank-note{ color:var(--faint); font-size:.88rem; }
+.stats{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--s3); margin-top:var(--s5); }
+.stat{ padding:var(--s4); border:1px solid var(--line); border-radius:var(--r-md); background:rgba(6,9,20,.4); }
+.stat .k{ display:flex; align-items:center; gap:6px; color:var(--faint); font-size:.88rem; }
+.stat .k svg{ width:16px; height:16px; }
+.stat .v{ font-family:var(--font-display); font-weight:700; font-size:1.7rem; font-variant-numeric:tabular-nums; }
+.stat.ok .k svg{ color:var(--ok); } .stat.bad .k svg{ color:var(--bad); } .stat.skip .k svg{ color:var(--skip); }
+.best{ margin-top:var(--s4); color:var(--muted); }
+.result-actions{ margin-top:var(--s5); }
+
+/* Review */
+.filters{ display:flex; flex-wrap:wrap; gap:var(--s2); margin-top:var(--s5); }
+.filter{ min-height:40px; padding:0 var(--s4); border-radius:999px; border:1px solid var(--line-strong); background:transparent; color:var(--muted); font-family:var(--font-body); font-weight:600; font-size:.95rem; cursor:pointer; }
+.filter[aria-pressed="true"]{ background:var(--text); color:var(--bg); border-color:var(--text); }
+.filter .c{ font-variant-numeric:tabular-nums; opacity:.75; margin-left:4px; }
+.rlist{ list-style:none; padding:0; margin:var(--s5) 0 0; display:grid; gap:var(--s4); }
+.rcard{ --st:var(--skip); padding:var(--s5); border:1px solid var(--line); border-left:4px solid var(--st); border-radius:var(--r-md); background:rgba(16,26,58,.7); }
+.rcard.ok{ --st:var(--ok); } .rcard.bad{ --st:var(--bad); }
+.rhead{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:var(--s2); align-items:center; }
+.rnum{ font-family:var(--font-display); font-weight:600; color:var(--faint); }
+.pill{ display:inline-flex; align-items:center; gap:6px; padding:2px 10px; border-radius:999px; font-weight:600; font-size:.88rem; color:var(--st); border:1px solid color-mix(in srgb, var(--st) 55%, transparent); }
+.pill svg{ width:15px; height:15px; }
+.rq{ font-weight:600; margin-top:var(--s3); max-width:72ch; }
+.ans{ display:grid; gap:var(--s2); margin-top:var(--s4); }
+.ans div{ display:grid; grid-template-columns:150px 1fr; gap:var(--s3); }
+.ans dt{ color:var(--faint); font-size:.92rem; }
+.ans dd{ margin:0; }
+.ans .yours.bad{ color:#ffb3bc; text-decoration:line-through; text-decoration-color:rgba(255,116,132,.6); }
+.ans .right{ color:#a7f0cb; }
+.expl{ margin-top:var(--s4); padding-top:var(--s4); border-top:1px dashed var(--line); color:var(--muted); max-width:75ch; }
+.src{ margin-top:var(--s3); font-size:.9rem; color:var(--faint); }
+.src a{ color:var(--muted); }
+.empty{ margin-top:var(--s5); color:var(--muted); }
+
+/* Dialog */
+dialog{ width:min(520px, calc(100vw - 32px)); padding:0; border:1px solid var(--line-strong); border-radius:var(--r-lg); background:var(--panel); color:var(--text); box-shadow:0 30px 80px -20px rgba(0,0,0,.9); }
+dialog::backdrop{ background:rgba(3,5,12,.72); }
+.dlg{ padding:var(--s5); }
+.dlg h2{ font-size:1.35rem; }
+.dlg .body{ margin-top:var(--s3); color:var(--muted); }
+.dlg .body ul{ padding-left:1.2em; margin:var(--s2) 0 0; }
+.dlg .body li + li{ margin-top:6px; }
+.dlg .btn-row{ justify-content:flex-end; margin-top:var(--s5); }
+
+/* Tests */
+.tests{ list-style:none; padding:0; margin:var(--s5) 0 0; display:grid; gap:var(--s2); }
+.tests li{ display:flex; gap:var(--s3); padding:var(--s3) var(--s4); border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(16,26,58,.6); }
+.tests li svg{ width:18px; height:18px; flex:none; margin-top:3px; }
+.tests li.pass svg{ color:var(--ok); } .tests li.fail svg{ color:var(--bad); }
+.tests .d{ color:var(--faint); font-size:.9rem; }
+.test-sum{ margin-top:var(--s4); font-family:var(--font-display); font-weight:600; font-size:1.2rem; }
+
+.back{ margin-bottom:var(--s3); }
+.view-title{ font-size:clamp(1.6rem,4vw,2.3rem); }
+.view-title:focus{ outline:none; }
+.view-title:focus-visible{ outline:2px solid var(--electric); outline-offset:6px; }
+.lead{ color:var(--muted); margin-top:var(--s2); }
+
+@media (max-width:640px){
+  body{ font-size:1rem; }
+  .facts{ grid-template-columns:1fr 1fr; }
+  .hextrack > li{ flex:0 0 calc((100% - 54px) / 10); }
+  .hexbtn{ width:100%; height:34px; }
+  .topbar small{ display:none; }
+  .hexbtn .n{ font-size:.72rem; }
+  .qnav .btn{ min-width:0; flex:1; }
+  .result-top{ grid-template-columns:1fr; justify-items:center; text-align:center; }
+  .stats{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ans div{ grid-template-columns:1fr; gap:0; }
+  .result-actions .btn{ flex:1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation:none!important; transition:none!important; scroll-behavior:auto!important; }
+}
+</style>
+</head>
+<body data-accent="gold">
+<header class="topbar">
+  <div class="shell">
+    <button class="brand" type="button" data-action="home" aria-label="TFT Challenge, volver al inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="m12 7 4.5 2.5v5L12 17l-4.5-2.5v-5z"/></svg>
+      TFT Challenge
+    </button>
+    <small>Set 18, Enchanted Wilds, parche 18.5</small>
+  </div>
+</header>
+<main id="app" class="shell" tabindex="-1"></main>
+<div id="live" class="sr" aria-live="polite"></div>
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg"><h2 id="dlg-title"></h2><div class="body" id="dlg-body"></div><div class="btn-row" id="dlg-actions"></div></div></dialog>
+
+<script>
+'use strict';
+/* =========================================================================
+   DATOS — quiz-data
+   Respuestas verificadas el 23/10/2026. correctAnswer = índice 0–3.
+   ========================================================================= */
+const SOURCES = {
+  patch: { label: 'Riot Games, notas oficiales del parche 18.5 de TFT (20/10/2026, con la actualización del 22/10)', url: 'https://teamfighttactics.leagueoflegends.com/en-us/news/game-updates/teamfight-tactics-patch-18-5/' },
+  items: { label: 'Mobalytics, objetos combinados del Set 18 (consultado el 23/10/2026)', url: 'https://mobalytics.gg/tft/items/combined' },
+  eclipse: { label: 'League of Legends Wiki, TFT: Eclipse', url: 'https://wiki.leagueoflegends.com/en-us/TFT:Eclipse' },
+  origins: { label: 'Total Apex Entertainment, orígenes del Set 18 (Avatar y Apex Predator)', url: 'https://www.yardbarker.com/entertainment/articles/teamfight_tactics_set_18_enchanted_wilds_all_origins/s1_17456_44206995' },
+  luxVariants: { label: 'Mobalytics, variantes de Lux por origen', url: 'https://mobalytics.gg/tft/items/combined' }
+};
+const L = { A: 0, B: 1, C: 2, D: 3 };
+function q(id, category, question, options, letter, explanation, sources) {
+  return { id, category, question, options, correctAnswer: L[letter], explanation, patch: '18.5', sources: sources.map(k => SOURCES[k]) };
+}
+
+const EXAM_ITEMS = {
+  id: 'objetos', numeral: 'I', accent: 'gold',
+  title: 'Arsenal', subtitle: 'Objetos e interacciones',
+  description: 'Valores exactos, umbrales y cálculos de objetos combinados. Saber la estadística no basta: hay que saber aplicarla en combate.',
+  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 20,
+  randomize: { questions: false, options: false },
+  questions: [
+    q('obj-01', 'objeto', 'Una vez por combate, ¿cuándo se activa el escudo de Sanguinaria (Bloodthirster) y qué valor tiene?', [
+      'Al 40 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.',
+      'Al 60 % de vida: escudo del 40 % de la vida máxima que se deteriora rápidamente en 4 s.',
+      'Al 50 % de vida: escudo del 25 % de la vida máxima que dura hasta 4 s.',
+      'Al 50 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.'
+    ], 'D', 'Sanguinaria se activa una vez por combate al 50 % de vida y otorga un escudo del 30 % de la vida máxima que dura hasta 5 s. La opción del 60 % con escudo del 40 % que se deteriora en 4 s describe a Sterak’s Gage, el objeto con el que más se confunde.', ['items']),
+    q('obj-02', 'objeto', 'Tu portador de Sable-pistola hextech (Hextech Gunblade) inflige 1500 de daño en un combate. ¿Cuánta curación genera el efecto del objeto y a quién se dirige?', [
+      '225, repartidos entre los dos aliados con menos vida.',
+      '300, al aliado con menor porcentaje de vida.',
+      '300, al aliado con menos vida en valor absoluto.',
+      '375, al aliado con menor porcentaje de vida.'
+    ], 'B', 'El efecto cura al aliado con menor porcentaje de vida un 20 % del daño infligido: 1500 × 0,20 = 300. El criterio es el porcentaje, no la vida absoluta: un tanque de 4000 al 50 % tiene prioridad sobre un carry de 1000 al 60 %.', ['items']),
+    q('obj-03', 'objeto', 'Un enemigo situado a 2 hexágonos de tu portador de Chispa iónica (Ionic Spark) lanza una habilidad que gasta 80 de maná. ¿Qué ocurre?', [
+      'Recibe 120 de daño mágico antes de mitigación y está afectado por un 30 % de Shred (reducción de resistencia mágica).',
+      'Recibe 160 de daño mágico; el Shred no le afecta porque el aura solo alcanza 1 hexágono.',
+      'Recibe 120 de daño verdadero y está afectado por un 30 % de Sunder (reducción de armadura).',
+      'Recibe 80 de daño mágico y está afectado por un 25 % de Shred.'
+    ], 'A', 'Chispa iónica aplica un 30 % de Shred a los enemigos en un radio de 2 hexágonos y, cuando lanzan una habilidad, les inflige daño mágico igual al 150 % del maná gastado: 80 × 1,5 = 120 antes de mitigación. Sunder reduce armadura, no resistencia mágica.', ['items']),
+    q('obj-04', 'objeto', '¿Qué combinación describe exactamente el efecto del Chaleco de zarzas (Bramble Vest) en el Set 18?', [
+      '+8 % de vida máxima; 5 % menos de daño de todas las fuentes; 100 de daño mágico a los enemigos adyacentes al recibir un ataque (enfriamiento de 2 s).',
+      '+6 % de vida máxima; 5 % menos de daño de ataques; 100 de daño mágico a los enemigos en 2 hexágonos al recibir un ataque (enfriamiento de 1 s).',
+      '+6 % de vida máxima; 5 % menos de daño de ataques; 100 de daño mágico a los enemigos adyacentes al recibir un ataque (enfriamiento de 2 s).',
+      '+6 % de vida máxima; 10 % menos de daño de ataques; 150 de daño mágico a los enemigos adyacentes cada 3 s.'
+    ], 'C', 'Otorga +6 % de vida máxima y reduce un 5 % el daño recibido de ataques (no el de habilidades). Al recibir un ataque inflige 100 de daño mágico a todos los enemigos adyacentes, con un enfriamiento de 2 s.', ['items']),
+    q('obj-05', 'objeto', 'Tres enemigos tienen como objetivo a tu portador de Placa pétrea de gárgola (Gargoyle Stoneplate). ¿Cuántas resistencias adicionales obtiene por el efecto del objeto?', [
+      '+30 de armadura y +30 de resistencia mágica.',
+      '+15 de armadura y +15 de resistencia mágica.',
+      '+45 de armadura y +30 de resistencia mágica.',
+      '+30 de armadura y ninguna resistencia mágica.'
+    ], 'A', 'Otorga 10 de armadura y 10 de resistencia mágica por cada enemigo que tenga al portador como objetivo. Con tres enemigos: +30 de cada una.', ['items']),
+    q('obj-06', 'objeto', 'Un campeón con 2000 de vida máxima lleva Filo de la noche (Edge of Night). Sin otras curaciones ni heridas, ¿en qué momento se activa el objeto y cuánto cura?', [
+      'Al 40 % de vida (800); cura 300.',
+      'Al 60 % de vida (1200); cura 120.',
+      'Al 40 % de vida (800); cura 180.',
+      'Al 50 % de vida (1000); cura 200.'
+    ], 'C', 'Se activa al 40 % de vida: con 2000 de vida máxima, a 800. Le faltan 1200 y cura el 15 % de la vida que falta, es decir, 180. Además vuelve al portador inalcanzable brevemente y elimina efectos negativos. 300 sería el 15 % de la vida máxima, un error de base frecuente.', ['items']),
+    q('obj-07', 'objeto', 'Un lanzador de la retaguardia (rol que no es ni tanque ni luchador) equipa Yelmo adaptable (Adaptive Helm). ¿Qué recibe por el efecto del objeto?', [
+      '15 % de maná adicional de todas las fuentes y +30 de armadura y resistencia mágica.',
+      'Solo un 10 % de daño de ataque y de poder de habilidad.',
+      '10 % de maná adicional de todas las fuentes y un 10 % de daño de ataque y de poder de habilidad.',
+      '15 % de maná adicional de todas las fuentes y un 10 % de daño de ataque y de poder de habilidad.'
+    ], 'D', 'Todo portador obtiene un 15 % de maná adicional de todas las fuentes. La bonificación por rol cambia: tanques y luchadores reciben 30 de armadura y de resistencia mágica; el resto de roles, un 10 % de daño de ataque y de poder de habilidad.', ['items']),
+    q('obj-08', 'objeto', 'Con Bastón del arcángel (Archangel’s Staff), ¿cuánto poder de habilidad ha acumulado el portador gracias al objeto tras dos activaciones, y cuándo se produce la segunda?', [
+      '30 %, a los 8 s de combate.',
+      '40 %, a los 10 s de combate.',
+      '50 %, a los 10 s de combate.',
+      '20 %, a los 10 s de combate, porque el efecto no se acumula.'
+    ], 'B', 'Otorga un 20 % de poder de habilidad cada 5 s de combate y el efecto se acumula. La segunda activación llega a los 10 s y el total es del 40 %.', ['items']),
+    q('obj-09', 'objeto', 'En el parche 18.5, ¿qué porcentaje adicional de daño de ataque y de poder de habilidad de todas las fuentes otorgan la Mejora azul (Blue Buff) normal y su versión radiante?', [
+      'Normal: 10 %. Radiante: 25 %.',
+      'Normal: 10 %. Radiante: 30 %.',
+      'Normal: 15 %. Radiante: 25 %.',
+      'Normal: 20 %. Radiante: 40 %.'
+    ], 'A', 'La Mejora azul normal otorga un 10 % adicional de daño de ataque y de poder de habilidad de todas las fuentes. En el 18.5, la versión radiante bajó su bonificación base de AD/PH del 30 % al 25 %, así que el 30 % es el valor anterior al parche.', ['items', 'patch']),
+    q('obj-10', 'objeto', 'Un portador de Garra del dragón (Dragon’s Claw) tiene 3000 de vida máxima. ¿Cuánto cura cada pulso del efecto y cada cuánto se produce?', [
+      '75 de vida cada segundo.',
+      '60 de vida cada 2 s.',
+      '75 de vida cada 2 s.',
+      '180 de vida cada 5 s.'
+    ], 'C', 'Cura un 2,5 % de la vida máxima cada 2 s: 3000 × 0,025 = 75 por pulso. Regenerar un porcentaje de la vida que falta cada segundo es el efecto del Rostro espiritual, no de la Garra del dragón.', ['items']),
+    q('obj-11', 'objeto', '¿Qué amplificación de daño adicional otorga el Asesino de gigantes (Giant Slayer) en el Set 18 y contra qué objetivos?', [
+      '10 % contra objetivos con rol de tanque.',
+      '15 % contra objetivos con rol de tanque.',
+      '15 % contra objetivos con más de 1750 de vida máxima.',
+      '25 % contra objetivos con más de 1600 de vida máxima.'
+    ], 'B', 'En el Set 18 otorga un 15 % de amplificación de daño adicional contra objetivos con rol de tanque. Los umbrales por vida máxima pertenecen a versiones antiguas del objeto y ya no se aplican.', ['items']),
+    q('obj-12', 'objeto', 'Tras 6 segundos de combate, ¿cuánta velocidad de ataque acumulada ha obtenido un portador de Hoja de furia de Guinsoo (Guinsoo’s Rageblade) gracias a su efecto?', [
+      '30 %',
+      '36 %',
+      '18 %',
+      '42 %'
+    ], 'D', 'La Hoja de furia otorga un 7 % de velocidad de ataque acumulativa cada segundo: 7 × 6 = 42 %. El 18 % correspondería al ritmo del Fajín de mercurio (3 % por segundo).', ['items']),
+    q('obj-13', 'objeto', 'Un portador de Mano de la justicia (Hand of Justice) baja del 50 % de vida. ¿Qué valores del objeto tiene activos en ese momento?', [
+      '18 % de daño de ataque y de poder de habilidad, y 30 % de omnivampirismo.',
+      '36 % de daño de ataque y de poder de habilidad, y 15 % de omnivampirismo.',
+      '36 % de daño de ataque y de poder de habilidad, y 30 % de omnivampirismo.',
+      '18 % de daño de ataque y de poder de habilidad, y 15 % de omnivampirismo.'
+    ], 'A', 'Los valores base son 18 % de AD y PH y 15 % de omnivampirismo. Por encima del 50 % de vida se duplican el AD y el PH (36 %); por debajo del 50 % se duplica el omnivampirismo (30 %) y el AD/PH vuelve al 18 %.', ['items']),
+    q('obj-14', 'objeto', '¿Qué distingue el efecto de Últimas palabras (Last Whisper) del de Bastón del vacío (Void Staff)?', [
+      'Nada: ambos aplican un 30 % de reducción durante 3 s y no se acumulan.',
+      'Últimas palabras aplica un 30 % de Sunder durante 5 s; Bastón del vacío, un 30 % de Shred durante 3 s.',
+      'Últimas palabras aplica un 30 % de Sunder (armadura) durante 3 s; Bastón del vacío, un 30 % de Shred (resistencia mágica) durante 5 s. Ninguno se acumula.',
+      'Últimas palabras aplica un 20 % de Sunder acumulable durante 5 s; Bastón del vacío, un 30 % de Shred durante 5 s.'
+    ], 'C', 'Últimas palabras aplica un 30 % de Sunder (reducción de armadura) durante 3 s con ataques y habilidades. Bastón del vacío aplica un 30 % de Shred (reducción de resistencia mágica) durante 5 s. Ninguno de los dos efectos se acumula.', ['items']),
+    q('obj-15', 'objeto', 'El Morellonomicón (Morellonomicon) aplica 1 % de quemadura y 33 % de heridas durante 10 s. ¿Qué otro objeto aplica exactamente los mismos porcentajes, pero solo durante 5 s?', [
+      'Capa de fuego solar (Sunfire Cape)',
+      'Ninguno: todos los objetos con quemadura y heridas duran 10 s.',
+      'Bastón del vacío (Void Staff)',
+      'Mejora roja (Red Buff)'
+    ], 'D', 'La Mejora roja aplica 1 % de quemadura y 33 % de heridas durante 5 s. La Capa de fuego solar usa los mismos porcentajes que el Morellonomicón y también dura 10 s (cada 2 s, a un enemigo a 2 hexágonos). El Bastón del vacío no aplica quemadura ni heridas.', ['items']),
+    q('obj-16', 'objeto', 'Un portador de Promesa del protector (Protector’s Vow) cae al 40 % de vida durante el combate. ¿Cuánto maná ha recibido del objeto en total y qué escudo obtiene?', [
+      '20 de maná; escudo del 25 % de la vida máxima.',
+      '35 de maná (20 al inicio y 15 al 40 %); escudo del 20 % de la vida máxima.',
+      '35 de maná; escudo del 30 % de la vida máxima.',
+      '15 de maná; escudo del 20 % de la vida máxima.'
+    ], 'B', 'Al inicio del combate otorga 20 de maná. Al llegar al 40 % de vida concede 15 de maná más y un escudo equivalente al 20 % de la vida máxima, así que el total de maná es 35.', ['items']),
+    q('obj-17', 'objeto', '¿Cuál es la combinación correcta de duración de la inmunidad al control de masas y de acumulación de velocidad de ataque del Fajín de mercurio (Quicksilver)?', [
+      '15 s de inmunidad y 3 % de velocidad de ataque por segundo.',
+      '18 s de inmunidad y 5 % de velocidad de ataque acumulativa por segundo.',
+      '18 s de inmunidad y 3 % de velocidad de ataque acumulativa por segundo.',
+      '20 s de inmunidad y 2 % de velocidad de ataque por segundo.'
+    ], 'C', 'Al inicio del combate otorga inmunidad al control de masas durante 18 s y un 3 % de velocidad de ataque acumulativa cada segundo.', ['items']),
+    q('obj-18', 'objeto', 'Un portador de Rostro espiritual (Spirit Visage) con 3000 de vida máxima está a 1000 de vida. ¿Cuánto regenera por segundo gracias al objeto?', [
+      '40',
+      '60',
+      '30',
+      '20'
+    ], 'A', 'Regenera un 2 % de la vida que falta cada segundo. A 1000 de 3000 le faltan 2000: 2000 × 0,02 = 40 por segundo. 60 sería el 2 % de la vida máxima.', ['items']),
+    q('obj-19', 'objeto', '¿A qué porcentaje de vida se activa el escudo de Sterak’s Gage y cómo se comporta?', [
+      'Al 50 % de vida: escudo del 30 % de la vida máxima que dura hasta 5 s.',
+      'Al 40 % de vida: escudo del 40 % de la vida máxima que dura 5 s.',
+      'Al 60 % de vida: escudo del 25 % de la vida máxima que dura 4 s.',
+      'Al 60 % de vida: escudo del 40 % de la vida máxima que se deteriora rápidamente en 4 s.'
+    ], 'D', 'Al 60 % de vida otorga un escudo del 40 % de la vida máxima que se deteriora rápidamente durante 4 s. El 50 % con escudo del 30 % hasta 5 s es el efecto de Sanguinaria.', ['items']),
+    q('obj-20', 'objeto', 'Determinación titánica (Titan’s Resolve) llega al máximo de acumulaciones. ¿Qué tiene activo el portador gracias al objeto?', [
+      '50 % de daño de ataque y de poder de habilidad, 15 % de amplificación de daño y un escudo del 20 % de la vida máxima.',
+      '50 % de daño de ataque y de poder de habilidad (25 × 2 %), 10 % de amplificación de daño y el estado imparable.',
+      '60 % de daño de ataque y de poder de habilidad (30 × 2 %), 10 % de amplificación de daño y el estado inalcanzable.',
+      '50 % de daño de ataque y de poder de habilidad y 10 % de amplificación de daño, sin ningún estado especial.'
+    ], 'B', 'Cada acumulación otorga un 2 % de AD y PH al atacar o recibir daño, hasta 25 acumulaciones (50 % en total). Con el máximo, obtiene además un 10 % de amplificación de daño y se vuelve imparable.', ['items'])
+  ]
+};
+
+const EXAM_PATCH = {
+  id: 'parche-18-5', numeral: 'II', accent: 'violet',
+  title: 'Parche 18.5', subtitle: 'Balance, rasgos y fuegos fatuos',
+  description: 'Cambios exactos del 18.5 y de su actualización del 22 de octubre, rasgos ocultos y particularidades del Set 18.',
+  set: 'Set 18, Enchanted Wilds', patch: '18.5', estimatedMinutes: 20,
+  randomize: { questions: false, options: false },
+  questions: [
+    q('p185-01', 'campeón', 'Tras el parche 18.5, ¿cuánto daño inflige la habilidad de Kha’Zix contra un objetivo NO aislado (1/2/3 estrellas) y cuánto contra un objetivo aislado a 3 estrellas?', [
+      'No aislado: 255/360/515 de PH. Aislado a 3★: 605 de PH.',
+      'No aislado: 250/360/515 de PH. Aislado a 3★: 590 de PH.',
+      'No aislado: 250/345/500 de PH. Aislado a 3★: 590 de PH.',
+      'No aislado: 250/345/500 de PH. Aislado a 3★: 605 de PH.'
+    ], 'C', 'El 18.5 bajó el daño no aislado de 255/360/515 a 250/345/500 de PH y el aislado de 285/410/605 a 280/390/590 de PH. Las opciones con 515 o 605 mezclan valores anteriores al parche.', ['patch']),
+    q('p185-02', 'campeón', '¿Qué cambió exactamente en la habilidad de Soraka en el parche 18.5?', [
+      'Daño inicial de la estrella: 225/335 → 235/355 de PH. Daño adicional: 100/150 → 110/165 de PH.',
+      'Daño inicial: 225/335 → 235/355 de PH. Daño adicional sin cambios.',
+      'Daño inicial sin cambios. Daño adicional: 100/150 → 110/165 de PH.',
+      'Daño inicial: 225/335 → 250/375 de PH. Daño adicional: 100/150 → 110/165 de PH.'
+    ], 'A', 'Riot mejoró los dos componentes para convertirla en carry principal de PH viable: daño inicial de 225/335 a 235/355 de PH y daño adicional de 100/150 a 110/165 de PH.', ['patch']),
+    q('p185-03', 'campeón', '¿Qué cambios recibió Sentinel en el parche 18.5?', [
+      'Aturdimiento: 1 → 0,75 s. Escudo sin cambios.',
+      'Aturdimiento: 1 → 0,5 s. Escudo: 375/475 → 350/450 de PH.',
+      'Aturdimiento: 0,75 → 0,5 s. Escudo: 350/450 → 400/500 de PH.',
+      'Aturdimiento: 1 → 0,5 s. Escudo: 350/450 → 375/475 de PH.'
+    ], 'D', 'El aturdimiento bajó de 1 s a 0,5 s y el escudo subió de 350/450 a 375/475 de PH. Riot lo presenta como una debilitación ligera, salvo si se le equipa mucho poder de habilidad.', ['patch']),
+    q('p185-04', 'campeón', '¿Qué dos cambios recibió Tristana en el parche 18.5?', [
+      'Maná: 0/60 → 10/50. Daño por ataque de la habilidad: 10/15/25 → 12/18/28 de AD.',
+      'Maná: 0/60 → 0/50. Daño por ataque de la habilidad: 10/15/25 → 12/18/28 de AD.',
+      'Maná: 0/60 → 0/50. Daño por ataque de la habilidad sin cambios.',
+      'Maná: 0/50 → 0/60. Daño por ataque de la habilidad: 12/18/28 → 10/15/25 de AD.'
+    ], 'B', 'Tristana pasó de 0/60 a 0/50 de maná y su daño por ataque de la habilidad subió de 10/15/25 a 12/18/28 de AD. Riot lo describe como una mejora considerable.', ['patch']),
+    q('p185-05', 'campeón', '¿Qué cambios recibieron las dos formas de Maestro Yi en el parche 18.5?', [
+      'Forma de AD: daño de ataque inicial 60 → 62. Forma de PH: 125/190/285 → 135/200/320 de PH.',
+      'Forma de AD: daño de ataque inicial 58 → 63. Forma de PH sin cambios.',
+      'Forma de AD: daño de ataque inicial 60 → 63. Forma de PH: 125/190/285 → 135/200/320 de PH.',
+      'Forma de AD: daño de ataque inicial 60 → 63. Forma de PH: 125/190/285 → 135/205/300 de PH.'
+    ], 'C', 'La forma de AD subió su daño de ataque inicial de 60 a 63, y la forma de PH, el daño de habilidad de 125/190/285 a 135/200/320 de PH.', ['patch']),
+    q('p185-06', 'rasgo', '¿Qué cambió en la curación del rasgo Flora Fatalis en el parche 18.5?', [
+      'La curación basada en la vida máxima pasó del 8 % al 7 %.',
+      'La curación basada en la vida máxima pasó del 7 % al 8 %.',
+      'La curación basada en la vida máxima pasó del 8 % al 6 %.',
+      'La curación basada en la vida máxima pasó del 10 % al 7 %.'
+    ], 'A', 'La curación basada en la vida máxima bajó del 8 % al 7 % para frenar a los supertanques de las composiciones de Rammus y Azir. En compensación, el aumento Consuming Flora subió su efectividad adicional del 50 % al 70 %.', ['patch']),
+    q('p185-07', 'rasgo', '¿Cuáles son los nuevos valores de velocidad de ataque por ataque de Rapidfire tras el parche 18.5?', [
+      '3/5/8/12 %',
+      '3/6/8/10 %',
+      '4/5/7/10 %',
+      '3/5/7/10 %'
+    ], 'D', 'Rapidfire pasó de 3/5/8/12 % a 3/5/7/10 % de velocidad de ataque por ataque: solo se debilitaron los dos niveles superiores. Riot lo justifica porque el rasgo despega con un solo emblema.', ['patch']),
+    q('p185-08', 'rasgo', 'En Elderwood (9), ¿cuánta vida adicional recibe la invocación tras el ajuste del parche 18.5?', [
+      '100 %',
+      '125 %',
+      '115 %',
+      '140 %'
+    ], 'B', 'La vida adicional de la invocación en Elderwood (9) bajó del 140 % al 125 %. Riot señaló que, con emblemas y campeones de dos estrellas, era casi una victoria automática.', ['patch']),
+    q('p185-09', 'rasgo', '¿Qué combinación de cambios afectó a Riftbeast en el parche 18.5?', [
+      'Riftbeast (7): AD/PH 6 % → 5 %. Aumento Omega Riftbeast: vida y velocidad de ataque adicionales 10 % → 8 %.',
+      'Riftbeast (7): AD/PH 6 % → 5 %. Aumento Omega Riftbeast sin cambios.',
+      'Riftbeast (7): AD/PH 8 % → 6 %. Aumento Omega Riftbeast: vida adicional 10 % → 8 %.',
+      'Riftbeast (7): AD/PH 6 % → 4 %. Aumento Omega Riftbeast: velocidad de ataque 10 % → 8 %.'
+    ], 'A', 'Riftbeast (7) bajó su bonificación de AD/PH del 6 % al 5 %. Además, el aumento Omega Riftbeast redujo tanto la vida adicional como la velocidad de ataque adicional del 10 % al 8 %.', ['patch']),
+    q('p185-10', 'rasgo', '¿Qué dos valores de Blackthorn se modificaron en el parche 18.5?', [
+      'Bonificación potenciada de (6): 60 % → 50 %. Sacrificio de PH base: 12 % de amplificación + 3 de regeneración de maná → 10 % + 2.',
+      'Bonificación potenciada de (6): 50 % → 60 %. Sacrificio de PH base: 10 % de amplificación + 2 de regeneración de maná → 12 % + 2.',
+      'Bonificación potenciada de (6): 60 % → 50 %. Sacrificio de PH base: 12 % de amplificación + 2 de regeneración de maná → 10 % + 2.',
+      'Bonificación potenciada de (6) sin cambios. Sacrificio de PH base: 12 % de amplificación + 2 de regeneración de maná → 8 % + 2.'
+    ], 'C', 'La bonificación potenciada de Blackthorn (6) bajó del 60 % al 50 %, y el sacrificio de PH base pasó de 12 % de amplificación de daño y 2 de regeneración de maná a 10 % y 2. La regeneración de maná no cambió.', ['patch']),
+    q('p185-11', 'rasgo', '¿Qué cambió en el nivel de 4 unidades de Fae y en su progresión de pixies dorados en el parche 18.5?', [
+      'Curación de Fae (4): 4 % → 6 %. El umbral del 4.º pixie no cambia.',
+      'Curación de Fae (4): 4 % → 5 %. Umbral del 4.º pixie: 30 000 → 20 000.',
+      'Fae (4) otorga ahora un 5 % de omnivampirismo. Los umbrales no cambian.',
+      'Curación de Fae (4): 4 % → 5 %. Umbral del 4.º pixie: 30 000 → 25 000.'
+    ], 'D', 'La curación de Fae (2/4) pasó de 2,5/4 % a 3/5 %. Además se suavizaron los umbrales de los pixies dorados: el 4.º de 30 000 a 25 000, el 5.º de 70 000 a 60 000 y el 6.º de 110 000 a 100 000.', ['patch']),
+    q('p185-12', 'objeto', '¿Qué objetos radiantes se debilitaron en el parche 18.5 y cómo?', [
+      'Mejora azul radiante: AD/PH base 30 % → 25 %, y su bonificación para roles que no son tanque ni luchador 40 → 35.',
+      'Mejora azul radiante: AD/PH base 30 % → 25 %. Yelmo adaptable radiante: regeneración de maná 7 → 6 y bonificación para roles que no son tanque ni luchador 40 → 35.',
+      'Solo el Yelmo adaptable radiante: regeneración de maná 7 → 6.',
+      'Mejora azul radiante: AD/PH base 30 % → 20 %. Yelmo adaptable radiante: bonificación para roles que no son tanque ni luchador 40 → 45.'
+    ], 'B', 'Se debilitaron dos radiantes. La Mejora azul radiante bajó su AD/PH base del 30 % al 25 %. El Yelmo adaptable radiante bajó su regeneración de maná de 7 a 6 y su bonificación para roles que no son tanque ni luchador de 40 a 35. La primera opción atribuye a la Mejora azul un cambio que pertenece al Yelmo.', ['patch']),
+    q('p185-13', 'balance', '¿Cómo cambió el fuego fatuo Hand of Baron en el parche 18.5?', [
+      'Coste 6 → 4 de oro. Vida 33/55 → 22/33. Resto de estadísticas 3/5 % → 2/3 %. Probabilidad de crítico 10/15 % → 6/8 %.',
+      'Coste 4 → 6 de oro. Estadísticas sin cambios.',
+      'Coste 6 → 3 de oro. Vida 33/55 → 22/33. Probabilidad de crítico sin cambios.',
+      'Coste 6 → 4 de oro. Estadísticas sin cambios.'
+    ], 'A', 'Riot lo consideraba demasiado poderoso: bajó su coste de 6 a 4 de oro, pero recortó todas sus estadísticas. Vida de 33/55 a 22/33; resistencias, AD, PH, velocidad de ataque, omnivampirismo, durabilidad y amplificación de 3/5 % a 2/3 %; y crítico de 10/15 % a 6/8 %.', ['patch']),
+    q('p185-14', 'balance', '¿Qué describe correctamente lo ocurrido con el fuego fatuo Abandon Ship en el parche 18.5?', [
+      'Su coste pasó de 2 a 0 de oro.',
+      'Su coste pasó de 0 a 2 de oro, y su mejora Blossom pasó a costar 4.',
+      'Su coste pasó de 0 a 2 de oro, y en la actualización del 22 de octubre se corrigió su mejora Blossom para que cueste 2 de oro.',
+      'Se eliminó del sistema de fuegos fatuos.'
+    ], 'C', 'Con un coste de 0 era demasiado fácil de forzar, así que pasó a costar 2 de oro. En la actualización del 22 de octubre se corrigió además su mejora Blossom para que cueste correctamente 2 de oro.', ['patch']),
+    q('p185-15', 'mecánica', '¿Qué cambió en los fuegos fatuos que filtran según el número de campeones con objetos equipados?', [
+      'Ahora solo cuentan los campeones que están en el tablero.',
+      'Ahora también cuentan los campeones del banquillo.',
+      'Ahora cuentan los objetos que tiene el jugador, no los campeones.',
+      'Ahora solo cuentan los campeones de 3 estrellas.'
+    ], 'B', 'Los fuegos fatuos que filtran por número de campeones con objetos ahora también incluyen los del banquillo. Riot quería reducir la optimización de tablero y banquillo como prueba de conocimiento y de APM.', ['patch']),
+    q('p185-16', 'mecánica', '¿Cómo comprueban la composición los fuegos fatuos que filtran por roles específicos tras el parche 18.5?', [
+      'Revisan el tablero actual en el momento de la compra.',
+      'Revisan exclusivamente los campeones del banquillo.',
+      'Revisan la composición con la que empezó la partida.',
+      'Usan una instantánea del último combate en lugar del tablero actual.'
+    ], 'D', 'Los fuegos fatuos que filtran por rol toman una instantánea del último combate en lugar de mirar el tablero actual, para que reorganizar unidades antes de comprar deje de ser óptimo.', ['patch']),
+    q('p185-17', 'rasgo', '¿Qué debes desplegar para activar el rasgo oculto Eclipse?', [
+      '3 campeones Solar y 3 campeones Lunar en el tablero.',
+      '3 campeones Solar y 2 campeones Lunar en el tablero.',
+      '2 campeones Solar y 2 campeones Lunar en el tablero.',
+      '3 campeones Solar y 3 Lunar, contando también los del banquillo.'
+    ], 'A', 'Eclipse es un rasgo oculto que se activa con 3 campeones Solar y 3 campeones Lunar colocados en el tablero durante la partida. Los campeones del banquillo no cuentan.', ['eclipse']),
+    q('p185-18', 'rasgo', '¿Cuál es la peculiaridad del rasgo Avatar de Lux en el Set 18?', [
+      'Puede representar uno de seis orígenes, y el origen elegido cuenta dos veces para las bonificaciones.',
+      'Puede representar uno de nueve orígenes, el origen cuenta una sola vez y ocupa dos espacios de equipo.',
+      'Puede representar uno de nueve orígenes, el origen elegido cuenta dos veces para las bonificaciones, y tener un Avatar en el tablero o el banquillo transforma los demás Avatares de tu tienda en ese mismo rasgo.',
+      'Puede representar cualquier clase, pero nunca un origen, y cambia de rasgo cada ronda.'
+    ], 'C', 'Lux puede ser Blackthorn, Blossom, Coven, Elderwood, Fae, Inferno, Lunar, Primal o Solar: nueve orígenes. El rasgo elegido cuenta dos veces para las bonificaciones, y tener un Avatar en el tablero o el banquillo convierte a los demás Avatares de tu tienda en ese rasgo.', ['origins', 'luxVariants']),
+    q('p185-19', 'rasgo', '¿Qué particularidad tiene Elder Dragon en el recuento de unidades y en el rasgo Riftbeast?', [
+      'Ocupa un espacio de equipo y suma 1 al recuento de Riftbeast.',
+      'Ocupa dos espacios de equipo y suma 2 al recuento de Riftbeast, gracias a su rasgo único Apex Predator.',
+      'Ocupa dos espacios de equipo, pero no contribuye a Riftbeast.',
+      'Ocupa tres espacios de equipo y suma 2 al recuento de Riftbeast.'
+    ], 'B', 'Su rasgo único, Apex Predator, hace que Elder Dragon ocupe dos espacios de equipo y otorgue +2 al rasgo Riftbeast.', ['origins']),
+    q('p185-20', 'rasgo', 'Con el parche 18.5 en vigor, ¿qué hace exactamente el rasgo oculto Eclipse?', [
+      'A los 10 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3,5 s.',
+      'Al inicio del combate, elimina una sola vez al enemigo con más vida.',
+      'A los 8 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3 s.',
+      'A los 8 s de combate, elimina al enemigo con menos vida y repite el efecto cada 3,5 s.'
+    ], 'D', 'Tras 8 s de combate, Eclipse elimina al enemigo con menos vida y repite el efecto cada 3,5 s. Los 10 s eran el valor anterior: el parche 18.4 adelantó la primera ejecución a los 8 s.', ['eclipse'])
+  ]
+};
+
+const EXAMS = [EXAM_ITEMS, EXAM_PATCH];
+
+/* =========================================================================
+   LÓGICA — QuizService (funciones puras, testeables)
+   ========================================================================= */
+const RANKS = [
+  { min: 9.5, label: 'Conocimiento excepcional' },
+  { min: 8.5, label: 'Maestro del meta' },
+  { min: 7, label: 'Experto' },
+  { min: 5, label: 'Jugador experimentado' },
+  { min: 2.5, label: 'Conocimientos básicos' },
+  { min: 0, label: 'Principiante' }
+];
+const LETTERS = ['A', 'B', 'C', 'D'];
+
+function mulberry32(seed) {
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+function shuffled(arr, rng) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function range(n) { return Array.from({ length: n }, (_, i) => i); }
+
+const QuizService = {
+  createSession(exam, rng = Math.random, override) {
+    const r = Object.assign({}, exam.randomize, override || {});
+    const n = exam.questions.length;
+    const optionOrders = {};
+    exam.questions.forEach(qq => { optionOrders[qq.id] = r.options ? shuffled(range(qq.options.length), rng) : range(qq.options.length); });
+    return {
+      v: 1, examId: exam.id, ids: exam.questions.map(qq => qq.id),
+      order: r.questions ? shuffled(range(n), rng) : range(n),
+      optionOrders, answers: {}, current: 0, elapsedMs: 0, status: 'progress', result: null
+    };
+  },
+  isValid(exam, s) {
+    return !!s && s.v === 1 && s.examId === exam.id && Array.isArray(s.ids) && s.ids.join('|') === exam.questions.map(qq => qq.id).join('|') && Array.isArray(s.order) && s.order.length === exam.questions.length;
+  },
+  total(exam) { return exam.questions.length; },
+  questionAt(exam, s, i) { return exam.questions[s.order[i]]; },
+  currentQuestion(exam, s) { return this.questionAt(exam, s, s.current); },
+  isAnswered(s, qid) { return Object.prototype.hasOwnProperty.call(s.answers, qid); },
+  select(exam, s, displayIdx) {
+    if (s.status !== 'progress') return false;
+    const qq = this.currentQuestion(exam, s);
+    const original = s.optionOrders[qq.id][displayIdx];
+    if (original === undefined) return false;
+    s.answers[qq.id] = original;
+    return true;
+  },
+  selectedDisplayIndex(exam, s, i) {
+    const qq = this.questionAt(exam, s, i);
+    if (!this.isAnswered(s, qq.id)) return -1;
+    return s.optionOrders[qq.id].indexOf(s.answers[qq.id]);
+  },
+  canAdvance(exam, s) { return this.isAnswered(s, this.currentQuestion(exam, s).id) && s.current < exam.questions.length - 1; },
+  next(exam, s) { if (!this.canAdvance(exam, s)) return false; s.current++; return true; },
+  prev(s) { if (s.current <= 0) return false; s.current--; return true; },
+  goTo(exam, s, i) { if (i < 0 || i >= exam.questions.length) return false; s.current = i; return true; },
+  isLast(exam, s) { return s.current === exam.questions.length - 1; },
+  answeredCount(exam, s) { return exam.questions.filter(qq => this.isAnswered(s, qq.id)).length; },
+  unansweredNumbers(exam, s) {
+    const out = [];
+    s.order.forEach((qi, pos) => { if (!this.isAnswered(s, exam.questions[qi].id)) out.push(pos + 1); });
+    return out;
+  },
+  score(exam, answers) {
+    let correct = 0, wrong = 0, blank = 0;
+    exam.questions.forEach(qq => {
+      if (!Object.prototype.hasOwnProperty.call(answers, qq.id)) blank++;
+      else if (answers[qq.id] === qq.correctAnswer) correct++;
+      else wrong++;
+    });
+    const total = exam.questions.length;
+    return { correct, wrong, blank, total, pct: correct / total * 100, grade: correct / total * 10 };
+  },
+  classify(grade) { return RANKS.find(r => grade >= r.min - 1e-9).label; },
+  formatNumber(n) {
+    const r = Math.round(n * 10) / 10;
+    return Number.isInteger(r) ? String(r) : r.toFixed(1).replace('.', ',');
+  },
+  submit(exam, s) {
+    const sc = this.score(exam, s.answers);
+    s.status = 'done';
+    s.result = Object.assign({}, sc, { rank: this.classify(sc.grade), elapsedMs: s.elapsedMs, finishedAt: Date.now() });
+    return s.result;
+  },
+  statusOf(qq, answers) {
+    if (!Object.prototype.hasOwnProperty.call(answers, qq.id)) return 'skip';
+    return answers[qq.id] === qq.correctAnswer ? 'ok' : 'bad';
+  }
+};
+
+/* =========================================================================
+   PERSISTENCIA
+   ========================================================================= */
+function makeStore(backend) {
+  const P = 'tftc:v1:';
+  return {
+    get(k) { try { const v = backend.getItem(P + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } },
+    set(k, v) { try { backend.setItem(P + k, JSON.stringify(v)); } catch (e) { /* almacenamiento no disponible */ } },
+    del(k) { try { backend.removeItem(P + k); } catch (e) { /* almacenamiento no disponible */ } }
+  };
+}
+function memoryBackend() { const m = new Map(); return { getItem: k => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)), removeItem: k => m.delete(k) }; }
+let storageBackend;
+try { localStorage.setItem('tftc:probe', '1'); localStorage.removeItem('tftc:probe'); storageBackend = localStorage; } catch (e) { storageBackend = memoryBackend(); }
+const Store = makeStore(storageBackend);
+
+const Progress = {
+  load(exam, store = Store) { const s = store.get('session:' + exam.id); return QuizService.isValid(exam, s) ? s : null; },
+  save(s, store = Store) { store.set('session:' + s.examId, s); },
+  clear(examId, store = Store) { store.del('session:' + examId); },
+  best(examId, store = Store) { return store.get('best:' + examId); },
+  recordBest(examId, result, store = Store) {
+    const prev = store.get('best:' + examId);
+    if (!prev || result.grade > prev.grade) store.set('best:' + examId, { grade: result.grade, correct: result.correct, at: result.finishedAt });
+    return prev;
+  }
+};
+
+/* =========================================================================
+   INTERFAZ
+   ========================================================================= */
+const ICON = {
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  x: '<path d="M18 6 6 18M6 6l12 12"/>',
+  minus: '<path d="M5 12h14"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  trophy: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a4 4 0 0 1-4 4M7 5H4v2a4 4 0 0 0 4 4"/>',
+  book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+  hex: '<path d="M12 2 21 7v10l-9 5-9-5V7z"/>',
+  left: '<path d="m15 18-6-6 6-6"/>',
+  right: '<path d="m9 18 6-6-6-6"/>',
+  flag: '<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+  layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  redo: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+  home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/>',
+  list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'
+};
+function icon(name) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICON[name] + '</svg>'; }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function fmtTime(ms) { const t = Math.floor(ms / 1000); const m = Math.floor(t / 60); const s = t % 60; return m + ':' + String(s).padStart(2, '0'); }
+function getExam(id) { return EXAMS.find(e => e.id === id) || null; }
+function otherExam(id) { return EXAMS.find(e => e.id !== id); }
+
+const app = document.getElementById('app');
+const live = document.getElementById('live');
+const state = { view: 'home', examId: null, session: null, filter: 'all', timer: null, lastTick: 0 };
+
+function announce(msg) { live.textContent = ''; requestAnimationFrame(() => { live.textContent = msg; }); }
+function persistView() { Store.set('view', { view: state.view, examId: state.examId }); }
+function setAccent(exam) { document.body.dataset.accent = exam ? exam.accent : 'gold'; }
+function focusTitle() { const h = app.querySelector('[data-focus]'); if (h) h.focus({ preventScroll: false }); }
+function scrollTop() { window.scrollTo({ top: 0, behavior: 'auto' }); }
+
+/* ---------- Temporizador ---------- */
+function startTimer() {
+  stopTimer();
+  state.lastTick = performance.now();
+  state.timer = setInterval(tick, 1000);
+}
+function tick() {
+  if (!state.session || state.session.status !== 'progress') return;
+  const now = performance.now();
+  state.session.elapsedMs += now - state.lastTick;
+  state.lastTick = now;
+  const el = document.getElementById('timer');
+  if (el) el.textContent = fmtTime(state.session.elapsedMs);
+  Progress.save(state.session);
+}
+function stopTimer() {
+  if (state.timer) { tick(); clearInterval(state.timer); state.timer = null; }
+}
+document.addEventListener('visibilitychange', () => {
+  if (state.view !== 'quiz') return;
+  if (document.hidden) stopTimer(); else startTimer();
+});
+window.addEventListener('pagehide', () => { if (state.view === 'quiz') stopTimer(); });
+
+/* ---------- Diálogos ---------- */
+const dlg = document.getElementById('dlg');
+function openDialog({ title, body, actions }) {
+  return new Promise(resolve => {
+    document.getElementById('dlg-title').textContent = title;
+    document.getElementById('dlg-body').innerHTML = body;
+    const box = document.getElementById('dlg-actions');
+    box.innerHTML = '';
+    actions.forEach((a, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'btn ' + (a.primary ? 'btn-primary' : '');
+      b.textContent = a.label;
+      b.addEventListener('click', () => { dlg.close(); resolve(a.value); });
+      box.appendChild(b);
+      if (a.autofocus) setTimeout(() => b.focus(), 0);
+    });
+    const onCancel = () => { dlg.removeEventListener('cancel', onCancel); resolve(null); };
+    dlg.addEventListener('cancel', onCancel, { once: true });
+    dlg.showModal();
+  });
+}
+function showRules() {
+  openDialog({
+    title: 'Reglas del desafío',
+    body: '<ul>' +
+      '<li>Cada examen tiene 20 preguntas con cuatro opciones y una sola respuesta correcta.</li>' +
+      '<li>Cada pregunta vale 0,5 puntos: la nota final es sobre 10.</li>' +
+      '<li>Las preguntas sin responder cuentan como incorrectas. Fallar no resta.</li>' +
+      '<li>No verás si aciertas hasta entregar el examen.</li>' +
+      '<li>Puedes volver atrás, cambiar respuestas y saltar a cualquier pregunta desde la fila de hexágonos.</li>' +
+      '<li>Tu progreso se guarda en este navegador. Cada examen se guarda por separado.</li>' +
+      '<li>Atajos: teclas <kbd>A</kbd>–<kbd>D</kbd> o <kbd>1</kbd>–<kbd>4</kbd> para elegir opción.</li>' +
+      '</ul>',
+    actions: [{ label: 'ENTENDIDO', value: true, primary: true, autofocus: true }]
+  });
+}
+
+/* ---------- Navegación entre vistas ---------- */
+function go(view, examId) {
+  if (state.view === 'quiz' && view !== 'quiz') stopTimer();
+  state.view = view;
+  state.examId = examId || null;
+  const exam = getExam(state.examId);
+  state.session = exam ? Progress.load(exam) : null;
+  setAccent(exam);
+  if (view !== 'tests') persistView();
+  render();
+  scrollTop();
+  focusTitle();
+}
+function startNew(examId) {
+  const exam = getExam(examId);
+  const s = QuizService.createSession(exam);
+  Progress.save(s);
+  state.filter = 'all';
+  go('quiz', examId);
+}
+function continueExam(examId) { go('quiz', examId); }
+
+function render() {
+  if (state.view === 'quiz') return renderQuiz();
+  if (state.view === 'results') return renderResults();
+  if (state.view === 'review') return renderReview();
+  if (state.view === 'tests') return renderTests();
+  return renderHome();
+}
+
+/* ---------- Inicio ---------- */
+function examCard(exam) {
+  const s = Progress.load(exam);
+  const best = Progress.best(exam.id);
+  let status, actions;
+  if (s && s.status === 'progress') {
+    const n = QuizService.answeredCount(exam, s);
+    status = 'En curso: ' + n + ' de 20 respondidas, pregunta ' + (s.current + 1) + ' de 20';
+    actions = '<button class="btn btn-primary" type="button" data-action="continue" data-exam="' + exam.id + '">CONTINUAR' + icon('right') + '</button>' +
+      '<button class="btn" type="button" data-action="restart-home" data-exam="' + exam.id + '">EMPEZAR DE NUEVO</button>';
+  } else if (s && s.status === 'done') {
+    status = 'Completado: última nota ' + QuizService.formatNumber(s.result.grade) + '/10' + (best ? ', mejor nota ' + QuizService.formatNumber(best.grade) + '/10' : '');
+    actions = '<button class="btn btn-primary" type="button" data-action="start" data-exam="' + exam.id + '">REPETIR TEST' + icon('redo') + '</button>' +
+      '<button class="btn" type="button" data-action="results" data-exam="' + exam.id + '">VER RESULTADO</button>';
+  } else {
+    status = best ? 'Mejor nota: ' + QuizService.formatNumber(best.grade) + '/10' : 'Sin empezar';
+    actions = '<button class="btn btn-primary" type="button" data-action="start" data-exam="' + exam.id + '">COMENZAR TEST' + icon('right') + '</button>';
+  }
+  return '<article class="exam-card" data-accent="' + exam.accent + '" aria-labelledby="t-' + exam.id + '">' +
+    '<div class="exam-head"><div class="hexmark" aria-hidden="true">' + exam.numeral + '</div>' +
+    '<div><p class="kicker">Examen ' + exam.numeral + '</p><h2 id="t-' + exam.id + '">' + esc(exam.title) + '</h2><p class="desc" style="margin-top:2px">' + esc(exam.subtitle) + '</p></div></div>' +
+    '<p class="desc">' + esc(exam.description) + '</p>' +
+    '<dl class="facts">' +
+      '<div><dt>Preguntas</dt><dd>' + exam.questions.length + '</dd></div>' +
+      '<div><dt>Dificultad</dt><dd>Extrema</dd></div>' +
+      '<div><dt>Set y parche</dt><dd>Set 18, parche ' + exam.patch + '</dd></div>' +
+      '<div><dt>Tiempo estimado</dt><dd>' + exam.estimatedMinutes + ' min</dd></div>' +
+      '<div><dt>Puntuación</dt><dd>0,5 por pregunta</dd></div>' +
+      '<div><dt>Nota máxima</dt><dd>10</dd></div>' +
+    '</dl>' +
+    '<p class="status">' + icon('trophy') + '<span>' + esc(status) + '</span></p>' +
+    '<div class="btn-row">' + actions + '</div>' +
+  '</article>';
+}
+function renderHome() {
+  app.innerHTML =
+    '<section class="hero">' +
+      '<h1 tabindex="-1" data-focus><span class="tft">TFT</span> Challenge</h1>' +
+      '<p class="tagline">«Solo los mejores conocen todos los detalles»</p>' +
+      '<div class="chips">' +
+        '<span class="chip chip-extreme">' + icon('target') + 'EXTREMA</span>' +
+        '<span class="chip">' + icon('layers') + 'Set 18, Enchanted Wilds</span>' +
+        '<span class="chip">' + icon('hex') + 'Parche 18.5</span>' +
+        '<span class="chip">' + icon('list') + '2 exámenes, 20 preguntas cada uno</span>' +
+      '</div>' +
+      '<p class="brief">Responde 20 preguntas avanzadas sobre TFT. Cada pregunta tiene cuatro opciones y solo una respuesta correcta. Al terminar, descubrirás tu nota, los errores cometidos y tu nivel de conocimiento.</p>' +
+      '<div class="btn-row"><button class="btn" type="button" data-action="rules">' + icon('book') + 'CONSULTAR REGLAS</button></div>' +
+    '</section>' +
+    '<section aria-label="Exámenes disponibles"><div class="exams">' + EXAMS.map(examCard).join('') + '</div></section>' +
+    '<p class="footnote">Preguntas verificadas el 23 de octubre de 2026 con las notas oficiales del parche 18.5 (incluida la actualización del 22 de octubre) y con bases de datos del Set 18. TFT Challenge es un proyecto de fans sin relación con Riot Games; las clasificaciones son orientativas y no son rangos oficiales. <a href="#pruebas">Ver pruebas de puntuación y navegación</a>.</p>';
+  document.title = 'TFT Challenge';
+}
+
+/* ---------- Test ---------- */
+function renderQuiz() {
+  const exam = getExam(state.examId);
+  let s = state.session;
+  if (!exam) return go('home');
+  if (!s) { s = QuizService.createSession(exam); Progress.save(s); state.session = s; }
+  if (s.status === 'done') return go('results', exam.id);
+  const total = QuizService.total(exam);
+  app.innerHTML =
+    '<div class="quiz-head">' +
+      '<div class="quiz-title"><span class="exam-name">Examen ' + exam.numeral + ': ' + esc(exam.title) + '</span>' +
+      '<h1 id="qcount" class="view-title">Pregunta ' + (s.current + 1) + ' de ' + total + '</h1></div>' +
+      '<div class="meta-row">' +
+        '<span class="chip" id="answered">' + icon('check') + '<span></span></span>' +
+        '<span class="chip">' + icon('hex') + 'Parche ' + exam.patch + '</span>' +
+        '<span class="chip" aria-label="Tiempo empleado">' + icon('clock') + '<span id="timer">' + fmtTime(s.elapsedMs) + '</span></span>' +
+        '<button class="btn btn-quiet" type="button" data-action="abandon">' + icon('flag') + 'ABANDONAR</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="progress">' +
+      '<div class="bar" role="progressbar" aria-label="Preguntas respondidas" aria-valuemin="0" aria-valuemax="' + total + '" id="bar"><span></span></div>' +
+      '<nav aria-label="Ir a una pregunta"><ol class="hextrack" id="hextrack"></ol></nav>' +
+    '</div>' +
+    '<section class="qcard" id="qcard" aria-labelledby="qtext"></section>' +
+    '<div class="qnav">' +
+      '<button class="btn" type="button" data-action="prev" id="btn-prev">' + icon('left') + 'ANTERIOR</button>' +
+      '<button class="btn btn-primary" type="button" data-action="next" id="btn-next"></button>' +
+    '</div>';
+  const track = document.getElementById('hextrack');
+  track.innerHTML = range(total).map(i => '<li><button type="button" class="hexbtn" data-action="jump" data-i="' + i + '"><span class="hx"></span><span class="n">' + (i + 1) + '</span></button></li>').join('');
+  renderQuestion(false);
+  startTimer();
+  document.title = 'Pregunta ' + (s.current + 1) + ' · TFT Challenge';
+}
+function renderQuestion(animate) {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  const qq = QuizService.currentQuestion(exam, s);
+  const sel = QuizService.selectedDisplayIndex(exam, s, s.current);
+  const order = s.optionOrders[qq.id];
+  const card = document.getElementById('qcard');
+  card.innerHTML =
+    '<p class="qcat">' + icon('hex') + 'Categoría: ' + esc(qq.category) + '</p>' +
+    '<h2 class="qtext" id="qtext" tabindex="-1">' + esc(qq.question) + '</h2>' +
+    '<fieldset><legend class="sr">Elige una respuesta</legend><div class="opts">' +
+      order.map((orig, d) => {
+        const id = 'opt-' + qq.id + '-' + d;
+        return '<label class="opt' + (d === sel ? ' is-selected' : '') + '" for="' + id + '">' +
+          '<input class="sr" type="radio" name="answer" id="' + id + '" value="' + d + '"' + (d === sel ? ' checked' : '') + '>' +
+          '<span class="letter" aria-hidden="true">' + LETTERS[d] + '</span>' +
+          '<span class="otext"><span class="sr">Opción ' + LETTERS[d] + ': </span>' + esc(qq.options[orig]) + '</span></label>';
+      }).join('') +
+    '</div></fieldset>' +
+    '<p class="kbd-hint">Atajos: <kbd>A</kbd>–<kbd>D</kbd> o <kbd>1</kbd>–<kbd>4</kbd> para elegir.</p>';
+  if (animate) { card.classList.remove('enter'); void card.offsetWidth; card.classList.add('enter'); }
+  card.querySelectorAll('input[name="answer"]').forEach(inp => inp.addEventListener('change', () => choose(Number(inp.value), false)));
+  updateQuizChrome();
+}
+function updateQuizChrome() {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  const total = QuizService.total(exam);
+  const answered = QuizService.answeredCount(exam, s);
+  document.getElementById('qcount').textContent = 'Pregunta ' + (s.current + 1) + ' de ' + total;
+  document.querySelector('#answered span').textContent = 'Respondidas: ' + answered + '/' + total;
+  const bar = document.getElementById('bar');
+  bar.setAttribute('aria-valuenow', String(answered));
+  bar.firstElementChild.style.width = (answered / total * 100) + '%';
+  document.querySelectorAll('#hextrack .hexbtn').forEach(b => {
+    const i = Number(b.dataset.i);
+    const qq = QuizService.questionAt(exam, s, i);
+    const done = QuizService.isAnswered(s, qq.id);
+    const cur = i === s.current;
+    b.classList.toggle('done', done);
+    b.classList.toggle('current', cur);
+    if (cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    b.setAttribute('aria-label', 'Pregunta ' + (i + 1) + ', ' + (done ? 'respondida' : 'sin responder') + (cur ? ', actual' : ''));
+  });
+  document.getElementById('btn-prev').disabled = s.current === 0;
+  const next = document.getElementById('btn-next');
+  if (QuizService.isLast(exam, s)) {
+    next.innerHTML = 'FINALIZAR TEST' + icon('flag');
+    next.dataset.action = 'finish';
+    next.disabled = false;
+  } else {
+    next.innerHTML = 'SIGUIENTE' + icon('right');
+    next.dataset.action = 'next';
+    next.disabled = !QuizService.canAdvance(exam, s);
+  }
+  document.title = 'Pregunta ' + (s.current + 1) + ' · TFT Challenge';
+}
+function choose(displayIdx, fromKey) {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  if (!QuizService.select(exam, s, displayIdx)) return;
+  Progress.save(s);
+  document.querySelectorAll('#qcard .opt').forEach((o, d) => {
+    o.classList.toggle('is-selected', d === displayIdx);
+    const inp = o.querySelector('input');
+    inp.checked = d === displayIdx;
+    if (fromKey && d === displayIdx) inp.focus();
+  });
+  updateQuizChrome();
+}
+function moveTo(fn) {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  if (!fn(exam, s)) return;
+  Progress.save(s);
+  renderQuestion(true);
+  announce('Pregunta ' + (s.current + 1) + ' de ' + QuizService.total(exam));
+  document.getElementById('qtext').focus({ preventScroll: true });
+  const head = document.querySelector('.quiz-head');
+  if (head && head.getBoundingClientRect().top < 0) head.scrollIntoView({ block: 'start' });
+}
+async function finish() {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  const missing = QuizService.unansweredNumbers(exam, s);
+  if (missing.length) {
+    const choice = await openDialog({
+      title: missing.length === 1 ? 'Queda 1 pregunta sin responder' : 'Quedan ' + missing.length + ' preguntas sin responder',
+      body: '<p>Sin responder: ' + missing.join(', ') + '.</p><p style="margin-top:8px">Si entregas ahora, contarán como incorrectas.</p>',
+      actions: [{ label: 'Volver al test', value: 'back', autofocus: true }, { label: 'Entregar test', value: 'submit', primary: true }]
+    });
+    if (choice !== 'submit') {
+      if (choice === 'back' && missing.length) moveTo((e, ss) => QuizService.goTo(e, ss, missing[0] - 1));
+      return;
+    }
+  }
+  stopTimer();
+  const result = QuizService.submit(exam, s);
+  const prevBest = Progress.recordBest(exam.id, result);
+  s.prevBest = prevBest ? prevBest.grade : null;
+  Progress.save(s);
+  go('results', exam.id);
+}
+async function abandon() {
+  const choice = await openDialog({
+    title: '¿Abandonar el examen?',
+    body: '<p>Tus respuestas y el tiempo se guardan. Podrás continuar desde la pantalla de inicio.</p>',
+    actions: [{ label: 'Seguir respondiendo', value: false, autofocus: true }, { label: 'Abandonar', value: true, primary: true }]
+  });
+  if (choice) go('home');
+}
+
+/* ---------- Resultados ---------- */
+function otherExamButton(exam) {
+  const other = otherExam(exam.id);
+  const os = Progress.load(other);
+  if (os && os.status === 'progress') return '<button class="btn" type="button" data-action="continue" data-exam="' + other.id + '">CONTINUAR EL OTRO EXAMEN</button>';
+  if (os && os.status === 'done') return '<button class="btn" type="button" data-action="start" data-exam="' + other.id + '">REPETIR EL OTRO EXAMEN</button>';
+  return '<button class="btn" type="button" data-action="start" data-exam="' + other.id + '">HACER EL OTRO EXAMEN</button>';
+}
+function renderResults() {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  if (!exam || !s || s.status !== 'done') return go('home');
+  const r = s.result;
+  const C = 2 * Math.PI * 52;
+  const best = Progress.best(exam.id);
+  let bestLine = '';
+  if (s.prevBest !== null && s.prevBest !== undefined) {
+    bestLine = r.grade > s.prevBest ? 'Nuevo récord en este examen. Tu mejor nota anterior era ' + QuizService.formatNumber(s.prevBest) + '/10.' : 'Tu mejor nota en este examen: ' + QuizService.formatNumber(best.grade) + '/10.';
+  } else if (best) { bestLine = 'Tu mejor nota en este examen: ' + QuizService.formatNumber(best.grade) + '/10.'; }
+  app.innerHTML =
+    '<p class="exam-name" style="font-family:var(--font-display);font-weight:600;color:var(--accent)">Examen ' + exam.numeral + ': ' + esc(exam.title) + '</p>' +
+    '<div class="result-top">' +
+      '<div class="ring" role="img" aria-label="' + QuizService.formatNumber(r.pct) + ' % de aciertos">' +
+        '<svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52" fill="none" stroke-width="10"/>' +
+        '<circle class="val" id="ringval" cx="60" cy="60" r="52" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="' + C.toFixed(2) + '" stroke-dashoffset="' + C.toFixed(2) + '"/></svg>' +
+        '<div class="center"><span class="pct">' + QuizService.formatNumber(r.pct) + ' %</span><span class="pct-l">de aciertos</span></div>' +
+      '</div>' +
+      '<div>' +
+        '<h1 class="done-label view-title" tabindex="-1" data-focus style="font-size:1.05rem">TEST COMPLETADO</h1>' +
+        '<p class="grade" aria-label="Nota final: ' + QuizService.formatNumber(r.grade) + ' sobre 10">' + QuizService.formatNumber(r.grade) + '<small>/10</small></p>' +
+        '<p class="rank">' + esc(r.rank) + '</p>' +
+        '<p class="rank-note">Clasificación orientativa; no es un rango oficial de Riot Games.</p>' +
+      '</div>' +
+    '</div>' +
+    '<div class="stats">' +
+      '<div class="stat ok"><p class="k">' + icon('check') + 'Aciertos</p><p class="v">' + r.correct + '</p></div>' +
+      '<div class="stat bad"><p class="k">' + icon('x') + 'Fallos</p><p class="v">' + r.wrong + '</p></div>' +
+      '<div class="stat skip"><p class="k">' + icon('minus') + 'Sin responder</p><p class="v">' + r.blank + '</p></div>' +
+      '<div class="stat"><p class="k">' + icon('clock') + 'Tiempo</p><p class="v">' + fmtTime(r.elapsedMs) + '</p></div>' +
+    '</div>' +
+    (bestLine ? '<p class="best">' + esc(bestLine) + '</p>' : '') +
+    '<div class="btn-row result-actions">' +
+      '<button class="btn btn-primary" type="button" data-action="review">' + icon('list') + 'REVISAR RESPUESTAS</button>' +
+      '<button class="btn" type="button" data-action="start" data-exam="' + exam.id + '">' + icon('redo') + 'REPETIR TEST</button>' +
+      otherExamButton(exam) +
+      '<button class="btn" type="button" data-action="home">' + icon('home') + 'VOLVER AL INICIO</button>' +
+    '</div>';
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const ring = document.getElementById('ringval');
+    if (ring) ring.style.strokeDashoffset = String(C * (1 - r.pct / 100));
+  }));
+  announce('Test completado. Nota ' + QuizService.formatNumber(r.grade) + ' sobre 10. ' + r.rank + '.');
+  document.title = 'Resultado ' + QuizService.formatNumber(r.grade) + '/10 · TFT Challenge';
+}
+
+/* ---------- Revisión ---------- */
+const STATUS_TEXT = { ok: 'Correcta', bad: 'Incorrecta', skip: 'Sin responder' };
+const STATUS_ICON = { ok: 'check', bad: 'x', skip: 'minus' };
+function renderReview() {
+  const exam = getExam(state.examId);
+  const s = state.session;
+  if (!exam || !s || s.status !== 'done') return go('home');
+  const items = s.order.map((qi, pos) => {
+    const qq = exam.questions[qi];
+    return { qq, pos, st: QuizService.statusOf(qq, s.answers) };
+  });
+  const counts = { all: items.length, ok: 0, bad: 0, skip: 0 };
+  items.forEach(it => counts[it.st]++);
+  const F = [['all', 'Todas'], ['ok', 'Correctas'], ['bad', 'Incorrectas'], ['skip', 'Sin responder']];
+  const shown = items.filter(it => state.filter === 'all' || it.st === state.filter);
+  const letterOf = (qq, orig) => LETTERS[s.optionOrders[qq.id].indexOf(orig)];
+  app.innerHTML =
+    '<button class="btn btn-quiet back" type="button" data-action="results" data-exam="' + exam.id + '">' + icon('left') + 'VOLVER A RESULTADOS</button>' +
+    '<h1 class="view-title" tabindex="-1" data-focus>Revisión de respuestas</h1>' +
+    '<p class="lead">Examen ' + exam.numeral + ': ' + esc(exam.title) + '. Nota ' + QuizService.formatNumber(s.result.grade) + '/10.</p>' +
+    '<div class="filters" role="group" aria-label="Filtrar preguntas">' +
+      F.map(([k, l]) => '<button class="filter" type="button" data-action="filter" data-f="' + k + '" aria-pressed="' + (state.filter === k) + '">' + l + '<span class="c">' + counts[k] + '</span></button>').join('') +
+    '</div>' +
+    (shown.length ? '<ol class="rlist">' + shown.map(({ qq, pos, st }) => {
+      const has = st !== 'skip';
+      const yours = has ? letterOf(qq, s.answers[qq.id]) + ') ' + esc(qq.options[s.answers[qq.id]]) : 'Sin responder';
+      const right = letterOf(qq, qq.correctAnswer) + ') ' + esc(qq.options[qq.correctAnswer]);
+      return '<li class="rcard ' + st + '">' +
+        '<div class="rhead"><span class="rnum">Pregunta ' + (pos + 1) + '</span><span class="pill">' + icon(STATUS_ICON[st]) + STATUS_TEXT[st] + '</span></div>' +
+        '<p class="rq">' + esc(qq.question) + '</p>' +
+        '<dl class="ans">' +
+          '<div><dt>Tu respuesta</dt><dd class="yours ' + st + '">' + yours + '</dd></div>' +
+          '<div><dt>Respuesta correcta</dt><dd class="right">' + right + '</dd></div>' +
+        '</dl>' +
+        '<p class="expl">' + esc(qq.explanation) + '</p>' +
+        '<p class="src">Fuente: ' + qq.sources.map(src => '<a href="' + esc(src.url) + '" target="_blank" rel="noopener noreferrer">' + esc(src.label) + '</a>').join('; ') + '</p>' +
+      '</li>';
+    }).join('') + '</ol>' : '<p class="empty">No hay preguntas en esta categoría. Prueba con otro filtro.</p>');
+  document.title = 'Revisión · TFT Challenge';
+}
+
+/* ---------- Pruebas ---------- */
+function runTests() {
+  const out = [];
+  const t = (name, fn) => { try { const d = fn(); out.push({ name, pass: d === true || d === undefined, detail: typeof d === 'string' ? d : '' }); } catch (e) { out.push({ name, pass: false, detail: e.message }); } };
+  const eq = (a, b, m) => { if (a !== b) throw new Error((m || '') + ' esperado ' + JSON.stringify(b) + ', obtenido ' + JSON.stringify(a)); };
+  const exam = EXAM_ITEMS;
+  const answersWith = (nCorrect, nWrong) => {
+    const a = {};
+    exam.questions.forEach((qq, i) => {
+      if (i < nCorrect) a[qq.id] = qq.correctAnswer;
+      else if (i < nCorrect + nWrong) a[qq.id] = (qq.correctAnswer + 1) % 4;
+    });
+    return a;
+  };
+  [[20, '10'], [18, '9'], [15, '7,5'], [10, '5'], [0, '0']].forEach(([n, g]) => t('Nota: ' + n + ' aciertos = ' + g + '/10', () => eq(QuizService.formatNumber(QuizService.score(exam, answersWith(n, 20 - n)).grade), g)));
+  t('Porcentaje: 15 aciertos = 75 %', () => eq(QuizService.score(exam, answersWith(15, 5)).pct, 75));
+  t('Sin responder cuenta como incorrecta y no penaliza de más', () => { const sc = QuizService.score(exam, answersWith(10, 5)); eq(sc.correct, 10); eq(sc.wrong, 5); eq(sc.blank, 5); eq(sc.grade, 5); });
+  t('Examen vacío: 0/10 y 20 sin responder', () => { const sc = QuizService.score(exam, {}); eq(sc.grade, 0); eq(sc.blank, 20); });
+  [[0, 'Principiante'], [2, 'Principiante'], [2.5, 'Conocimientos básicos'], [4.5, 'Conocimientos básicos'], [5, 'Jugador experimentado'], [6.5, 'Jugador experimentado'], [7, 'Experto'], [8, 'Experto'], [8.5, 'Maestro del meta'], [9, 'Maestro del meta'], [9.5, 'Conocimiento excepcional'], [10, 'Conocimiento excepcional']]
+    .forEach(([g, l]) => t('Clasificación ' + QuizService.formatNumber(g) + ' → ' + l, () => eq(QuizService.classify(g), l)));
+  const allIds = new Set();
+  EXAMS.forEach(ex => {
+    t('Datos ' + ex.id + ': 20 preguntas', () => eq(ex.questions.length, 20));
+    t('Datos ' + ex.id + ': 4 opciones distintas, índice correcto 0–3, explicación y fuente', () => {
+      ex.questions.forEach(qq => {
+        if (qq.options.length !== 4) throw new Error(qq.id + ' no tiene 4 opciones');
+        if (new Set(qq.options).size !== 4) throw new Error(qq.id + ' repite opciones');
+        if (!Number.isInteger(qq.correctAnswer) || qq.correctAnswer < 0 || qq.correctAnswer > 3) throw new Error(qq.id + ' índice correcto inválido');
+        if (!qq.explanation || !qq.sources.length || qq.sources.some(s => !s || !s.url)) throw new Error(qq.id + ' sin explicación o fuente');
+        if (allIds.has(qq.id)) throw new Error('Identificador repetido: ' + qq.id);
+        allIds.add(qq.id);
+      });
+    });
+    t('Datos ' + ex.id + ': respuestas correctas repartidas (5 por letra)', () => {
+      const c = [0, 0, 0, 0]; ex.questions.forEach(qq => c[qq.correctAnswer]++);
+      eq(c.join('/'), '5/5/5/5');
+    });
+  });
+  t('Navegación: no se puede avanzar sin responder', () => { const s = QuizService.createSession(exam); eq(QuizService.canAdvance(exam, s), false); eq(QuizService.next(exam, s), false); eq(s.current, 0); });
+  t('Navegación: ANTERIOR deshabilitado en la primera pregunta', () => { const s = QuizService.createSession(exam); eq(QuizService.prev(s), false); });
+  t('Navegación: responder, avanzar y volver conserva la selección', () => {
+    const s = QuizService.createSession(exam);
+    QuizService.select(exam, s, 2); eq(QuizService.next(exam, s), true); eq(s.current, 1);
+    QuizService.select(exam, s, 0); QuizService.prev(s);
+    eq(QuizService.selectedDisplayIndex(exam, s, 0), 2); eq(QuizService.selectedDisplayIndex(exam, s, 1), 0);
+  });
+  t('Navegación: solo una respuesta por pregunta (cambiarla sustituye la anterior)', () => {
+    const s = QuizService.createSession(exam); QuizService.select(exam, s, 1); QuizService.select(exam, s, 3);
+    eq(Object.keys(s.answers).length, 1); eq(QuizService.selectedDisplayIndex(exam, s, 0), 3);
+  });
+  t('Navegación: la última pregunta no avanza y permite finalizar', () => {
+    const s = QuizService.createSession(exam); QuizService.goTo(exam, s, 19); QuizService.select(exam, s, 0);
+    eq(QuizService.isLast(exam, s), true); eq(QuizService.next(exam, s), false);
+    eq(QuizService.unansweredNumbers(exam, s).length, 19);
+  });
+  t('Flujo completo: 20 respuestas correctas → 10/10 y revisión con 20 correctas', () => {
+    const s = QuizService.createSession(exam);
+    for (let i = 0; i < 20; i++) {
+      const qq = QuizService.currentQuestion(exam, s);
+      QuizService.select(exam, s, s.optionOrders[qq.id].indexOf(qq.correctAnswer));
+      if (i < 19) QuizService.next(exam, s);
+    }
+    const r = QuizService.submit(exam, s);
+    eq(r.grade, 10); eq(exam.questions.filter(qq => QuizService.statusOf(qq, s.answers) === 'ok').length, 20);
+    eq(QuizService.select(exam, s, 0), false, 'tras entregar no se puede responder:');
+  });
+  t('Aleatorización: preguntas y opciones barajadas mantienen la respuesta correcta', () => {
+    const s = QuizService.createSession(EXAM_PATCH, mulberry32(42), { questions: true, options: true });
+    if (s.order.join(',') === range(20).join(',')) throw new Error('El orden no se ha barajado');
+    for (let i = 0; i < 20; i++) {
+      QuizService.goTo(EXAM_PATCH, s, i);
+      const qq = QuizService.currentQuestion(EXAM_PATCH, s);
+      QuizService.select(EXAM_PATCH, s, s.optionOrders[qq.id].indexOf(qq.correctAnswer));
+    }
+    eq(QuizService.score(EXAM_PATCH, s.answers).correct, 20);
+  });
+  t('Reinicio: un examen nuevo empieza vacío y no altera el otro examen', () => {
+    const mem = makeStore(memoryBackend());
+    const a = QuizService.createSession(EXAM_ITEMS); QuizService.select(EXAM_ITEMS, a, 1); Progress.save(a, mem);
+    const b = QuizService.createSession(EXAM_PATCH); QuizService.select(EXAM_PATCH, b, 2); QuizService.next(EXAM_PATCH, b); Progress.save(b, mem);
+    Progress.save(QuizService.createSession(EXAM_ITEMS), mem);
+    const a2 = Progress.load(EXAM_ITEMS, mem), b2 = Progress.load(EXAM_PATCH, mem);
+    eq(Object.keys(a2.answers).length, 0); eq(a2.elapsedMs, 0); eq(a2.current, 0);
+    eq(Object.keys(b2.answers).length, 1); eq(b2.current, 1);
+  });
+  t('Persistencia: una sesión guardada con otras preguntas se descarta', () => {
+    const mem = makeStore(memoryBackend());
+    const s = QuizService.createSession(EXAM_ITEMS); s.ids[0] = 'otra'; Progress.save(s, mem);
+    eq(Progress.load(EXAM_ITEMS, mem), null);
+  });
+  t('Mejor nota: solo se actualiza si se supera', () => {
+    const mem = makeStore(memoryBackend());
+    Progress.recordBest('x', { grade: 6, correct: 12, finishedAt: 1 }, mem);
+    Progress.recordBest('x', { grade: 5, correct: 10, finishedAt: 2 }, mem);
+    eq(Progress.best('x', mem).grade, 6);
+    Progress.recordBest('x', { grade: 8.5, correct: 17, finishedAt: 3 }, mem);
+    eq(Progress.best('x', mem).grade, 8.5);
+  });
+  return out;
+}
+function renderTests() {
+  setAccent(null);
+  const res = runTests();
+  const ok = res.filter(r => r.pass).length;
+  app.innerHTML =
+    '<button class="btn btn-quiet back" type="button" data-action="home">' + icon('left') + 'VOLVER AL INICIO</button>' +
+    '<h1 class="view-title" tabindex="-1" data-focus>Pruebas de puntuación y navegación</h1>' +
+    '<p class="lead">Se ejecutan en tu navegador sobre la misma lógica que usa el examen, sin tocar tu progreso guardado.</p>' +
+    '<p class="test-sum">' + ok + ' de ' + res.length + ' pruebas superadas</p>' +
+    '<ul class="tests">' + res.map(r => '<li class="' + (r.pass ? 'pass' : 'fail') + '">' + icon(r.pass ? 'check' : 'x') + '<div><span>' + esc(r.name) + '</span>' + (r.detail ? '<p class="d">' + esc(r.detail) + '</p>' : '') + '<span class="sr">' + (r.pass ? 'Superada' : 'Fallida') + '</span></div></li>').join('') + '</ul>';
+  document.title = 'Pruebas · TFT Challenge';
+}
+
+/* ---------- Eventos ---------- */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-action]');
+  if (!el) return;
+  const a = el.dataset.action;
+  const id = el.dataset.exam;
+  switch (a) {
+    case 'home':
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+      if (state.view === 'quiz') { abandon(); return; }
+      go('home'); break;
+    case 'rules': showRules(); break;
+    case 'start': startNew(id); break;
+    case 'continue': continueExam(id); break;
+    case 'restart-home':
+      openDialog({
+        title: '¿Empezar de nuevo?',
+        body: '<p>Se borrarán las respuestas y el tiempo de este intento. El otro examen no se ve afectado.</p>',
+        actions: [{ label: 'Cancelar', value: false, autofocus: true }, { label: 'Empezar de nuevo', value: true, primary: true }]
+      }).then(v => { if (v) startNew(id); });
+      break;
+    case 'results': state.filter = 'all'; go('results', id || state.examId); break;
+    case 'review': state.filter = 'all'; go('review', state.examId); break;
+    case 'filter': state.filter = el.dataset.f; renderReview(); { const b = app.querySelector('.filter[data-f="' + state.filter + '"]'); if (b) b.focus(); } break;
+    case 'prev': moveTo((ex, s) => QuizService.prev(s)); break;
+    case 'next': moveTo((ex, s) => QuizService.next(ex, s)); break;
+    case 'jump': moveTo((ex, s) => QuizService.goTo(ex, s, Number(el.dataset.i))); break;
+    case 'finish': finish(); break;
+    case 'abandon': abandon(); break;
+  }
+});
+document.addEventListener('keydown', e => {
+  if (state.view !== 'quiz' || dlg.open || e.altKey || e.ctrlKey || e.metaKey) return;
+  const k = e.key.toLowerCase();
+  const map = { a: 0, b: 1, c: 2, d: 3, '1': 0, '2': 1, '3': 2, '4': 3 };
+  if (k in map) { e.preventDefault(); choose(map[k], true); }
+});
+window.addEventListener('hashchange', () => { if (location.hash === '#pruebas') go('tests'); });
+
+/* ---------- Arranque ---------- */
+(function boot() {
+  if (location.hash === '#pruebas') { state.view = 'tests'; render(); return; }
+  const saved = Store.get('view');
+  if (saved && saved.examId && getExam(saved.examId) && ['quiz', 'results', 'review'].includes(saved.view)) {
+    const exam = getExam(saved.examId);
+    const s = Progress.load(exam);
+    if (s && ((saved.view === 'quiz' && s.status === 'progress') || (saved.view !== 'quiz' && s.status === 'done'))) {
+      state.view = saved.view; state.examId = saved.examId; state.session = s; setAccent(exam); render(); return;
+    }
+  }
+  state.view = 'home'; render();
+})();
+</script>
+</body>
+</html>
